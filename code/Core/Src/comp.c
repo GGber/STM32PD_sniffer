@@ -44,7 +44,7 @@ void MX_COMP1_Init(void)
   hcomp1.Init.OutputPol = COMP_OUTPUTPOL_NONINVERTED;
   hcomp1.Init.Hysteresis = COMP_HYSTERESIS_NONE;
   hcomp1.Init.BlankingSrce = COMP_BLANKINGSRC_NONE;
-  hcomp1.Init.TriggerMode = COMP_TRIGGERMODE_NONE;
+  hcomp1.Init.TriggerMode = COMP_TRIGGERMODE_IT_FALLING;
   if (HAL_COMP_Init(&hcomp1) != HAL_OK)
   {
     Error_Handler();
@@ -71,7 +71,7 @@ void MX_COMP2_Init(void)
   hcomp2.Init.OutputPol = COMP_OUTPUTPOL_NONINVERTED;
   hcomp2.Init.Hysteresis = COMP_HYSTERESIS_NONE;
   hcomp2.Init.BlankingSrce = COMP_BLANKINGSRC_NONE;
-  hcomp2.Init.TriggerMode = COMP_TRIGGERMODE_NONE;
+  hcomp2.Init.TriggerMode = COMP_TRIGGERMODE_IT_FALLING;
   if (HAL_COMP_Init(&hcomp2) != HAL_OK)
   {
     Error_Handler();
@@ -109,6 +109,9 @@ void HAL_COMP_MspInit(COMP_HandleTypeDef* compHandle)
     GPIO_InitStruct.Alternate = GPIO_AF8_COMP1;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
+    /* COMP1 interrupt Init */
+    HAL_NVIC_SetPriority(COMP1_2_3_IRQn, 5, 0);
+    HAL_NVIC_EnableIRQ(COMP1_2_3_IRQn);
   /* USER CODE BEGIN COMP1_MspInit 1 */
 
   /* USER CODE END COMP1_MspInit 1 */
@@ -136,6 +139,9 @@ void HAL_COMP_MspInit(COMP_HandleTypeDef* compHandle)
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
+    /* COMP2 interrupt Init */
+    HAL_NVIC_SetPriority(COMP1_2_3_IRQn, 5, 0);
+    HAL_NVIC_EnableIRQ(COMP1_2_3_IRQn);
   /* USER CODE BEGIN COMP2_MspInit 1 */
 
   /* USER CODE END COMP2_MspInit 1 */
@@ -157,6 +163,15 @@ void HAL_COMP_MspDeInit(COMP_HandleTypeDef* compHandle)
     */
     HAL_GPIO_DeInit(GPIOA, GPIO_PIN_1|GPIO_PIN_6);
 
+    /* COMP1 interrupt Deinit */
+  /* USER CODE BEGIN COMP1:COMP1_2_3_IRQn disable */
+    /**
+    * Uncomment the line below to disable the "COMP1_2_3_IRQn" interrupt
+    * Be aware, disabling shared interrupt may affect other IPs
+    */
+    /* HAL_NVIC_DisableIRQ(COMP1_2_3_IRQn); */
+  /* USER CODE END COMP1:COMP1_2_3_IRQn disable */
+
   /* USER CODE BEGIN COMP1_MspDeInit 1 */
 
   /* USER CODE END COMP1_MspDeInit 1 */
@@ -172,6 +187,15 @@ void HAL_COMP_MspDeInit(COMP_HandleTypeDef* compHandle)
     PA3     ------> COMP2_INP
     */
     HAL_GPIO_DeInit(GPIOA, GPIO_PIN_2|GPIO_PIN_3);
+
+    /* COMP2 interrupt Deinit */
+  /* USER CODE BEGIN COMP2:COMP1_2_3_IRQn disable */
+    /**
+    * Uncomment the line below to disable the "COMP1_2_3_IRQn" interrupt
+    * Be aware, disabling shared interrupt may affect other IPs
+    */
+    /* HAL_NVIC_DisableIRQ(COMP1_2_3_IRQn); */
+  /* USER CODE END COMP2:COMP1_2_3_IRQn disable */
 
   /* USER CODE BEGIN COMP2_MspDeInit 1 */
 

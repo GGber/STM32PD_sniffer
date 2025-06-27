@@ -45,7 +45,7 @@ void MX_TIM2_Init(void)
 
   /* USER CODE END TIM2_Init 1 */
   htim2.Instance = TIM2;
-  htim2.Init.Prescaler = 40 - 1;
+  htim2.Init.Prescaler = 8 - 1;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim2.Init.Period = 200;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
@@ -85,6 +85,7 @@ void MX_TIM2_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN TIM2_Init 2 */
+  /* 20M sample */
   HAL_TIM_Base_Start_IT(&htim2);  // Start timer with interrupt enabled
 
   HAL_TIM_IC_Start_DMA(&htim2, TIM_CHANNEL_1, (uint32_t*)time2_data_buffer, 2048);
