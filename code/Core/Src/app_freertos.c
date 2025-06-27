@@ -122,14 +122,8 @@ void StartLedTask(void *argument)
     osDelay(500); // Delay for 500 ms
     HAL_GPIO_WritePin(GPIOB, LED1_Pin, GPIO_PIN_SET);
     osDelay(500); // Delay for 500 ms
-
-    uint16_t adcvalue[4];
-    for (size_t i = 0; i < 4; i++)
-    {
-      adcvalue[i] = adcBuffer[i] * 3300 / 4096; // Convert ADC value to mV
-    }
     
-    printf("ADC Values: %d %d %d %d \r\n", adcvalue[0], adcvalue[1], adcvalue[2], adcvalue[3]);
+    printf("ADC Values: %d %d \r\n", adc_cc1, adc_cc2);
   }
   /* USER CODE END StartLedTask */
 }

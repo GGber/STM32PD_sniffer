@@ -40,7 +40,7 @@ void MX_COMP1_Init(void)
   /* USER CODE END COMP1_Init 1 */
   hcomp1.Instance = COMP1;
   hcomp1.Init.InputPlus = COMP_INPUT_PLUS_IO1;
-  hcomp1.Init.InputMinus = COMP_INPUT_MINUS_DAC3_CH1;
+  hcomp1.Init.InputMinus = COMP_INPUT_MINUS_DAC1_CH1;
   hcomp1.Init.OutputPol = COMP_OUTPUTPOL_NONINVERTED;
   hcomp1.Init.Hysteresis = COMP_HYSTERESIS_NONE;
   hcomp1.Init.BlankingSrce = COMP_BLANKINGSRC_NONE;
@@ -50,7 +50,7 @@ void MX_COMP1_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN COMP1_Init 2 */
-
+  HAL_COMP_Start(&hcomp1);
   /* USER CODE END COMP1_Init 2 */
 
 }
@@ -67,7 +67,7 @@ void MX_COMP2_Init(void)
   /* USER CODE END COMP2_Init 1 */
   hcomp2.Instance = COMP2;
   hcomp2.Init.InputPlus = COMP_INPUT_PLUS_IO2;
-  hcomp2.Init.InputMinus = COMP_INPUT_MINUS_DAC3_CH2;
+  hcomp2.Init.InputMinus = COMP_INPUT_MINUS_DAC1_CH2;
   hcomp2.Init.OutputPol = COMP_OUTPUTPOL_NONINVERTED;
   hcomp2.Init.Hysteresis = COMP_HYSTERESIS_NONE;
   hcomp2.Init.BlankingSrce = COMP_BLANKINGSRC_NONE;
@@ -77,7 +77,7 @@ void MX_COMP2_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN COMP2_Init 2 */
-
+  HAL_COMP_Start(&hcomp2);
   /* USER CODE END COMP2_Init 2 */
 
 }
@@ -121,19 +121,19 @@ void HAL_COMP_MspInit(COMP_HandleTypeDef* compHandle)
 
     __HAL_RCC_GPIOA_CLK_ENABLE();
     /**COMP2 GPIO Configuration
+    PA2     ------> COMP2_OUT
     PA3     ------> COMP2_INP
-    PA7     ------> COMP2_OUT
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_3;
-    GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-    GPIO_InitStruct.Pin = GPIO_PIN_7;
+    GPIO_InitStruct.Pin = GPIO_PIN_2;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     GPIO_InitStruct.Alternate = GPIO_AF8_COMP2;
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+    GPIO_InitStruct.Pin = GPIO_PIN_3;
+    GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /* USER CODE BEGIN COMP2_MspInit 1 */
@@ -168,10 +168,10 @@ void HAL_COMP_MspDeInit(COMP_HandleTypeDef* compHandle)
   /* USER CODE END COMP2_MspDeInit 0 */
 
     /**COMP2 GPIO Configuration
+    PA2     ------> COMP2_OUT
     PA3     ------> COMP2_INP
-    PA7     ------> COMP2_OUT
     */
-    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_3|GPIO_PIN_7);
+    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_2|GPIO_PIN_3);
 
   /* USER CODE BEGIN COMP2_MspDeInit 1 */
 

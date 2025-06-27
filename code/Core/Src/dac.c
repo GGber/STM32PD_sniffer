@@ -24,26 +24,26 @@
 
 /* USER CODE END 0 */
 
-DAC_HandleTypeDef hdac3;
+DAC_HandleTypeDef hdac1;
 
-/* DAC3 init function */
-void MX_DAC3_Init(void)
+/* DAC1 init function */
+void MX_DAC1_Init(void)
 {
 
-  /* USER CODE BEGIN DAC3_Init 0 */
+  /* USER CODE BEGIN DAC1_Init 0 */
 
-  /* USER CODE END DAC3_Init 0 */
+  /* USER CODE END DAC1_Init 0 */
 
   DAC_ChannelConfTypeDef sConfig = {0};
 
-  /* USER CODE BEGIN DAC3_Init 1 */
+  /* USER CODE BEGIN DAC1_Init 1 */
 
-  /* USER CODE END DAC3_Init 1 */
+  /* USER CODE END DAC1_Init 1 */
 
   /** DAC Initialization
   */
-  hdac3.Instance = DAC3;
-  if (HAL_DAC_Init(&hdac3) != HAL_OK)
+  hdac1.Instance = DAC1;
+  if (HAL_DAC_Init(&hdac1) != HAL_OK)
   {
     Error_Handler();
   }
@@ -56,62 +56,86 @@ void MX_DAC3_Init(void)
   sConfig.DAC_SampleAndHold = DAC_SAMPLEANDHOLD_DISABLE;
   sConfig.DAC_Trigger = DAC_TRIGGER_NONE;
   sConfig.DAC_Trigger2 = DAC_TRIGGER_NONE;
-  sConfig.DAC_OutputBuffer = DAC_OUTPUTBUFFER_DISABLE;
-  sConfig.DAC_ConnectOnChipPeripheral = DAC_CHIPCONNECT_INTERNAL;
+  sConfig.DAC_OutputBuffer = DAC_OUTPUTBUFFER_ENABLE;
+  sConfig.DAC_ConnectOnChipPeripheral = DAC_CHIPCONNECT_BOTH;
   sConfig.DAC_UserTrimming = DAC_TRIMMING_FACTORY;
-  if (HAL_DAC_ConfigChannel(&hdac3, &sConfig, DAC_CHANNEL_1) != HAL_OK)
+  if (HAL_DAC_ConfigChannel(&hdac1, &sConfig, DAC_CHANNEL_1) != HAL_OK)
   {
     Error_Handler();
   }
 
   /** DAC channel OUT2 config
   */
-  if (HAL_DAC_ConfigChannel(&hdac3, &sConfig, DAC_CHANNEL_2) != HAL_OK)
+  if (HAL_DAC_ConfigChannel(&hdac1, &sConfig, DAC_CHANNEL_2) != HAL_OK)
   {
     Error_Handler();
   }
-  /* USER CODE BEGIN DAC3_Init 2 */
-
-  /* USER CODE END DAC3_Init 2 */
+  /* USER CODE BEGIN DAC1_Init 2 */
+  uint32_t dac_value = 200 * 4095 / 3300;
+  
+  HAL_DAC_Start(&hdac1, DAC_CHANNEL_1);
+  HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, dac_value);
+  
+  HAL_DAC_Start(&hdac1, DAC_CHANNEL_2);
+  HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_2, DAC_ALIGN_12B_R, dac_value);
+  
+  /* USER CODE END DAC1_Init 2 */
 
 }
 
 void HAL_DAC_MspInit(DAC_HandleTypeDef* dacHandle)
 {
 
-  if(dacHandle->Instance==DAC3)
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+  if(dacHandle->Instance==DAC1)
   {
-  /* USER CODE BEGIN DAC3_MspInit 0 */
+  /* USER CODE BEGIN DAC1_MspInit 0 */
 
-  /* USER CODE END DAC3_MspInit 0 */
-    /* DAC3 clock enable */
-    __HAL_RCC_DAC3_CLK_ENABLE();
+  /* USER CODE END DAC1_MspInit 0 */
+    /* DAC1 clock enable */
+    __HAL_RCC_DAC1_CLK_ENABLE();
 
-    /* DAC3 interrupt Init */
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+    /**DAC1 GPIO Configuration
+    PA4     ------> DAC1_OUT1
+    PA5     ------> DAC1_OUT2
+    */
+    GPIO_InitStruct.Pin = GPIO_PIN_4|GPIO_PIN_5;
+    GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+    /* DAC1 interrupt Init */
     HAL_NVIC_SetPriority(TIM6_DAC_IRQn, 15, 0);
     HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);
-  /* USER CODE BEGIN DAC3_MspInit 1 */
+  /* USER CODE BEGIN DAC1_MspInit 1 */
 
-  /* USER CODE END DAC3_MspInit 1 */
+  /* USER CODE END DAC1_MspInit 1 */
   }
 }
 
 void HAL_DAC_MspDeInit(DAC_HandleTypeDef* dacHandle)
 {
 
-  if(dacHandle->Instance==DAC3)
+  if(dacHandle->Instance==DAC1)
   {
-  /* USER CODE BEGIN DAC3_MspDeInit 0 */
+  /* USER CODE BEGIN DAC1_MspDeInit 0 */
 
-  /* USER CODE END DAC3_MspDeInit 0 */
+  /* USER CODE END DAC1_MspDeInit 0 */
     /* Peripheral clock disable */
-    __HAL_RCC_DAC3_CLK_DISABLE();
+    __HAL_RCC_DAC1_CLK_DISABLE();
 
-    /* DAC3 interrupt Deinit */
+    /**DAC1 GPIO Configuration
+    PA4     ------> DAC1_OUT1
+    PA5     ------> DAC1_OUT2
+    */
+    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_4|GPIO_PIN_5);
+
+    /* DAC1 interrupt Deinit */
     HAL_NVIC_DisableIRQ(TIM6_DAC_IRQn);
-  /* USER CODE BEGIN DAC3_MspDeInit 1 */
+  /* USER CODE BEGIN DAC1_MspDeInit 1 */
 
-  /* USER CODE END DAC3_MspDeInit 1 */
+  /* USER CODE END DAC1_MspDeInit 1 */
   }
 }
 

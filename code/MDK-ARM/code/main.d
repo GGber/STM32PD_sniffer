@@ -33,6 +33,8 @@ code\main.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h
 code\main.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h
 code\main.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h
 code\main.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h
+code\main.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h
+code\main.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h
 code\main.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h
 code\main.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h
 code\main.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h
@@ -57,6 +59,7 @@ code\main.o: ../Core/Inc/adc.h
 code\main.o: ../Core/Inc/comp.h
 code\main.o: ../Core/Inc/dac.h
 code\main.o: ../Core/Inc/dma.h
+code\main.o: ../Core/Inc/opamp.h
 code\main.o: ../Core/Inc/tim.h
 code\main.o: ../Core/Inc/usart.h
 code\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

@@ -29,16 +29,20 @@ extern "C" {
 #include "main.h"
 
 /* USER CODE BEGIN Includes */
-extern uint16_t adcBuffer[4];  // 存储四个通道的值
+extern uint16_t adc_cc1;  
+extern uint16_t adc_cc2;  
 /* USER CODE END Includes */
 
 extern ADC_HandleTypeDef hadc1;
+
+extern ADC_HandleTypeDef hadc2;
 
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
 
 void MX_ADC1_Init(void);
+void MX_ADC2_Init(void);
 
 /* USER CODE BEGIN Prototypes */
 

@@ -23,6 +23,7 @@
 #include "comp.h"
 #include "dac.h"
 #include "dma.h"
+#include "opamp.h"
 #include "tim.h"
 #include "usart.h"
 #include "usb.h"
@@ -99,10 +100,13 @@ int main(void)
   MX_ADC1_Init();
   MX_COMP1_Init();
   MX_COMP2_Init();
-  MX_DAC3_Init();
   MX_TIM2_Init();
   MX_USART1_UART_Init();
   MX_USB_PCD_Init();
+  MX_ADC2_Init();
+  MX_DAC1_Init();
+  MX_OPAMP1_Init();
+  MX_OPAMP2_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */

@@ -1,10 +1,10 @@
 Dependencies for Project 'code', Target 'code': (DO NOT MODIFY !)
 CompilerVersion: 5060960::V5.06 update 7 (build 960)::.\ARMCC
-F (startup_stm32g473xx.s)(0x68516BBB)(--cpu Cortex-M4.fp.sp -g --apcs=interwork --pd "__MICROLIB SETA 1" -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include--pd "__UVISION_VERSION SETA 538" --pd "_RTE_ SETA 1" --pd "STM32G473xx SETA 1" --pd "_RTE_ SETA 1"--list startup_stm32g473xx.lst --xref -o code\startup_stm32g473xx.o --depend code\startup_stm32g473xx.d)
-F (../Core/Src/main.c)(0x68516DD4)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\main.o --omf_browse code\main.crf --depend code\main.d)
-I (../Core/Inc/main.h)(0x68516416)
+F (startup_stm32g473xx.s)(0x685EB742)(--cpu Cortex-M4.fp.sp -g --apcs=interwork --pd "__MICROLIB SETA 1" -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include--pd "__UVISION_VERSION SETA 538" --pd "_RTE_ SETA 1" --pd "STM32G473xx SETA 1" --pd "_RTE_ SETA 1"--list startup_stm32g473xx.lst --xref -o code\startup_stm32g473xx.o --depend code\startup_stm32g473xx.d)
+F (../Core/Src/main.c)(0x685EA80C)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\main.o --omf_browse code\main.crf --depend code\main.d)
+I (../Core/Inc/main.h)(0x685EA80C)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -35,6 +35,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -55,20 +57,21 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h)(0x682B4E38
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/task.h)(0x682B4E38)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/list.h)(0x682B4E38)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h)(0x682B4E38)
-I (../Core/Inc/adc.h)(0x685167CA)
+I (../Core/Inc/adc.h)(0x685EB0B4)
 I (../Core/Inc/comp.h)(0x68516415)
-I (../Core/Inc/dac.h)(0x68516415)
+I (../Core/Inc/dac.h)(0x685EA80B)
 I (../Core/Inc/dma.h)(0x68516753)
+I (../Core/Inc/opamp.h)(0x685EA80B)
 I (../Core/Inc/tim.h)(0x68516415)
 I (../Core/Inc/usart.h)(0x685168AC)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5E8E3CC2)
 I (../Core/Inc/usb.h)(0x68516416)
 I (../Core/Inc/gpio.h)(0x68516414)
-F (../Core/Src/gpio.c)(0x685165D0)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\gpio.o --omf_browse code\gpio.crf --depend code\gpio.d)
+F (../Core/Src/gpio.c)(0x685EA8EE)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\gpio.o --omf_browse code\gpio.crf --depend code\gpio.d)
 I (../Core/Inc/gpio.h)(0x68516414)
-I (../Core/Inc/main.h)(0x68516416)
+I (../Core/Inc/main.h)(0x685EA80C)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -99,6 +102,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -108,7 +113,7 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
-F (../Core/Src/app_freertos.c)(0x68516958)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\app_freertos.o --omf_browse code\app_freertos.crf --depend code\app_freertos.d)
+F (../Core/Src/app_freertos.c)(0x685EB0D7)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\app_freertos.o --omf_browse code\app_freertos.crf --depend code\app_freertos.d)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x682B4E38)
 I (D:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
@@ -120,9 +125,9 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h)(0x682B4E38)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/task.h)(0x682B4E38)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/list.h)(0x682B4E38)
-I (../Core/Inc/main.h)(0x68516416)
+I (../Core/Inc/main.h)(0x685EA80C)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -151,6 +156,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -164,12 +171,12 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h)(0x682B4E
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h)(0x682B4E38)
 I (../Core/Inc/usart.h)(0x685168AC)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5E8E3CC2)
-I (../Core/Inc/adc.h)(0x685167CA)
-F (../Core/Src/adc.c)(0x68516891)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\adc.o --omf_browse code\adc.crf --depend code\adc.d)
-I (../Core/Inc/adc.h)(0x685167CA)
-I (../Core/Inc/main.h)(0x68516416)
+I (../Core/Inc/adc.h)(0x685EB0B4)
+F (../Core/Src/adc.c)(0x685EB5CB)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\adc.o --omf_browse code\adc.crf --depend code\adc.d)
+I (../Core/Inc/adc.h)(0x685EB0B4)
+I (../Core/Inc/main.h)(0x685EA80C)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -200,6 +207,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -209,11 +218,11 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
-F (../Core/Src/comp.c)(0x68516415)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\comp.o --omf_browse code\comp.crf --depend code\comp.d)
+F (../Core/Src/comp.c)(0x685EB412)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\comp.o --omf_browse code\comp.crf --depend code\comp.d)
 I (../Core/Inc/comp.h)(0x68516415)
-I (../Core/Inc/main.h)(0x68516416)
+I (../Core/Inc/main.h)(0x685EA80C)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -244,6 +253,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -253,11 +264,11 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
-F (../Core/Src/dac.c)(0x68516415)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\dac.o --omf_browse code\dac.crf --depend code\dac.d)
-I (../Core/Inc/dac.h)(0x68516415)
-I (../Core/Inc/main.h)(0x68516416)
+F (../Core/Src/dac.c)(0x685EB8BE)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\dac.o --omf_browse code\dac.crf --depend code\dac.d)
+I (../Core/Inc/dac.h)(0x685EA80B)
+I (../Core/Inc/main.h)(0x685EA80C)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -288,6 +299,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -299,9 +312,9 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
 F (../Core/Src/dma.c)(0x68516753)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\dma.o --omf_browse code\dma.crf --depend code\dma.d)
 I (../Core/Inc/dma.h)(0x68516753)
-I (../Core/Inc/main.h)(0x68516416)
+I (../Core/Inc/main.h)(0x685EA80C)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -332,6 +345,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -341,11 +356,11 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
-F (../Core/Src/tim.c)(0x68516DED)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\tim.o --omf_browse code\tim.crf --depend code\tim.d)
-I (../Core/Inc/tim.h)(0x68516415)
-I (../Core/Inc/main.h)(0x68516416)
+F (../Core/Src/opamp.c)(0x685EB004)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\opamp.o --omf_browse code\opamp.crf --depend code\opamp.d)
+I (../Core/Inc/opamp.h)(0x685EA80B)
+I (../Core/Inc/main.h)(0x685EA80C)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -376,6 +391,54 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pwr.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pwr_ex.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
+F (../Core/Src/tim.c)(0x685EB6E7)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\tim.o --omf_browse code\tim.crf --depend code\tim.d)
+I (../Core/Inc/tim.h)(0x68516415)
+I (../Core/Inc/main.h)(0x685EA80C)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
+I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
+I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g473xx.h)(0x682B4E51)
+I (../Drivers/CMSIS/Include/core_cm4.h)(0x682B4E37)
+I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
+I (../Drivers/CMSIS/Include/cmsis_version.h)(0x682B4E37)
+I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x682B4E37)
+I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x682B4E37)
+I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x682B4E37)
+I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/system_stm32g4xx.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x682B4E51)
+I (D:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5E8E3CC2)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc_ex.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio_ex.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_dma.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_dma_ex.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_cortex.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_adc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_adc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_adc_ex.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_comp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_exti.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_dac.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_dac_ex.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -389,9 +452,9 @@ I (../Core/Inc/usart.h)(0x685168AC)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5E8E3CC2)
 F (../Core/Src/usart.c)(0x685168A7)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\usart.o --omf_browse code\usart.crf --depend code\usart.d)
 I (../Core/Inc/usart.h)(0x685168AC)
-I (../Core/Inc/main.h)(0x68516416)
+I (../Core/Inc/main.h)(0x685EA80C)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -422,6 +485,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -434,9 +499,9 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5E8E3CC2)
 F (../Core/Src/usb.c)(0x68516416)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\usb.o --omf_browse code\usb.crf --depend code\usb.d)
 I (../Core/Inc/usb.h)(0x68516416)
-I (../Core/Inc/main.h)(0x68516416)
+I (../Core/Inc/main.h)(0x685EA80C)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -467,6 +532,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -476,10 +543,10 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
-F (../Core/Src/stm32g4xx_it.c)(0x68516BBA)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\stm32g4xx_it.o --omf_browse code\stm32g4xx_it.crf --depend code\stm32g4xx_it.d)
-I (../Core/Inc/main.h)(0x68516416)
+F (../Core/Src/stm32g4xx_it.c)(0x685EA80B)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\stm32g4xx_it.o --omf_browse code\stm32g4xx_it.crf --depend code\stm32g4xx_it.d)
+I (../Core/Inc/main.h)(0x685EA80C)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -510,6 +577,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -521,9 +590,9 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
 I (../Core/Inc/stm32g4xx_it.h)(0x68516BBA)
 F (../Core/Src/stm32g4xx_hal_msp.c)(0x68516416)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\stm32g4xx_hal_msp.o --omf_browse code\stm32g4xx_hal_msp.crf --depend code\stm32g4xx_hal_msp.d)
-I (../Core/Inc/main.h)(0x68516416)
+I (../Core/Inc/main.h)(0x685EA80C)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -554,6 +623,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -565,7 +636,7 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
 F (../Core/Src/stm32g4xx_hal_timebase_tim.c)(0x68516416)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\stm32g4xx_hal_timebase_tim.o --omf_browse code\stm32g4xx_hal_timebase_tim.crf --depend code\stm32g4xx_hal_timebase_tim.d)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -596,6 +667,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -607,7 +680,7 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
 F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim.c)(0x682B4E51)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\stm32g4xx_hal_tim.o --omf_browse code\stm32g4xx_hal_tim.crf --depend code\stm32g4xx_hal_tim.d)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -638,6 +711,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -649,7 +724,7 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
 F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.c)(0x682B4E51)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\stm32g4xx_hal_tim_ex.o --omf_browse code\stm32g4xx_hal_tim_ex.crf --depend code\stm32g4xx_hal_tim_ex.d)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -680,6 +755,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -691,7 +768,7 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
 F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_adc.c)(0x682B4E51)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\stm32g4xx_hal_adc.o --omf_browse code\stm32g4xx_hal_adc.crf --depend code\stm32g4xx_hal_adc.d)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -722,6 +799,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -733,7 +812,7 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
 F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_adc_ex.c)(0x682B4E51)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\stm32g4xx_hal_adc_ex.o --omf_browse code\stm32g4xx_hal_adc_ex.crf --depend code\stm32g4xx_hal_adc_ex.d)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -764,6 +843,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -776,7 +857,7 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
 F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_adc.c)(0x682B4E51)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\stm32g4xx_ll_adc.o --omf_browse code\stm32g4xx_ll_adc.crf --depend code\stm32g4xx_ll_adc.d)
 F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.c)(0x682B4E51)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\stm32g4xx_hal.o --omf_browse code\stm32g4xx_hal.crf --depend code\stm32g4xx_hal.d)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -807,6 +888,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -818,7 +901,7 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
 F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.c)(0x682B4E51)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\stm32g4xx_hal_rcc.o --omf_browse code\stm32g4xx_hal_rcc.crf --depend code\stm32g4xx_hal_rcc.d)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -849,6 +932,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -860,7 +945,7 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
 F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.c)(0x682B4E51)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\stm32g4xx_hal_rcc_ex.o --omf_browse code\stm32g4xx_hal_rcc_ex.crf --depend code\stm32g4xx_hal_rcc_ex.d)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -891,6 +976,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -902,7 +989,7 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
 F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash.c)(0x682B4E51)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\stm32g4xx_hal_flash.o --omf_browse code\stm32g4xx_hal_flash.crf --depend code\stm32g4xx_hal_flash.d)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -933,6 +1020,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -944,7 +1033,7 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
 F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ex.c)(0x682B4E51)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\stm32g4xx_hal_flash_ex.o --omf_browse code\stm32g4xx_hal_flash_ex.crf --depend code\stm32g4xx_hal_flash_ex.d)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -975,6 +1064,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -986,7 +1077,7 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
 F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ramfunc.c)(0x682B4E51)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\stm32g4xx_hal_flash_ramfunc.o --omf_browse code\stm32g4xx_hal_flash_ramfunc.crf --depend code\stm32g4xx_hal_flash_ramfunc.d)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -1017,6 +1108,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -1028,7 +1121,7 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
 F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.c)(0x682B4E51)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\stm32g4xx_hal_gpio.o --omf_browse code\stm32g4xx_hal_gpio.crf --depend code\stm32g4xx_hal_gpio.d)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -1059,6 +1152,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -1070,7 +1165,7 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
 F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_exti.c)(0x682B4E51)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\stm32g4xx_hal_exti.o --omf_browse code\stm32g4xx_hal_exti.crf --depend code\stm32g4xx_hal_exti.d)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -1101,6 +1196,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -1112,7 +1209,7 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
 F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.c)(0x682B4E51)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\stm32g4xx_hal_dma.o --omf_browse code\stm32g4xx_hal_dma.crf --depend code\stm32g4xx_hal_dma.d)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -1143,6 +1240,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -1154,7 +1253,7 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
 F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma_ex.c)(0x682B4E51)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\stm32g4xx_hal_dma_ex.o --omf_browse code\stm32g4xx_hal_dma_ex.crf --depend code\stm32g4xx_hal_dma_ex.d)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -1185,6 +1284,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -1196,7 +1297,7 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
 F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr.c)(0x682B4E51)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\stm32g4xx_hal_pwr.o --omf_browse code\stm32g4xx_hal_pwr.crf --depend code\stm32g4xx_hal_pwr.d)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -1227,6 +1328,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -1238,7 +1341,7 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
 F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.c)(0x682B4E51)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\stm32g4xx_hal_pwr_ex.o --omf_browse code\stm32g4xx_hal_pwr_ex.crf --depend code\stm32g4xx_hal_pwr_ex.d)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -1269,6 +1372,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -1280,7 +1385,7 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
 F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.c)(0x682B4E51)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\stm32g4xx_hal_cortex.o --omf_browse code\stm32g4xx_hal_cortex.crf --depend code\stm32g4xx_hal_cortex.d)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -1311,6 +1416,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -1322,7 +1429,7 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
 F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_comp.c)(0x682B4E51)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\stm32g4xx_hal_comp.o --omf_browse code\stm32g4xx_hal_comp.crf --depend code\stm32g4xx_hal_comp.d)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -1353,6 +1460,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -1364,7 +1473,7 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
 F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dac.c)(0x682B4E51)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\stm32g4xx_hal_dac.o --omf_browse code\stm32g4xx_hal_dac.crf --depend code\stm32g4xx_hal_dac.d)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -1395,6 +1504,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -1406,7 +1517,7 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
 F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dac_ex.c)(0x682B4E51)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\stm32g4xx_hal_dac_ex.o --omf_browse code\stm32g4xx_hal_dac_ex.crf --depend code\stm32g4xx_hal_dac_ex.d)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -1437,6 +1548,96 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pwr.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pwr_ex.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
+F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp.c)(0x682B4E51)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\stm32g4xx_hal_opamp.o --omf_browse code\stm32g4xx_hal_opamp.crf --depend code\stm32g4xx_hal_opamp.d)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
+I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
+I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g473xx.h)(0x682B4E51)
+I (../Drivers/CMSIS/Include/core_cm4.h)(0x682B4E37)
+I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
+I (../Drivers/CMSIS/Include/cmsis_version.h)(0x682B4E37)
+I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x682B4E37)
+I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x682B4E37)
+I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x682B4E37)
+I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/system_stm32g4xx.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x682B4E51)
+I (D:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5E8E3CC2)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc_ex.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio_ex.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_dma.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_dma_ex.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_cortex.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_adc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_adc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_adc_ex.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_comp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_exti.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_dac.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_dac_ex.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pwr.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pwr_ex.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
+F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c)(0x682B4E51)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\stm32g4xx_hal_opamp_ex.o --omf_browse code\stm32g4xx_hal_opamp_ex.crf --depend code\stm32g4xx_hal_opamp_ex.d)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
+I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
+I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g473xx.h)(0x682B4E51)
+I (../Drivers/CMSIS/Include/core_cm4.h)(0x682B4E37)
+I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
+I (../Drivers/CMSIS/Include/cmsis_version.h)(0x682B4E37)
+I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x682B4E37)
+I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x682B4E37)
+I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x682B4E37)
+I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/system_stm32g4xx.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x682B4E51)
+I (D:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5E8E3CC2)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc_ex.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio_ex.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_dma.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_dma_ex.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_cortex.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_adc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_adc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_adc_ex.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_comp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_exti.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_dac.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_dac_ex.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -1448,7 +1649,7 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
 F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.c)(0x682B4E51)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\stm32g4xx_hal_uart.o --omf_browse code\stm32g4xx_hal_uart.crf --depend code\stm32g4xx_hal_uart.d)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -1479,6 +1680,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -1490,7 +1693,7 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
 F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.c)(0x682B4E51)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\stm32g4xx_hal_uart_ex.o --omf_browse code\stm32g4xx_hal_uart_ex.crf --depend code\stm32g4xx_hal_uart_ex.d)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -1521,6 +1724,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -1532,7 +1737,7 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
 F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pcd.c)(0x682B4E51)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\stm32g4xx_hal_pcd.o --omf_browse code\stm32g4xx_hal_pcd.crf --depend code\stm32g4xx_hal_pcd.d)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -1563,6 +1768,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -1574,7 +1781,7 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
 F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pcd_ex.c)(0x682B4E51)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\stm32g4xx_hal_pcd_ex.o --omf_browse code\stm32g4xx_hal_pcd_ex.crf --depend code\stm32g4xx_hal_pcd_ex.d)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -1605,6 +1812,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -1616,7 +1825,7 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
 F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_usb.c)(0x682B4E51)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\stm32g4xx_ll_usb.o --omf_browse code\stm32g4xx_ll_usb.crf --depend code\stm32g4xx_ll_usb.d)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h)(0x682B4E51)
@@ -1647,6 +1856,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -1667,7 +1878,7 @@ I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x682B4E37)
 I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x682B4E37)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/system_stm32g4xx.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x682B4E51)
@@ -1689,6 +1900,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
@@ -1827,7 +2040,7 @@ I (../Drivers/CMSIS/Include/cmsis_version.h)(0x682B4E37)
 I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x682B4E37)
 I (../Drivers/CMSIS/Device/ST/STM32G4xx/Include/system_stm32g4xx.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
-I (../Core/Inc/stm32g4xx_hal_conf.h)(0x68516416)
+I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x682B4E51)
@@ -1848,6 +2061,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h)(0x682B4E51)
+I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usb.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h)(0x682B4E51)
