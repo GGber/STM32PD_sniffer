@@ -35,7 +35,13 @@ extern "C" {
 extern UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN Private defines */
-
+/* Debug print with timestamp macro */
+#define DEBUG_PRINT(fmt, ...)                  \
+  do                                           \
+  {                                            \
+    uint32_t tick = osKernelGetTickCount() ;             \
+    printf("[%lu.%lu] " fmt, tick / 1000, tick % 1000, ##__VA_ARGS__); \
+  } while (0)
 /* USER CODE END Private defines */
 
 void MX_USART1_UART_Init(void);

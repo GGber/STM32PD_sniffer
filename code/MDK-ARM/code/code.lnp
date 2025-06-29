@@ -53,6 +53,12 @@
 "code\cmsis_os2.o"
 "code\heap_4.o"
 "code\port.o"
+"code\usbd_hid.o"
+"code\usbd_cdc_acm.o"
+"code\usbd_core.o"
+"code\usb_dc_fsdev.o"
+"code\usb_glue_st.o"
+"code\winusb2.0_cdc_template.o"
 --library_type=microlib --strict --scatter "code\code.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

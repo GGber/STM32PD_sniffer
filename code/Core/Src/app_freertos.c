@@ -92,7 +92,7 @@ const osMessageQueueAttr_t TimeIndexQueue_attributes = {
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
-
+void handle_pd_task(void);
 /* USER CODE END FunctionPrototypes */
 
 void StartLedTask(void *argument);
@@ -157,6 +157,7 @@ void MX_FREERTOS_Init(void) {
 void StartLedTask(void *argument)
 {
   /* USER CODE BEGIN StartLedTask */
+    extern int usbd_cdc_write(const uint8_t *data, uint32_t data_len);
   /* Infinite loop */
   for(;;)
   {
@@ -164,6 +165,8 @@ void StartLedTask(void *argument)
     osDelay(500); // Delay for 500 ms
     HAL_GPIO_WritePin(GPIOB, LED1_Pin, GPIO_PIN_SET);
     osDelay(500); // Delay for 500 ms
+      
+    //usbd_cdc_write("123456789", 9);
   }
   /* USER CODE END StartLedTask */
 }
@@ -184,9 +187,8 @@ void StartTaskPD(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    cc_detect[0].adc_cc = adc_cc1 * 3000 / 4096; // Convert ADC value to mV
-    cc_detect[1].adc_cc = adc_cc2 * 3000 / 4096; // Convert ADC value to mV
-    //printf("CC1 ADC: %d mV, CC2 ADC: %d mV\r\n", cc_detect[0].adc_cc, cc_detect[1].adc_cc);
+    cc_detect[0].adc_cc = adc_cc1 * 2 * 3300 / 4096; // Convert ADC value to mV
+    cc_detect[1].adc_cc = adc_cc2 * 2 * 3300 / 4096; // Convert ADC value to mV
 
     for(uint8_t index = 0; index < 2; index++){
 
@@ -208,8 +210,8 @@ void StartTaskPD(void *argument)
             cc_detect[index].state = CC_IDLE; // Back to idle if ADC is above threshold
           } else if ((osKernelGetTickCount() - cc_detect[index].cc_debounce_time) >= CC_DEBOUNCE_ATTACH_TIME) {
             cc_detect[index].flag_cc_attach = 1; // Set attach flag
+            handle_pd_task();
             cc_detect[index].state = CC_ATTACH; // Transition to attach state after debounce
-            printf("CC%d Attach Detected\r\n", index + 1);
           }
           break;
         }
@@ -228,8 +230,9 @@ void StartTaskPD(void *argument)
           if ((cc_detect[index].adc_cc <= CC_MAX_ADC_VALUE) && (cc_detect[index].adc_cc >= CC_MIN_ADC_VALUE)) {
             cc_detect[index].state = CC_ATTACH; // Back to attach state if ADC is above threshold
           } else if ((osKernelGetTickCount() - cc_detect[index].cc_debounce_time) >= CC_DEBOUNCE_DETACH_TIME) {
+            cc_detect[index].flag_cc_attach = 0; // Set attach flag
+            handle_pd_task();
             cc_detect[index].state = CC_DETACH; // Transition to detach state after debounce
-            printf("CC%d Detach Detected\r\n", index + 1);
           }
           break;
         }
@@ -248,13 +251,27 @@ void StartTaskPD(void *argument)
       }
     }
 
-    osDelay(500);
+    osDelay(5);
   }
   /* USER CODE END StartTaskPD */
 }
 
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */
-
+void handle_pd_task(void)
+{
+  if(cc_detect[0].state == 1)
+  {
+    DEBUG_PRINT("CC1 detected\r\n");
+  }
+  else if(cc_detect[1].state == 1)
+  {
+    DEBUG_PRINT("CC2 detected\r\n");
+  }
+  else
+  {
+    DEBUG_PRINT("No CC detected\r\n");
+  }
+}
 /* USER CODE END Application */
 

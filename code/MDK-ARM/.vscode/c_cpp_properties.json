@@ -11,6 +11,12 @@
                 "e:\\Git_work\\STM32PD_sniffer\\code\\Middlewares\\Third_Party\\FreeRTOS\\Source\\portable\\RVDS\\ARM_CM4F",
                 "e:\\Git_work\\STM32PD_sniffer\\code\\Drivers\\CMSIS\\Device\\ST\\STM32G4xx\\Include",
                 "e:\\Git_work\\STM32PD_sniffer\\code\\Drivers\\CMSIS\\Include",
+                "e:\\Git_work\\STM32PD_sniffer\\code\\CherryUSB\\class\\hid",
+                "e:\\Git_work\\STM32PD_sniffer\\code\\CherryUSB\\class\\cdc",
+                "e:\\Git_work\\STM32PD_sniffer\\code\\CherryUSB\\class\\msc",
+                "e:\\Git_work\\STM32PD_sniffer\\code\\CherryUSB\\class\\hub",
+                "e:\\Git_work\\STM32PD_sniffer\\code\\CherryUSB\\core",
+                "e:\\Git_work\\STM32PD_sniffer\\code\\CherryUSB\\common",
                 "D:\\Keil_v5\\ARM\\ARMCC\\include",
                 "D:\\Keil_v5\\ARM\\ARMCC\\include\\arm_linux",
                 "D:\\Keil_v5\\ARM\\ARMCC\\include\\arm_linux_compat",
@@ -19,7 +25,9 @@
                 "e:\\Git_work\\STM32PD_sniffer\\code\\Core\\Src",
                 "e:\\Git_work\\STM32PD_sniffer\\code\\Drivers\\STM32G4xx_HAL_Driver\\Src",
                 "e:\\Git_work\\STM32PD_sniffer\\code\\Middlewares\\Third_Party\\FreeRTOS\\Source",
-                "e:\\Git_work\\STM32PD_sniffer\\code\\Middlewares\\Third_Party\\FreeRTOS\\Source\\portable\\MemMang"
+                "e:\\Git_work\\STM32PD_sniffer\\code\\Middlewares\\Third_Party\\FreeRTOS\\Source\\portable\\MemMang",
+                "e:\\Git_work\\STM32PD_sniffer\\code\\CherryUSB\\port\\fsdev",
+                "e:\\Git_work\\STM32PD_sniffer\\code\\CherryUSB\\demo"
             ],
             "defines": [
                 "USE_HAL_DRIVER",

@@ -102,13 +102,14 @@ int main(void)
   MX_COMP2_Init();
   MX_TIM2_Init();
   MX_USART1_UART_Init();
-  MX_USB_PCD_Init();
+//  MX_USB_PCD_Init();
   MX_ADC2_Init();
   MX_DAC1_Init();
   MX_OPAMP1_Init();
   MX_OPAMP2_Init();
   /* USER CODE BEGIN 2 */
-
+  extern void winusbv2_init(uint8_t busid, uintptr_t reg_base);
+  winusbv2_init(0, USB_BASE);
   /* USER CODE END 2 */
 
   /* Init scheduler */
