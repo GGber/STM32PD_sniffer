@@ -473,3 +473,10 @@ int usbd_cdc_write(const uint8_t *data, uint32_t data_len)
 {
     return usbd_ep_start_write(0, CDC_IN_EP, data, data_len);
 }
+
+int usbd_winusb_write(const uint8_t *data, uint32_t data_len)
+{
+    return usbd_ep_start_write(0, WINUSB_IN_EP, data, data_len);
+}
+
+

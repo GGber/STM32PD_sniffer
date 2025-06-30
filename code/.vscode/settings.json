@@ -2,6 +2,8 @@
     "files.associations": {
         "adc.h": "c",
         "usart.h": "c",
-        "tim.h": "c"
+        "tim.h": "c",
+        "bmc_analyze.h": "c",
+        "freertos.h": "c"
     }
 }

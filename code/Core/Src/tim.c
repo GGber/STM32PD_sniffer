@@ -23,9 +23,9 @@
 /* USER CODE BEGIN 0 */
 #include "usart.h"
 
-volatile uint8_t buffer_index = 0;
-volatile uint8_t time2_data_buffer[MAX_BUFFER_INDEX][MAX_BUFFER_LEN];
-volatile uint16_t time2_data_len[MAX_BUFFER_INDEX];
+uint8_t buffer_index = 0;
+uint8_t time2_data_buffer[MAX_BUFFER_INDEX][MAX_BUFFER_LEN];
+uint16_t time2_data_len[MAX_BUFFER_INDEX];
 /* USER CODE END 0 */
 
 TIM_HandleTypeDef htim2;

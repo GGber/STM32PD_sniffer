@@ -55,9 +55,10 @@ code\app_freertos.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h
 code\app_freertos.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h
 code\app_freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h
 code\app_freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h
+code\app_freertos.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 code\app_freertos.o: ../Core/Inc/usart.h
 code\app_freertos.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 code\app_freertos.o: ../Core/Inc/adc.h
 code\app_freertos.o: ../Core/Inc/comp.h
 code\app_freertos.o: ../Core/Inc/tim.h
-code\app_freertos.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+code\app_freertos.o: ../Core/Inc/bmc_analyze.h

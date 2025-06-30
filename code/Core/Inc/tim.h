@@ -36,9 +36,9 @@ extern "C" {
 extern TIM_HandleTypeDef htim2;
 
 /* USER CODE BEGIN Private defines */
-extern volatile uint8_t buffer_index;
-extern volatile uint8_t time2_data_buffer[MAX_BUFFER_INDEX][MAX_BUFFER_LEN];
-extern volatile uint16_t time2_data_len[MAX_BUFFER_INDEX];
+extern uint8_t buffer_index;
+extern uint8_t time2_data_buffer[MAX_BUFFER_INDEX][MAX_BUFFER_LEN];
+extern uint16_t time2_data_len[MAX_BUFFER_INDEX];
 /* USER CODE END Private defines */
 
 void MX_TIM2_Init(void);

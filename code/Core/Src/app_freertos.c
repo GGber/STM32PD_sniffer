@@ -25,15 +25,18 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <string.h>
 #include "usart.h"
 #include "adc.h"
 #include "comp.h"
 #include "tim.h"
-#include <string.h>
+#include "bmc_analyze.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
+
+
 
 #define CC_DEBOUNCE_ATTACH_TIME 100 // Debounce time in milliseconds
 #define CC_DEBOUNCE_DETACH_TIME 10  // Debounce time in milliseconds
@@ -196,12 +199,18 @@ void StartTaskPD(void *argument)
 {
   /* USER CODE BEGIN StartTaskPD */
 
-  
-
+  uint8_t buffer_index;
   /* Infinite loop */
   for(;;)
   {
-    osDelay(5);
+    osMessageQueueGet(TimeIndexQueueHandle, &buffer_index, NULL, portMAX_DELAY);
+
+    uint8_t data_time[MAX_BUFFER_LEN];
+    /* first and last data is invalid */
+    uint16_t data_time_len = time2_data_len[buffer_index] - 2;
+    memcpy(data_time, &time2_data_buffer[buffer_index][1], data_time_len);
+
+    decode_bmc(data_time, data_time_len);
   }
   /* USER CODE END StartTaskPD */
 }
@@ -314,9 +323,11 @@ void timer2_timeout_handle(void)
   /* data len */
   uint16_t transferred = MAX_BUFFER_LEN - __HAL_DMA_GET_COUNTER(htim2.hdma[TIM_DMA_ID_CC1]);
   time2_data_len[buffer_index] = transferred;
-    
+
   /* handle data */
-  
+  /* Send buffer index to message queue */
+  osMessageQueuePut(TimeIndexQueueHandle, (uint8_t *)&buffer_index, 0, 0);
+
   /* start next buffer */
   buffer_index++;
   if(buffer_index >= MAX_BUFFER_INDEX)
@@ -380,5 +391,9 @@ void handle_cc_detach(void)
     HAL_TIM_IC_Stop_DMA(&htim2, TIM_CHANNEL_1);
   }
 }
+
+
+
+
 /* USER CODE END Application */
 
