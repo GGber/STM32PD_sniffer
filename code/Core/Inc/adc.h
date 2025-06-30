@@ -29,8 +29,8 @@ extern "C" {
 #include "main.h"
 
 /* USER CODE BEGIN Includes */
-extern uint16_t adc_cc1;  
-extern uint16_t adc_cc2;  
+extern volatile uint16_t adc1_value;
+extern volatile uint16_t adc2_value;
 /* USER CODE END Includes */
 
 extern ADC_HandleTypeDef hadc1;

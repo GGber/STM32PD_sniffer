@@ -30,6 +30,9 @@ extern "C" {
 
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
+#include "FreeRTOS.h"
+#include "task.h"
+#include "cmsis_os.h"
 /* USER CODE END Includes */
 
 extern UART_HandleTypeDef huart1;
@@ -40,7 +43,7 @@ extern UART_HandleTypeDef huart1;
   do                                           \
   {                                            \
     uint32_t tick = osKernelGetTickCount() ;             \
-    printf("[%lu.%lu] " fmt, tick / 1000, tick % 1000, ##__VA_ARGS__); \
+    printf("[%d.%d] " fmt, tick / 1000, tick % 1000, ##__VA_ARGS__); \
   } while (0)
 /* USER CODE END Private defines */
 

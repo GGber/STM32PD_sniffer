@@ -58,4 +58,6 @@ code\app_freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cm
 code\app_freertos.o: ../Core/Inc/usart.h
 code\app_freertos.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 code\app_freertos.o: ../Core/Inc/adc.h
+code\app_freertos.o: ../Core/Inc/comp.h
+code\app_freertos.o: ../Core/Inc/tim.h
 code\app_freertos.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

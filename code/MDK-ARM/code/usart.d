@@ -46,3 +46,14 @@ code\usart.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h
 code\usart.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h
 code\usart.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h
 code\usart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+code\usart.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+code\usart.o: ../Core/Inc/FreeRTOSConfig.h
+code\usart.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+code\usart.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+code\usart.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+code\usart.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h
+code\usart.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+code\usart.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
+code\usart.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
+code\usart.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h
+code\usart.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h

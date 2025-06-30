@@ -23,7 +23,9 @@
 /* USER CODE BEGIN 0 */
 #include "usart.h"
 
-uint8_t time2_data_buffer[2048];
+volatile uint8_t buffer_index = 0;
+volatile uint8_t time2_data_buffer[MAX_BUFFER_INDEX][MAX_BUFFER_LEN];
+volatile uint16_t time2_data_len[MAX_BUFFER_INDEX];
 /* USER CODE END 0 */
 
 TIM_HandleTypeDef htim2;
@@ -47,7 +49,7 @@ void MX_TIM2_Init(void)
   htim2.Instance = TIM2;
   htim2.Init.Prescaler = 8 - 1;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 200;
+  htim2.Init.Period = 1000;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
   if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
@@ -75,7 +77,7 @@ void MX_TIM2_Init(void)
   sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_BOTHEDGE;
   sConfigIC.ICSelection = TIM_ICSELECTION_DIRECTTI;
   sConfigIC.ICPrescaler = TIM_ICPSC_DIV1;
-  sConfigIC.ICFilter = 0;
+  sConfigIC.ICFilter = 1;
   if (HAL_TIM_IC_ConfigChannel(&htim2, &sConfigIC, TIM_CHANNEL_1) != HAL_OK)
   {
     Error_Handler();
@@ -85,10 +87,14 @@ void MX_TIM2_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN TIM2_Init 2 */
-  /* 20M sample */
-  HAL_TIM_Base_Start_IT(&htim2);  // Start timer with interrupt enabled
+//  /* 20M (50ns)sample */
 
-  HAL_TIM_IC_Start_DMA(&htim2, TIM_CHANNEL_1, (uint32_t*)time2_data_buffer, 2048);
+  __HAL_TIM_CLEAR_FLAG(&htim2, TIM_FLAG_UPDATE);
+  
+  __HAL_TIM_URS_ENABLE(&htim2);
+  
+  HAL_TIM_Base_Start(&htim2);  // Start timer with interrupt enabled
+  
   /* USER CODE END TIM2_Init 2 */
 
 }
@@ -126,7 +132,7 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* tim_baseHandle)
     hdma_tim2_ch1.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
     hdma_tim2_ch1.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
     hdma_tim2_ch1.Init.Mode = DMA_NORMAL;
-    hdma_tim2_ch1.Init.Priority = DMA_PRIORITY_LOW;
+    hdma_tim2_ch1.Init.Priority = DMA_PRIORITY_HIGH;
     if (HAL_DMA_Init(&hdma_tim2_ch1) != HAL_OK)
     {
       Error_Handler();
@@ -171,9 +177,6 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* tim_baseHandle)
 }
 
 /* USER CODE BEGIN 1 */
-void timer2_timeout_handle(void)
-{
-    //printf("Timer 2 Period Elapsed \r\n");
-}
+
   
 /* USER CODE END 1 */

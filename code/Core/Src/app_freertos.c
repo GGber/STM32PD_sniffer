@@ -27,6 +27,8 @@
 /* USER CODE BEGIN Includes */
 #include "usart.h"
 #include "adc.h"
+#include "comp.h"
+#include "tim.h"
 #include <string.h>
 /* USER CODE END Includes */
 
@@ -35,8 +37,8 @@
 
 #define CC_DEBOUNCE_ATTACH_TIME 100 // Debounce time in milliseconds
 #define CC_DEBOUNCE_DETACH_TIME 10  // Debounce time in milliseconds
-#define CC_MAX_ADC_VALUE 2200 // Maximum ADC value for CC detection 
-#define CC_MIN_ADC_VALUE 300 // Minimum ADC value for CC detection
+#define CC_MAX_ADC_VALUE 2500 // Maximum ADC value for CC detection 
+#define CC_MIN_ADC_VALUE 500  // Minimum ADC value for CC detection
 
 enum cc_state{
     CC_IDLE,
@@ -84,6 +86,13 @@ const osThreadAttr_t PDTask_attributes = {
   .priority = (osPriority_t) osPriorityAboveNormal,
   .stack_size = 1024 * 4
 };
+/* Definitions for CCTask */
+osThreadId_t CCTaskHandle;
+const osThreadAttr_t CCTask_attributes = {
+  .name = "CCTask",
+  .priority = (osPriority_t) osPriorityAboveNormal1,
+  .stack_size = 256 * 4
+};
 /* Definitions for TimeIndexQueue */
 osMessageQueueId_t TimeIndexQueueHandle;
 const osMessageQueueAttr_t TimeIndexQueue_attributes = {
@@ -92,11 +101,13 @@ const osMessageQueueAttr_t TimeIndexQueue_attributes = {
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
-void handle_pd_task(void);
+void handle_cc_attach(void);
+void handle_cc_detach(void);
 /* USER CODE END FunctionPrototypes */
 
 void StartLedTask(void *argument);
 void StartTaskPD(void *argument);
+void StartTaskCC(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -136,6 +147,9 @@ void MX_FREERTOS_Init(void) {
 
   /* creation of PDTask */
   PDTaskHandle = osThreadNew(StartTaskPD, NULL, &PDTask_attributes);
+
+  /* creation of CCTask */
+  CCTaskHandle = osThreadNew(StartTaskCC, NULL, &CCTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -182,13 +196,33 @@ void StartTaskPD(void *argument)
 {
   /* USER CODE BEGIN StartTaskPD */
 
-  memset(cc_detect, 0, sizeof(cc_detect));
+  
 
   /* Infinite loop */
   for(;;)
   {
-    cc_detect[0].adc_cc = adc_cc1 * 2 * 3300 / 4096; // Convert ADC value to mV
-    cc_detect[1].adc_cc = adc_cc2 * 2 * 3300 / 4096; // Convert ADC value to mV
+    osDelay(5);
+  }
+  /* USER CODE END StartTaskPD */
+}
+
+/* USER CODE BEGIN Header_StartTaskCC */
+/**
+* @brief Function implementing the CCTask thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartTaskCC */
+void StartTaskCC(void *argument)
+{
+  /* USER CODE BEGIN StartTaskCC */
+  memset(cc_detect, 0, sizeof(cc_detect));
+    
+  /* Infinite loop */
+  for(;;)
+  {
+    cc_detect[0].adc_cc = adc1_value * 2 * 3300 / 4096; // Convert ADC value to mV
+    cc_detect[1].adc_cc = adc2_value * 2 * 3300 / 4096; // Convert ADC value to mV
 
     for(uint8_t index = 0; index < 2; index++){
 
@@ -210,7 +244,7 @@ void StartTaskPD(void *argument)
             cc_detect[index].state = CC_IDLE; // Back to idle if ADC is above threshold
           } else if ((osKernelGetTickCount() - cc_detect[index].cc_debounce_time) >= CC_DEBOUNCE_ATTACH_TIME) {
             cc_detect[index].flag_cc_attach = 1; // Set attach flag
-            handle_pd_task();
+            handle_cc_attach();
             cc_detect[index].state = CC_ATTACH; // Transition to attach state after debounce
           }
           break;
@@ -231,7 +265,7 @@ void StartTaskPD(void *argument)
             cc_detect[index].state = CC_ATTACH; // Back to attach state if ADC is above threshold
           } else if ((osKernelGetTickCount() - cc_detect[index].cc_debounce_time) >= CC_DEBOUNCE_DETACH_TIME) {
             cc_detect[index].flag_cc_attach = 0; // Set attach flag
-            handle_pd_task();
+            handle_cc_detach();
             cc_detect[index].state = CC_DETACH; // Transition to detach state after debounce
           }
           break;
@@ -251,26 +285,99 @@ void StartTaskPD(void *argument)
       }
     }
 
-    osDelay(5);
+    osDelay(1);
   }
-  /* USER CODE END StartTaskPD */
+  /* USER CODE END StartTaskCC */
 }
 
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */
-void handle_pd_task(void)
+
+void HAL_COMP_TriggerCallback(COMP_HandleTypeDef *hcomp)
 {
-  if(cc_detect[0].state == 1)
+  LL_EXTI_DisableFallingTrig_0_31(LL_EXTI_LINE_21 | LL_EXTI_LINE_22);
+    
+  /* open timeout event */
+  __HAL_TIM_CLEAR_FLAG(&htim2, TIM_FLAG_UPDATE);
+  __HAL_TIM_ENABLE_IT(&htim2,  TIM_IT_UPDATE);
+}
+
+void timer2_timeout_handle(void)
+{
+  /* close update interrupt */
+  __HAL_TIM_DISABLE_IT(&htim2, TIM_IT_UPDATE);
+
+  /* open cc interrupt */
+  LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_21 | LL_EXTI_LINE_22);
+  LL_EXTI_EnableFallingTrig_0_31(LL_EXTI_LINE_21 | LL_EXTI_LINE_22);
+
+  /* data len */
+  uint16_t transferred = MAX_BUFFER_LEN - __HAL_DMA_GET_COUNTER(htim2.hdma[TIM_DMA_ID_CC1]);
+  time2_data_len[buffer_index] = transferred;
+    
+  /* handle data */
+  
+  /* start next buffer */
+  buffer_index++;
+  if(buffer_index >= MAX_BUFFER_INDEX)
   {
-    DEBUG_PRINT("CC1 detected\r\n");
+    buffer_index = 0;
   }
-  else if(cc_detect[1].state == 1)
+  
+  HAL_TIM_IC_Stop_DMA(&htim2, TIM_CHANNEL_1);
+  /* start DMA channel */
+  HAL_TIM_IC_Start_DMA(&htim2, TIM_CHANNEL_1, (uint32_t*)time2_data_buffer[buffer_index], MAX_BUFFER_LEN);
+}
+
+void handle_cc_attach(void)
+{
+  if(cc_detect[0].flag_cc_attach == 1 && cc_detect[1].flag_cc_attach == 0)
   {
-    DEBUG_PRINT("CC2 detected\r\n");
+    /* change to comp1 */
+    HAL_TIMEx_TISelection(&htim2, TIM_TIM2_TI1_COMP1, TIM_CHANNEL_1);
+
+    /* open comp interrupt */
+    HAL_COMP_Start(&hcomp1);
+      
+    LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_21 | LL_EXTI_LINE_22);
+    LL_EXTI_EnableFallingTrig_0_31(LL_EXTI_LINE_21 | LL_EXTI_LINE_22);
+    
+    /* start DMA channel */
+    HAL_TIM_IC_Start_DMA(&htim2, TIM_CHANNEL_1, (uint32_t*)time2_data_buffer[buffer_index], MAX_BUFFER_LEN);
+      
+    DEBUG_PRINT("CC1 attach\r\n");
   }
-  else
+  else if(cc_detect[1].flag_cc_attach == 1 && cc_detect[0].flag_cc_attach == 0)
   {
-    DEBUG_PRINT("No CC detected\r\n");
+    /* change to comp2 */
+    HAL_TIMEx_TISelection(&htim2, TIM_TIM2_TI1_COMP2, TIM_CHANNEL_1);
+
+    /* open cc interrupt */
+    HAL_COMP_Start(&hcomp2);
+    
+    LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_21 | LL_EXTI_LINE_22);
+    LL_EXTI_EnableFallingTrig_0_31(LL_EXTI_LINE_21 | LL_EXTI_LINE_22);
+    
+    /* start DMA channel */
+    HAL_TIM_IC_Start_DMA(&htim2, TIM_CHANNEL_1, (uint32_t*)time2_data_buffer[buffer_index], MAX_BUFFER_LEN);
+      
+    DEBUG_PRINT("CC2 attach\r\n");
+  }
+}
+
+void handle_cc_detach(void)
+{
+  if(cc_detect[0].flag_cc_attach == 0 && cc_detect[1].flag_cc_attach == 0)
+  {
+    DEBUG_PRINT("CC1/2 detach\r\n");
+
+    HAL_COMP_Stop(&hcomp1);
+    HAL_COMP_Stop(&hcomp2);
+    
+    LL_EXTI_DisableFallingTrig_0_31(LL_EXTI_LINE_21 | LL_EXTI_LINE_22);
+    __HAL_TIM_DISABLE_IT(&htim2, TIM_IT_UPDATE);
+
+    HAL_TIM_IC_Stop_DMA(&htim2, TIM_CHANNEL_1);
   }
 }
 /* USER CODE END Application */

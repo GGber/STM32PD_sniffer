@@ -110,6 +110,8 @@ int main(void)
   /* USER CODE BEGIN 2 */
   extern void winusbv2_init(uint8_t busid, uintptr_t reg_base);
   winusbv2_init(0, USB_BASE);
+  
+  printf("**** start run code ****\r\n");
   /* USER CODE END 2 */
 
   /* Init scheduler */

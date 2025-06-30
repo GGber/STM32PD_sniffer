@@ -50,7 +50,7 @@ void MX_COMP1_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN COMP1_Init 2 */
-  HAL_COMP_Start(&hcomp1);
+  //HAL_COMP_Start(&hcomp1);
   /* USER CODE END COMP1_Init 2 */
 
 }
@@ -77,7 +77,7 @@ void MX_COMP2_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN COMP2_Init 2 */
-  HAL_COMP_Start(&hcomp2);
+  //HAL_COMP_Start(&hcomp2);
   /* USER CODE END COMP2_Init 2 */
 
 }
@@ -143,7 +143,7 @@ void HAL_COMP_MspInit(COMP_HandleTypeDef* compHandle)
     HAL_NVIC_SetPriority(COMP1_2_3_IRQn, 5, 0);
     HAL_NVIC_EnableIRQ(COMP1_2_3_IRQn);
   /* USER CODE BEGIN COMP2_MspInit 1 */
-
+    LL_EXTI_DisableFallingTrig_0_31(LL_EXTI_LINE_21 | LL_EXTI_LINE_22);
   /* USER CODE END COMP2_MspInit 1 */
   }
 }

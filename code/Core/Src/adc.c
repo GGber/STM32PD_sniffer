@@ -21,8 +21,8 @@
 #include "adc.h"
 
 /* USER CODE BEGIN 0 */
-uint16_t adc_cc1;  
-uint16_t adc_cc2;  
+volatile uint16_t adc1_value;
+volatile uint16_t adc2_value;
 /* USER CODE END 0 */
 
 ADC_HandleTypeDef hadc1;
@@ -89,9 +89,10 @@ void MX_ADC1_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN ADC1_Init 2 */
-  
   HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
-  HAL_ADC_Start_DMA(&hadc1, (uint32_t *)&adc_cc1, 2);
+
+  HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&adc1_value, 1);
+
   /* USER CODE END ADC1_Init 2 */
 
 }
@@ -146,7 +147,9 @@ void MX_ADC2_Init(void)
   }
   /* USER CODE BEGIN ADC2_Init 2 */
   HAL_ADCEx_Calibration_Start(&hadc2, ADC_SINGLE_ENDED);
-  HAL_ADC_Start_DMA(&hadc2, (uint32_t *)&adc_cc2, 2);
+
+  HAL_ADC_Start_DMA(&hadc2, (uint32_t*)&adc2_value, 1);
+
   /* USER CODE END ADC2_Init 2 */
 
 }
@@ -314,5 +317,6 @@ void HAL_ADC_MspDeInit(ADC_HandleTypeDef* adcHandle)
 }
 
 /* USER CODE BEGIN 1 */
+
 
 /* USER CODE END 1 */
