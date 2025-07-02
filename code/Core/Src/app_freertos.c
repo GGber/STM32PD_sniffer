@@ -233,6 +233,7 @@ void StartTaskCC(void *argument)
     cc_detect[0].adc_cc = adc1_value * 2 * 3300 / 4096; // Convert ADC value to mV
     cc_detect[1].adc_cc = adc2_value * 2 * 3300 / 4096; // Convert ADC value to mV
 
+    printf(" %d  %d \r\n", cc_detect[0].adc_cc, cc_detect[1].adc_cc);
     for(uint8_t index = 0; index < 2; index++){
 
       switch(cc_detect[index].state)
@@ -253,7 +254,7 @@ void StartTaskCC(void *argument)
             cc_detect[index].state = CC_IDLE; // Back to idle if ADC is above threshold
           } else if ((osKernelGetTickCount() - cc_detect[index].cc_debounce_time) >= CC_DEBOUNCE_ATTACH_TIME) {
             cc_detect[index].flag_cc_attach = 1; // Set attach flag
-            handle_cc_attach();
+            //handle_cc_attach();
             cc_detect[index].state = CC_ATTACH; // Transition to attach state after debounce
           }
           break;
@@ -274,7 +275,7 @@ void StartTaskCC(void *argument)
             cc_detect[index].state = CC_ATTACH; // Back to attach state if ADC is above threshold
           } else if ((osKernelGetTickCount() - cc_detect[index].cc_debounce_time) >= CC_DEBOUNCE_DETACH_TIME) {
             cc_detect[index].flag_cc_attach = 0; // Set attach flag
-            handle_cc_detach();
+            //handle_cc_detach();
             cc_detect[index].state = CC_DETACH; // Transition to detach state after debounce
           }
           break;
@@ -294,7 +295,7 @@ void StartTaskCC(void *argument)
       }
     }
 
-    osDelay(1);
+    osDelay(1000);
   }
   /* USER CODE END StartTaskCC */
 }

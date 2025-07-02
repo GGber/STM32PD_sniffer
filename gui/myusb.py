@@ -18,8 +18,8 @@ class USBDeviceManager:
 
         for i, dev in enumerate(self.device_list):
             try:
-                manufacturer = dev.get_string(dev.iManufacturer)
-                product = dev.get_string(dev.iProduct)
+                manufacturer = usb.util.get_string(dev, dev.iManufacturer)
+                product = usb.util.get_string(dev, dev.iProduct)
             except Exception as e:
                 manufacturer = product = "<无法访问>"
                 print(f"[警告] 无法读取设备描述符 {hex(dev.idVendor)}:{hex(dev.idProduct)}: {e}")

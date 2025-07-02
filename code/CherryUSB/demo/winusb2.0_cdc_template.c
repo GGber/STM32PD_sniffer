@@ -17,8 +17,8 @@
 #define CDC_OUT_EP 0x04
 #define CDC_INT_EP 0x85
 
-#define USBD_VID           0xFFFE
-#define USBD_PID           0xFFFF
+#define USBD_VID           0x1514
+#define USBD_PID           0x1000
 #define USBD_MAX_POWER     500
 #define USBD_LANGID_STRING 1033
 
@@ -195,10 +195,11 @@ static const uint8_t device_quality_descriptor[] = {
 
 static const char *string_descriptors[] = {
     (const char[]){ 0x09, 0x04 }, /* Langid */
-    "CherryUSB",                  /* Manufacturer */
-    "CherryUSB WINUSB DEMO",      /* Product */
-    "2022123456",                 /* Serial Number */
+    "GGber",                  /* Manufacturer */
+    "PD SNIIFER",      /* Product */
+    "2025070223",                 /* Serial Number */
 };
+
 
 static const uint8_t *device_descriptor_callback(uint8_t speed)
 {
