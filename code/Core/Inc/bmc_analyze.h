@@ -11,7 +11,7 @@ void decode_bmc(uint8_t *intervals, size_t len);
 
 void bits_to_bytes(uint8_t *bits, int bit_count, uint8_t *bytes_out, int *byte_count_out);
 
-extern int usbd_cdc_write(const uint8_t *data, uint32_t data_len);
-extern int usbd_winusb_write(const uint8_t *data, uint32_t data_len);
+//extern int usbd_cdc_write(const uint8_t *data, uint32_t data_len);
+//extern int usbd_winusb_write(const uint8_t *data, uint32_t data_len);
 
 

@@ -14,22 +14,26 @@
 #define WINUSB_OUT_EP 0x02
 
 /*!< endpoint address */
-#define HID_INT_EP          0x83
-#define HID_INT_EP_SIZE     4
-#define HID_INT_EP_INTERVAL 10
+#define HIDRAW_IN_EP       0x83
+#define HIDRAW_IN_EP_SIZE  64
+#define HIDRAW_IN_INTERVAL 10
 
-#define USBD_VID           0xFFFE
-#define USBD_PID           0xFFFF
+#define HIDRAW_OUT_EP          0x04
+#define HIDRAW_OUT_EP_SIZE     64
+#define HIDRAW_OUT_EP_INTERVAL 10
+
+#define USBD_VID           0x1514
+#define USBD_PID           0x1000
 #define USBD_MAX_POWER     500
 #define USBD_LANGID_STRING 1033
 
-#define USB_CONFIG_SIZE (9 + 9 + 7 + 7 + 9 + 9 + 7)
+#define USB_CONFIG_SIZE (9 + 9 + 7 + 7 + 9 + 9 + 7 + 7)
 #define INTF_NUM        2
 
 /*!< config descriptor size */
 #define USB_HID_CONFIG_DESC_SIZ 34
 /*!< report descriptor size */
-#define HID_MOUSE_REPORT_DESC_SIZE 74
+#define HID_CUSTOM_REPORT_DESC_SIZE 38
 
 #ifdef CONFIG_USB_HS
 #define WINUSB_EP_MPS 512
@@ -180,37 +184,40 @@ static const uint8_t config_descriptor[] = {
     USB_ENDPOINT_DESCRIPTOR_INIT(WINUSB_OUT_EP, USB_ENDPOINT_TYPE_BULK, WINUSB_EP_MPS, 0x00),
     /* Endpoint IN 1 */
     USB_ENDPOINT_DESCRIPTOR_INIT(WINUSB_IN_EP, USB_ENDPOINT_TYPE_BULK, WINUSB_EP_MPS, 0x00),
-    /************** Descriptor of Joystick Mouse interface ****************/
-    /* 09 */
+    /************** Descriptor of Custom interface *****************/
     0x09,                          /* bLength: Interface Descriptor size */
     USB_DESCRIPTOR_TYPE_INTERFACE, /* bDescriptorType: Interface descriptor type */
-    0x01,                          /* bInterfaceNumber: Number of Interface */
+    0x00,                          /* bInterfaceNumber: Number of Interface */
     0x00,                          /* bAlternateSetting: Alternate setting */
-    0x01,                          /* bNumEndpoints */
+    0x02,                          /* bNumEndpoints */
     0x03,                          /* bInterfaceClass: HID */
     0x01,                          /* bInterfaceSubClass : 1=BOOT, 0=no boot */
-    0x02,                          /* nInterfaceProtocol : 0=none, 1=keyboard, 2=mouse */
+    0x00,                          /* nInterfaceProtocol : 0=none, 1=keyboard, 2=mouse */
     0,                             /* iInterface: Index of string descriptor */
-    /******************** Descriptor of Joystick Mouse HID ********************/
-    /* 18 */
+    /******************** Descriptor of Custom HID ********************/
     0x09,                    /* bLength: HID Descriptor size */
     HID_DESCRIPTOR_TYPE_HID, /* bDescriptorType: HID */
     0x11,                    /* bcdHID: HID Class Spec release number */
     0x01,
-    0x00,                       /* bCountryCode: Hardware target country */
-    0x01,                       /* bNumDescriptors: Number of HID class descriptors to follow */
-    0x22,                       /* bDescriptorType */
-    HID_MOUSE_REPORT_DESC_SIZE, /* wItemLength: Total length of Report descriptor */
+    0x00,                        /* bCountryCode: Hardware target country */
+    0x01,                        /* bNumDescriptors: Number of HID class descriptors to follow */
+    0x22,                        /* bDescriptorType */
+    HID_CUSTOM_REPORT_DESC_SIZE, /* wItemLength: Total length of Report descriptor */
     0x00,
-    /******************** Descriptor of Mouse endpoint ********************/
-    /* 27 */
+    /******************** Descriptor of Custom in endpoint ********************/
     0x07,                         /* bLength: Endpoint Descriptor size */
     USB_DESCRIPTOR_TYPE_ENDPOINT, /* bDescriptorType: */
-    HID_INT_EP,                   /* bEndpointAddress: Endpoint Address (IN) */
+    HIDRAW_IN_EP,                 /* bEndpointAddress: Endpoint Address (IN) */
     0x03,                         /* bmAttributes: Interrupt endpoint */
-    HID_INT_EP_SIZE,              /* wMaxPacketSize: 4 Byte max */
-    0x00,
-    HID_INT_EP_INTERVAL, /* bInterval: Polling Interval */
+    WBVAL(HIDRAW_IN_EP_SIZE),     /* wMaxPacketSize: 4 Byte max */
+    HIDRAW_IN_INTERVAL,           /* bInterval: Polling Interval */
+    /******************** Descriptor of Custom out endpoint ********************/
+    0x07,                         /* bLength: Endpoint Descriptor size */
+    USB_DESCRIPTOR_TYPE_ENDPOINT, /* bDescriptorType: */
+    HIDRAW_OUT_EP,                /* bEndpointAddress: Endpoint Address (IN) */
+    0x03,                         /* bmAttributes: Interrupt endpoint */
+    WBVAL(HIDRAW_OUT_EP_SIZE),    /* wMaxPacketSize: 4 Byte max */
+    HIDRAW_OUT_EP_INTERVAL,       /* bInterval: Polling Interval */
 };
 
 static const uint8_t device_quality_descriptor[] = {
@@ -230,10 +237,10 @@ static const uint8_t device_quality_descriptor[] = {
 };
 
 static const char *string_descriptors[] = {
-    (const char[]){ 0x09, 0x04 }, /* Langid */
-    "CherryUSB",                  /* Manufacturer */
-    "CherryUSB WINUSB DEMO",      /* Product */
-    "2022123456",                 /* Serial Number */
+    (const char[]){ 0x09, 0x04 },   /* Langid */
+    "GGber",                        /* Manufacturer */
+    "PD SNIFFER",                   /* Product */
+    "2025070524",                   /* Serial Number */
 };
 
 static const uint8_t *device_descriptor_callback(uint8_t speed)
@@ -450,53 +457,28 @@ struct usbd_endpoint winusb_in_ep1 = {
 };
 
 /*!< hid mouse report descriptor */
-static const uint8_t hid_mouse_report_desc[HID_MOUSE_REPORT_DESC_SIZE] = {
-    0x05, 0x01, // USAGE_PAGE (Generic Desktop)
-    0x09, 0x02, // USAGE (Mouse)
-    0xA1, 0x01, // COLLECTION (Application)
-    0x09, 0x01, //   USAGE (Pointer)
-
-    0xA1, 0x00, //   COLLECTION (Physical)
-    0x05, 0x09, //     USAGE_PAGE (Button)
-    0x19, 0x01, //     USAGE_MINIMUM (Button 1)
-    0x29, 0x03, //     USAGE_MAXIMUM (Button 3)
-
-    0x15, 0x00, //     LOGICAL_MINIMUM (0)
-    0x25, 0x01, //     LOGICAL_MAXIMUM (1)
-    0x95, 0x03, //     REPORT_COUNT (3)
-    0x75, 0x01, //     REPORT_SIZE (1)
-
-    0x81, 0x02, //     INPUT (Data,Var,Abs)
-    0x95, 0x01, //     REPORT_COUNT (1)
-    0x75, 0x05, //     REPORT_SIZE (5)
-    0x81, 0x01, //     INPUT (Cnst,Var,Abs)
-
-    0x05, 0x01, //     USAGE_PAGE (Generic Desktop)
-    0x09, 0x30, //     USAGE (X)
-    0x09, 0x31, //     USAGE (Y)
-    0x09, 0x38,
-
-    0x15, 0x81, //     LOGICAL_MINIMUM (-127)
-    0x25, 0x7F, //     LOGICAL_MAXIMUM (127)
-    0x75, 0x08, //     REPORT_SIZE (8)
-    0x95, 0x03, //     REPORT_COUNT (2)
-
-    0x81, 0x06, //     INPUT (Data,Var,Rel)
-    0xC0, 0x09,
-    0x3c, 0x05,
-    0xff, 0x09,
-
-    0x01, 0x15,
-    0x00, 0x25,
-    0x01, 0x75,
-    0x01, 0x95,
-
-    0x02, 0xb1,
-    0x22, 0x75,
-    0x06, 0x95,
-    0x01, 0xb1,
-
-    0x01, 0xc0 //   END_COLLECTION
+static const uint8_t hid_mouse_report_desc[HID_CUSTOM_REPORT_DESC_SIZE] = {
+    /* USER CODE BEGIN 0 */
+    0x06, 0x00, 0xff, /* USAGE_PAGE (Vendor Defined Page 1) */
+    0x09, 0x01,       /* USAGE (Vendor Usage 1) */
+    0xa1, 0x01,       /* COLLECTION (Application) */
+    0x85, 0x02,       /*   REPORT ID (0x02) */
+    0x09, 0x01,       /*   USAGE (Vendor Usage 1) */
+    0x15, 0x00,       /*   LOGICAL_MINIMUM (0) */
+    0x26, 0xff, 0x00, /*   LOGICAL_MAXIMUM (255) */
+    0x95, 0x40 - 1,   /*   REPORT_COUNT (63) */
+    0x75, 0x08,       /*   REPORT_SIZE (8) */
+    0x81, 0x02,       /*   INPUT (Data,Var,Abs) */
+    /* <___________________________________________________> */
+    0x85, 0x01,       /*   REPORT ID (0x01) */
+    0x09, 0x01,       /*   USAGE (Vendor Usage 1) */
+    0x15, 0x00,       /*   LOGICAL_MINIMUM (0) */
+    0x26, 0xff, 0x00, /*   LOGICAL_MAXIMUM (255) */
+    0x95, 0x40 - 1,   /*   REPORT_COUNT (63) */
+    0x75, 0x08,       /*   REPORT_SIZE (8) */
+    0x91, 0x02,       /*   OUTPUT (Data,Var,Abs) */
+    /* USER CODE END 0 */
+    0xC0 /*     END_COLLECTION	             */
 };
 
 /*!< mouse report struct */

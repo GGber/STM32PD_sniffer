@@ -1,7 +1,7 @@
 Dependencies for Project 'code', Target 'code': (DO NOT MODIFY !)
 CompilerVersion: 5060960::V5.06 update 7 (build 960)::.\ARMCC
 F (startup_stm32g473xx.s)(0x68627080)(--cpu Cortex-M4.fp.sp -g --apcs=interwork --pd "__MICROLIB SETA 1" -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include--pd "__UVISION_VERSION SETA 538" --pd "_RTE_ SETA 1" --pd "STM32G473xx SETA 1" --pd "_RTE_ SETA 1"--list startup_stm32g473xx.lst --xref -o code\startup_stm32g473xx.o --depend code\startup_stm32g473xx.d)
-F (../Core/Src/main.c)(0x6862709E)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O2 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../CherryUSB/class/hid -I ../CherryUSB/class/cdc -I ../CherryUSB/class/msc -I ../CherryUSB/class/hub -I ../CherryUSB/core -I ../CherryUSB/common-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\main.o --omf_browse code\main.crf --depend code\main.d)
+F (../Core/Src/main.c)(0x6867FDC0)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O2 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../CherryUSB/class/hid -I ../CherryUSB/class/cdc -I ../CherryUSB/class/msc -I ../CherryUSB/class/hub -I ../CherryUSB/core -I ../CherryUSB/common-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\main.o --omf_browse code\main.crf --depend code\main.d)
 I (../Core/Inc/main.h)(0x685EA80C)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x682B4E51)
 I (../Core/Inc/stm32g4xx_hal_conf.h)(0x685EA80B)
@@ -67,8 +67,8 @@ I (../Core/Inc/usart.h)(0x686110BA)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5E8E3CC2)
 I (../Core/Inc/usb.h)(0x68516416)
 I (../Core/Inc/gpio.h)(0x68516414)
-F (..\Core\Src\bmc_analyze.c)(0x68629973)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O2 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../CherryUSB/class/hid -I ../CherryUSB/class/cdc -I ../CherryUSB/class/msc -I ../CherryUSB/class/hub -I ../CherryUSB/core -I ../CherryUSB/common-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\bmc_analyze.o --omf_browse code\bmc_analyze.crf --depend code\bmc_analyze.d)
-I (../Core/Inc/bmc_analyze.h)(0x68629A57)
+F (..\Core\Src\bmc_analyze.c)(0x6867F387)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O2 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../CherryUSB/class/hid -I ../CherryUSB/class/cdc -I ../CherryUSB/class/msc -I ../CherryUSB/class/hub -I ../CherryUSB/core -I ../CherryUSB/common-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\bmc_analyze.o --omf_browse code\bmc_analyze.crf --depend code\bmc_analyze.d)
+I (../Core/Inc/bmc_analyze.h)(0x6867F392)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x5E8E3CC2)
@@ -180,7 +180,7 @@ I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5E8E3CC2)
 I (../Core/Inc/adc.h)(0x68626DC0)
 I (../Core/Inc/comp.h)(0x68516415)
 I (../Core/Inc/tim.h)(0x68628679)
-I (../Core/Inc/bmc_analyze.h)(0x68629A57)
+I (../Core/Inc/bmc_analyze.h)(0x6867F392)
 F (../Core/Src/adc.c)(0x68626E6A)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O2 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../CherryUSB/class/hid -I ../CherryUSB/class/cdc -I ../CherryUSB/class/msc -I ../CherryUSB/class/hub -I ../CherryUSB/core -I ../CherryUSB/common-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\adc.o --omf_browse code\adc.crf --depend code\adc.d)
 I (../Core/Inc/adc.h)(0x68626DC0)
 I (../Core/Inc/main.h)(0x685EA80C)
@@ -2269,24 +2269,24 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x682B4E51)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x682B4E51)
-F (..\CherryUSB\demo\winusb2.0_cdc_template.c)(0x68654DA1)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O2 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../CherryUSB/class/hid -I ../CherryUSB/class/cdc -I ../CherryUSB/class/msc -I ../CherryUSB/class/hub -I ../CherryUSB/core -I ../CherryUSB/common-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\winusb2.0_cdc_template.o --omf_browse code\winusb2.0_cdc_template.crf --depend code\winusb2.0_cdc_template.d)
-I (..\CherryUSB\core\usbd_core.h)(0x685962A1)
+F (..\CherryUSB\demo\winusb1.0_template.c)(0x6868010E)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O2 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../CherryUSB/class/hid -I ../CherryUSB/class/cdc -I ../CherryUSB/class/msc -I ../CherryUSB/class/hub -I ../CherryUSB/core -I ../CherryUSB/common-I.\RTE\_code-ID:\Users\35166\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32G473xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G473xx-o code\winusb1.0_template.o --omf_browse code\winusb1.0_template.crf --depend code\winusb1.0_template.d)
+I (../CherryUSB/core/usbd_core.h)(0x685962A1)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5E8E3CC2)
 I (../Core/Inc/usb_config.h)(0x6860F832)
-I (..\CherryUSB\common\usb_util.h)(0x685962A1)
-I (..\CherryUSB\common\usb_errno.h)(0x685962A1)
-I (..\CherryUSB\common\usb_def.h)(0x685962A1)
-I (..\CherryUSB\common\usb_list.h)(0x685962A1)
-I (..\CherryUSB\common\usb_log.h)(0x685962A1)
+I (../CherryUSB/common/usb_util.h)(0x685962A1)
+I (../CherryUSB/common/usb_errno.h)(0x685962A1)
+I (../CherryUSB/common/usb_def.h)(0x685962A1)
+I (../CherryUSB/common/usb_list.h)(0x685962A1)
+I (../CherryUSB/common/usb_log.h)(0x685962A1)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5E8E3CC2)
-I (..\CherryUSB\common\usb_dc.h)(0x685962A1)
-I (..\CherryUSB\common\usb_osal.h)(0x685962A1)
-I (..\CherryUSB\common\usb_memcpy.h)(0x685962A1)
+I (../CherryUSB/common/usb_dc.h)(0x685962A1)
+I (../CherryUSB/common/usb_osal.h)(0x685962A1)
+I (../CherryUSB/common/usb_memcpy.h)(0x685962A1)
 I (D:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5E8E3CC2)
-I (..\CherryUSB\common\usb_dcache.h)(0x685962A1)
-I (..\CherryUSB\common\usb_version.h)(0x6860F495)
-I (..\CherryUSB\class\cdc\usbd_cdc_acm.h)(0x685962A1)
-I (..\CherryUSB\class\cdc\usb_cdc.h)(0x685962A1)
+I (../CherryUSB/common/usb_dcache.h)(0x685962A1)
+I (../CherryUSB/common/usb_version.h)(0x6860F495)
+I (../CherryUSB/class/cdc/usbd_cdc_acm.h)(0x685962A1)
+I (../CherryUSB/class/cdc/usb_cdc.h)(0x685962A1)

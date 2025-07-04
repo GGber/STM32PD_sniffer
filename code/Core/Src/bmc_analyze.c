@@ -61,7 +61,7 @@ void decode_bmc(uint8_t *intervals, size_t len) {
         pack_5bit_to_byte(bits, bit_index - 64, packed_bytes, &packed_len);
 
         // 发送到USB CDC
-        usbd_cdc_write(packed_bytes, packed_len);
+        //usbd_cdc_write(packed_bytes, packed_len);
     }
     else
     {

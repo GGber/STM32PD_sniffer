@@ -8,7 +8,7 @@
 
 #define WCID_VENDOR_CODE 0x17
 
-#define DOUBLE_WINUSB 0
+#define DOUBLE_WINUSB 1
 
 __ALIGN_BEGIN const uint8_t WCID_StringDescriptor_MSOS[18] __ALIGN_END = {
     ///////////////////////////////////////
@@ -166,8 +166,8 @@ struct usb_msosv1_descriptor msosv1_desc = {
 #define WINUSB_IN_EP  0x81
 #define WINUSB_OUT_EP 0x02
 
-#define USBD_VID           0xefff
-#define USBD_PID           0xffff
+#define USBD_VID           0x1514
+#define USBD_PID           0x1000
 #define USBD_MAX_POWER     100
 #define USBD_LANGID_STRING 1033
 
@@ -222,12 +222,12 @@ static const uint8_t device_quality_descriptor[] = {
 };
 
 static const char *string_descriptors[] = {
-    (const char[]){ 0x09, 0x04 }, /* Langid */
-    "CherryUSB",                  /* Manufacturer */
-    "CherryUSB WINUSB DEMO",      /* Product */
-    "2022123456",                 /* Serial Number */
-    "CherryUSB WINUSB DEMO 1",    /* STRING4 */
-    "CherryUSB WINUSB DEMO 2",    /* STRING5 */
+    (const char[]){ 0x09, 0x04 },   /* Langid */
+    "GGber",                        /* Manufacturer */
+    "PD SNIFFER",                   /* Product */
+    "2025070524",                   /* Serial Number */
+    "PD DATA",                      /* string1 */
+    "ADC",                          /* string2 */
 };
 
 static const uint8_t *device_descriptor_callback(uint8_t speed)
@@ -537,4 +537,54 @@ void winusb_init(uint8_t busid, uintptr_t reg_base)
     usbd_add_endpoint(busid, &winusb_in_ep2);
 #endif
     usbd_initialize(busid, reg_base, usbd_event_handler);
+}
+
+// 发送数据到第一个 WinUSB 接口 IN 端点
+int winusb_send_data_ep1(const uint8_t *data, uint32_t len)
+{
+    if (ep_tx_busy_flag) {
+        // 之前传输还没完成，避免冲突
+        return -1;
+    }
+
+    if (len > 2048) {
+        // 超出缓存大小限制
+        return -2;
+    }
+
+    // 拷贝数据到发送缓冲区
+    memcpy(write_buffer, data, len);
+
+    ep_tx_busy_flag = true;
+    int ret = usbd_ep_start_write(0, WINUSB_IN_EP, write_buffer, len);
+    return ret;
+}
+
+// 发送数据到第二个 WinUSB 接口 IN 端点（如果配置了DOUBLE_WINUSB）
+int winusb_send_data_ep2(const uint8_t *data, uint32_t len)
+{
+#if DOUBLE_WINUSB == 1
+    if (ep_tx_busy_flag) {
+        // 之前传输还没完成，避免冲突
+        return -1;
+    }
+
+    if (len > 2048) {
+        // 超出缓存大小限制
+        return -2;
+    }
+
+    // 拷贝数据到发送缓冲区
+    memcpy(write_buffer, data, len);
+
+    ep_tx_busy_flag = true;
+    int ret = usbd_ep_start_write(0, WINUSB_IN_EP2, write_buffer, len);
+    return ret;
+#else
+    (void)busid;
+    (void)data;
+    (void)len;
+    // 未配置双接口时，返回错误
+    return -3;
+#endif
 }

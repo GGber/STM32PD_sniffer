@@ -914,9 +914,9 @@
               <FilePath>..\CherryUSB\port\fsdev\usb_glue_st.c</FilePath>
             </File>
             <File>
-              <FileName>winusb2.0_cdc_template.c</FileName>
+              <FileName>winusb1.0_template.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\CherryUSB\demo\winusb2.0_cdc_template.c</FilePath>
+              <FilePath>..\CherryUSB\demo\winusb1.0_template.c</FilePath>
             </File>
           </Files>
         </Group>

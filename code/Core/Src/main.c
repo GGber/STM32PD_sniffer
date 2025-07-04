@@ -108,8 +108,8 @@ int main(void)
   MX_OPAMP1_Init();
   MX_OPAMP2_Init();
   /* USER CODE BEGIN 2 */
-  extern void winusbv2_init(uint8_t busid, uintptr_t reg_base);
-  winusbv2_init(0, USB_BASE);
+  extern void winusb_init(uint8_t busid, uintptr_t reg_base);
+  winusb_init(0, USB_BASE);
   
   printf("**** start run code ****\r\n");
   /* USER CODE END 2 */
