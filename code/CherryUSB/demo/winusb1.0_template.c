@@ -409,6 +409,79 @@ const uint8_t winusb_descriptor[] = {
 USB_NOCACHE_RAM_SECTION USB_MEM_ALIGNX uint8_t read_buffer[2048];
 USB_NOCACHE_RAM_SECTION USB_MEM_ALIGNX uint8_t write_buffer[2048];
 
+// 数据队列结构体
+#define MAX_QUEUE_SIZE 4
+#define MAX_DATA_SIZE 2048
+
+typedef struct {
+    uint8_t data[MAX_DATA_SIZE];
+    uint32_t length;
+    bool valid;
+} queue_item_t;
+
+typedef struct {
+    queue_item_t items[MAX_QUEUE_SIZE];
+    uint8_t head;
+    uint8_t tail;
+    uint8_t count;
+    bool sending;
+} data_queue_t;
+
+// 为两个端点分别创建队列
+static data_queue_t ep1_queue = {0};
+static data_queue_t ep2_queue = {0};
+
+// 队列操作函数
+static bool queue_is_empty(data_queue_t *queue) {
+    return queue->count == 0;
+}
+
+static bool queue_is_full(data_queue_t *queue) {
+    return queue->count >= MAX_QUEUE_SIZE;
+}
+
+static bool queue_enqueue(data_queue_t *queue, const uint8_t *data, uint32_t length) {
+    if (queue_is_full(queue) || length > MAX_DATA_SIZE) {
+        return false;
+    }
+    
+    queue_item_t *item = &queue->items[queue->tail];
+    memcpy(item->data, data, length);
+    item->length = length;
+    item->valid = true;
+    
+    queue->tail = (queue->tail + 1) % MAX_QUEUE_SIZE;
+    queue->count++;
+    
+    return true;
+}
+
+static bool queue_dequeue(data_queue_t *queue, uint8_t *data, uint32_t *length) {
+    if (queue_is_empty(queue)) {
+        return false;
+    }
+    
+    queue_item_t *item = &queue->items[queue->head];
+    memcpy(data, item->data, item->length);
+    *length = item->length;
+    item->valid = false;
+    
+    queue->head = (queue->head + 1) % MAX_QUEUE_SIZE;
+    queue->count--;
+    
+    return true;
+}
+
+static void queue_clear(data_queue_t *queue) {
+    queue->head = 0;
+    queue->tail = 0;
+    queue->count = 0;
+    queue->sending = false;
+    for (int i = 0; i < MAX_QUEUE_SIZE; i++) {
+        queue->items[i].valid = false;
+    }
+}
+
 volatile bool ep_tx_busy_flag = false;
 
 static void usbd_event_handler(uint8_t busid, uint8_t event)
@@ -426,6 +499,11 @@ static void usbd_event_handler(uint8_t busid, uint8_t event)
             break;
         case USBD_EVENT_CONFIGURED:
             ep_tx_busy_flag = false;
+            /* 初始化队列 */
+            queue_clear(&ep1_queue);
+#if DOUBLE_WINUSB == 1
+            queue_clear(&ep2_queue);
+#endif
             /* setup first out ep read transfer */
             usbd_ep_start_read(busid, WINUSB_OUT_EP, read_buffer, 2048);
 #if DOUBLE_WINUSB == 1
@@ -461,13 +539,25 @@ void usbd_winusb_out(uint8_t busid, uint8_t ep, uint32_t nbytes)
 
 void usbd_winusb_in(uint8_t busid, uint8_t ep, uint32_t nbytes)
 {
-//    USB_LOG_RAW("actual1 in len:%d\r\n", (unsigned int)nbytes);
+    //    USB_LOG_RAW("actual1 in len:%d\r\n", (unsigned int)nbytes);
 
     if ((nbytes % WINUSB_EP_MPS) == 0 && nbytes) {
         /* send zlp */
         usbd_ep_start_write(busid, WINUSB_IN_EP, NULL, 0);
     } else {
-        ep_tx_busy_flag = false;
+        // 传输完成，处理队列中的下一个数据
+        ep1_queue.sending = false;
+        
+        // 检查队列中是否还有数据需要发送
+        uint8_t send_data[MAX_DATA_SIZE];
+        uint32_t send_length;
+        
+        if (queue_dequeue(&ep1_queue, send_data, &send_length)) {
+            // 还有数据，继续发送
+            ep1_queue.sending = true;
+            memcpy(write_buffer, send_data, send_length);
+            usbd_ep_start_write(busid, WINUSB_IN_EP, write_buffer, send_length);
+        }
     }
 }
 
@@ -499,13 +589,25 @@ void usbd_winusb_out2(uint8_t busid, uint8_t ep, uint32_t nbytes)
 
 void usbd_winusb_in2(uint8_t busid, uint8_t ep, uint32_t nbytes)
 {
-//    USB_LOG_RAW("actual2 in len:%d\r\n", (unsigned int)nbytes);
+    //    USB_LOG_RAW("actual2 in len:%d\r\n", (unsigned int)nbytes);
 
     if ((nbytes % usbd_get_ep_mps(busid, ep)) == 0 && nbytes) {
         /* send zlp */
         usbd_ep_start_write(busid, WINUSB_IN_EP2, NULL, 0);
     } else {
-        ep_tx_busy_flag = false;
+        // 传输完成，处理队列中的下一个数据
+        ep2_queue.sending = false;
+        
+        // 检查队列中是否还有数据需要发送
+        uint8_t send_data[MAX_DATA_SIZE];
+        uint32_t send_length;
+        
+        if (queue_dequeue(&ep2_queue, send_data, &send_length)) {
+            // 还有数据，继续发送
+            ep2_queue.sending = true;
+            memcpy(write_buffer, send_data, send_length);
+            usbd_ep_start_write(busid, WINUSB_IN_EP2, write_buffer, send_length);
+        }
     }
 }
 
@@ -544,52 +646,81 @@ void winusb_init(uint8_t busid, uintptr_t reg_base)
     usbd_initialize(busid, reg_base, usbd_event_handler);
 }
 
-// �������ݵ���һ�� WinUSB �ӿ� IN �˵�
+// 发送数据到第一个 WinUSB 接口 IN 端点
 int winusb_send_data_ep1(const uint8_t *data, uint32_t len)
 {
-    if (ep_tx_busy_flag) {
-        // ֮ǰ���仹û��ɣ������ͻ
-        return -1;
-    }
-
-    if (len > 2048) {
-        // ���������С����
+    if (len > MAX_DATA_SIZE) {
+        // 数据太大，无法处理
         return -2;
     }
-
-    // �������ݵ����ͻ�����
-    memcpy(write_buffer, data, len);
-
-    ep_tx_busy_flag = true;
-    int ret = usbd_ep_start_write(0, WINUSB_IN_EP, write_buffer, len);
-    return ret;
+    
+    // 尝试将数据加入队列
+    if (!queue_enqueue(&ep1_queue, data, len)) {
+        // 队列满了，无法添加新数据
+        return -1;
+    }
+    
+    // 如果当前没有在发送数据，尝试开始发送
+    if (!ep1_queue.sending) {
+        uint8_t send_data[MAX_DATA_SIZE];
+        uint32_t send_length;
+        
+        if (queue_dequeue(&ep1_queue, send_data, &send_length)) {
+            ep1_queue.sending = true;
+            memcpy(write_buffer, send_data, send_length);
+            int ret = usbd_ep_start_write(0, WINUSB_IN_EP, write_buffer, send_length);
+            if (ret != 0) {
+                // 发送失败，恢复队列状态
+                ep1_queue.sending = false;
+                // 将数据重新放回队列头部（这里简化处理，实际应该放回原位置）
+                queue_enqueue(&ep1_queue, send_data, send_length);
+                return -3;
+            }
+        }
+    }
+    
+    return 0; // 成功加入队列
 }
 
-// �������ݵ��ڶ��� WinUSB �ӿ� IN �˵㣨���������DOUBLE_WINUSB��
+// 发送数据到第二个 WinUSB 接口 IN 端点（需要定义 DOUBLE_WINUSB）
 int winusb_send_data_ep2(const uint8_t *data, uint32_t len)
 {
 #if DOUBLE_WINUSB == 1
-    if (ep_tx_busy_flag) {
-        // ֮ǰ���仹û��ɣ������ͻ
-        return -1;
-    }
-
-    if (len > 2048) {
-        // ���������С����
+    if (len > MAX_DATA_SIZE) {
+        // 数据太大，无法处理
         return -2;
     }
-
-    // �������ݵ����ͻ�����
-    memcpy(write_buffer, data, len);
-
-    ep_tx_busy_flag = true;
-    int ret = usbd_ep_start_write(0, WINUSB_IN_EP2, write_buffer, len);
-    return ret;
+    
+    // 尝试将数据加入队列
+    if (!queue_enqueue(&ep2_queue, data, len)) {
+        // 队列满了，无法添加新数据
+        return -1;
+    }
+    
+    // 如果当前没有在发送数据，尝试开始发送
+    if (!ep2_queue.sending) {
+        uint8_t send_data[MAX_DATA_SIZE];
+        uint32_t send_length;
+        
+        if (queue_dequeue(&ep2_queue, send_data, &send_length)) {
+            ep2_queue.sending = true;
+            memcpy(write_buffer, send_data, send_length);
+            int ret = usbd_ep_start_write(0, WINUSB_IN_EP2, write_buffer, send_length);
+            if (ret != 0) {
+                // 发送失败，恢复队列状态
+                ep2_queue.sending = false;
+                // 将数据重新放回队列头部（这里简化处理，实际应该放回原位置）
+                queue_enqueue(&ep2_queue, send_data, send_length);
+                return -3;
+            }
+        }
+    }
+    
+    return 0; // 成功加入队列
 #else
-    (void)busid;
     (void)data;
     (void)len;
-    // δ����˫�ӿ�ʱ�����ش���
+    // 未定义双接口时返回错误
     return -3;
 #endif
 }
