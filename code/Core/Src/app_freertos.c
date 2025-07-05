@@ -233,7 +233,7 @@ void StartTaskCC(void *argument)
     cc_detect[0].adc_cc = adc1_value * 2 * 3300 / 4096; // Convert ADC value to mV
     cc_detect[1].adc_cc = adc2_value * 2 * 3300 / 4096; // Convert ADC value to mV
 
-    printf(" %d  %d \r\n", cc_detect[0].adc_cc, cc_detect[1].adc_cc);
+    //printf(" %d  %d \r\n", cc_detect[0].adc_cc, cc_detect[1].adc_cc);
     for(uint8_t index = 0; index < 2; index++){
 
       switch(cc_detect[index].state)

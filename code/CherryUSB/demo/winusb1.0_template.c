@@ -444,19 +444,24 @@ static void usbd_event_handler(uint8_t busid, uint8_t event)
 
 void usbd_winusb_out(uint8_t busid, uint8_t ep, uint32_t nbytes)
 {
-    USB_LOG_RAW("actual out len:%d\r\n", (unsigned int)nbytes);
-    // for (int i = 0; i < 100; i++) {
-    //     printf("%02x ", read_buffer[i]);
-    // }
-    // printf("\r\n");
-    usbd_ep_start_write(busid, WINUSB_IN_EP, read_buffer, nbytes);
+//    USB_LOG_RAW("actual1 out len:%d\r\n", (unsigned int)nbytes);
+//    for (int i = 0; i < nbytes; i++) {
+//        printf("%02x ", read_buffer[i]);
+//    }
+//    printf("\r\n");
+    
+    // ä½¿ç”¨ç‹¬ç«‹çš„ç¼“å†²åŒºé¿å…å†²çª
+    memcpy(write_buffer, read_buffer, nbytes);
+    
+    int ret = usbd_ep_start_write(busid, WINUSB_IN_EP, write_buffer, nbytes);
+    
     /* setup next out ep read transfer */
     usbd_ep_start_read(busid, WINUSB_OUT_EP, read_buffer, 2048);
 }
 
 void usbd_winusb_in(uint8_t busid, uint8_t ep, uint32_t nbytes)
 {
-    USB_LOG_RAW("actual in len:%d\r\n", (unsigned int)nbytes);
+//    USB_LOG_RAW("actual1 in len:%d\r\n", (unsigned int)nbytes);
 
     if ((nbytes % WINUSB_EP_MPS) == 0 && nbytes) {
         /* send zlp */
@@ -482,11 +487,11 @@ struct usbd_interface intf0;
 
 void usbd_winusb_out2(uint8_t busid, uint8_t ep, uint32_t nbytes)
 {
-    USB_LOG_RAW("actual out len:%d\r\n", (unsigned int)nbytes);
-    // for (int i = 0; i < 100; i++) {
-    //     printf("%02x ", read_buffer[i]);
-    // }
-    // printf("\r\n");
+//    USB_LOG_RAW("actual2 out len:%d\r\n", (unsigned int)nbytes);
+//    for (int i = 0; i < nbytes; i++) {
+//        printf("%02x ", read_buffer[i]);
+//    }
+//    printf("\r\n");
     usbd_ep_start_write(busid, WINUSB_IN_EP2, read_buffer, nbytes);
     /* setup next out ep read transfer */
     usbd_ep_start_read(busid, WINUSB_OUT_EP2, read_buffer, 2048);
@@ -494,7 +499,7 @@ void usbd_winusb_out2(uint8_t busid, uint8_t ep, uint32_t nbytes)
 
 void usbd_winusb_in2(uint8_t busid, uint8_t ep, uint32_t nbytes)
 {
-    USB_LOG_RAW("actual in len:%d\r\n", (unsigned int)nbytes);
+//    USB_LOG_RAW("actual2 in len:%d\r\n", (unsigned int)nbytes);
 
     if ((nbytes % usbd_get_ep_mps(busid, ep)) == 0 && nbytes) {
         /* send zlp */
@@ -539,20 +544,20 @@ void winusb_init(uint8_t busid, uintptr_t reg_base)
     usbd_initialize(busid, reg_base, usbd_event_handler);
 }
 
-// ·¢ËÍÊý¾Ýµ½µÚÒ»¸ö WinUSB ½Ó¿Ú IN ¶Ëµã
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ýµï¿½ï¿½ï¿½Ò»ï¿½ï¿½ WinUSB ï¿½Ó¿ï¿½ IN ï¿½Ëµï¿½
 int winusb_send_data_ep1(const uint8_t *data, uint32_t len)
 {
     if (ep_tx_busy_flag) {
-        // Ö®Ç°´«Êä»¹Ã»Íê³É£¬±ÜÃâ³åÍ»
+        // Ö®Ç°ï¿½ï¿½ï¿½ä»¹Ã»ï¿½ï¿½É£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í»
         return -1;
     }
 
     if (len > 2048) {
-        // ³¬³ö»º´æ´óÐ¡ÏÞÖÆ
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½
         return -2;
     }
 
-    // ¿½±´Êý¾Ýµ½·¢ËÍ»º³åÇø
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ýµï¿½ï¿½ï¿½ï¿½Í»ï¿½ï¿½ï¿½ï¿½ï¿½
     memcpy(write_buffer, data, len);
 
     ep_tx_busy_flag = true;
@@ -560,21 +565,21 @@ int winusb_send_data_ep1(const uint8_t *data, uint32_t len)
     return ret;
 }
 
-// ·¢ËÍÊý¾Ýµ½µÚ¶þ¸ö WinUSB ½Ó¿Ú IN ¶Ëµã£¨Èç¹ûÅäÖÃÁËDOUBLE_WINUSB£©
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ýµï¿½ï¿½Ú¶ï¿½ï¿½ï¿½ WinUSB ï¿½Ó¿ï¿½ IN ï¿½Ëµã£¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½DOUBLE_WINUSBï¿½ï¿½
 int winusb_send_data_ep2(const uint8_t *data, uint32_t len)
 {
 #if DOUBLE_WINUSB == 1
     if (ep_tx_busy_flag) {
-        // Ö®Ç°´«Êä»¹Ã»Íê³É£¬±ÜÃâ³åÍ»
+        // Ö®Ç°ï¿½ï¿½ï¿½ä»¹Ã»ï¿½ï¿½É£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í»
         return -1;
     }
 
     if (len > 2048) {
-        // ³¬³ö»º´æ´óÐ¡ÏÞÖÆ
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½
         return -2;
     }
 
-    // ¿½±´Êý¾Ýµ½·¢ËÍ»º³åÇø
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ýµï¿½ï¿½ï¿½ï¿½Í»ï¿½ï¿½ï¿½ï¿½ï¿½
     memcpy(write_buffer, data, len);
 
     ep_tx_busy_flag = true;
@@ -584,7 +589,7 @@ int winusb_send_data_ep2(const uint8_t *data, uint32_t len)
     (void)busid;
     (void)data;
     (void)len;
-    // Î´ÅäÖÃË«½Ó¿ÚÊ±£¬·µ»Ø´íÎó
+    // Î´ï¿½ï¿½ï¿½ï¿½Ë«ï¿½Ó¿ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½ï¿½ï¿½
     return -3;
 #endif
 }
