@@ -128,7 +128,7 @@ class USBCommunication(QObject):
                 # 添加调试信息
                 if len(devices) > 0:
                     for i, device in enumerate(devices):
-                        print(f"找到目标设备 {i+1}: VID=0x{device.idVendor:04X}, PID=0x{device.idProduct:04X}, Bus={device.bus}, Address={device.address}")
+                        # print(f"找到目标设备 {i+1}: VID=0x{device.idVendor:04X}, PID=0x{device.idProduct:04X}, Bus={device.bus}, Address={device.address}")
                         
                         # 检查每个设备的接口（只在第一次连接时）
                         if not any(f"{device.bus}-{device.address}" in dev_id for dev_id in self.devices.keys()):
@@ -148,8 +148,6 @@ class USBCommunication(QObject):
                                     print("  ⚠️  权限不足，但已建立的连接可能仍然有效")
                                 elif "insufficient permissions" in str(e):
                                     print("  ⚠️  权限不足，但已建立的连接可能仍然有效")
-                else:
-                    print("未检测到目标设备 (VID=0x1514, PID=0x1000)")
                 
                 # 检查新连接的设备
                 # 获取当前已连接的设备索引

@@ -414,8 +414,8 @@ USB_NOCACHE_RAM_SECTION USB_MEM_ALIGNX uint8_t read_buffer2[2048];
 USB_NOCACHE_RAM_SECTION USB_MEM_ALIGNX uint8_t write_buffer2[2048];
 
 // FIFO队列结构体定义
-#define MAX_QUEUE_SIZE 8
-#define MAX_DATA_SIZE 2048
+#define MAX_QUEUE_SIZE 16
+#define MAX_DATA_SIZE 512
 
 typedef struct {
     uint8_t data[MAX_DATA_SIZE];
@@ -433,7 +433,6 @@ typedef struct {
 
 // 为两个端点分别创建队列
 static data_queue_t ep1_queue = {0};
-static data_queue_t ep2_queue = {0};
 
 // FIFO队列操作函数
 static bool queue_is_empty(data_queue_t *queue) {
