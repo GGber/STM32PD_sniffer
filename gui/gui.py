@@ -22,18 +22,17 @@ class StatusIndicator(QFrame):
         layout = QHBoxLayout()
         self.setLayout(layout)
         
-        # 状态指示灯
+        # 状态指示灯 - 更小
         self.status_light = QFrame()
-        self.status_light.setFixedSize(20, 20)
+        self.status_light.setFixedSize(12, 12)  # 更小的指示灯
         self.status_light.setFrameStyle(QFrame.NoFrame)
         
-        # 状态文本
+        # 状态文本 - 更小
         self.status_label = QLabel("设备未连接")
-        self.status_label.setFont(QFont("Arial", 10, QFont.Bold))
+        self.status_label.setFont(QFont("Arial", 8))  # 更小的字体
         
         layout.addWidget(self.status_light)
         layout.addWidget(self.status_label)
-        layout.addStretch()
         
         self.update_status(False)
     
@@ -43,12 +42,12 @@ class StatusIndicator(QFrame):
         
         if connected:
             # 绿色圆形 - 已连接
-            self.status_light.setStyleSheet("background-color: #00FF00; border: 2px solid #008000; border-radius: 10px;")
+            self.status_light.setStyleSheet("background-color: #00FF00; border: 1px solid #008000; border-radius: 6px;")
             self.status_label.setText("设备已连接")
             self.status_label.setStyleSheet("color: #008000; font-weight: bold;")
         else:
             # 红色圆形 - 未连接
-            self.status_light.setStyleSheet("background-color: #FF0000; border: 2px solid #800000; border-radius: 10px;")
+            self.status_light.setStyleSheet("background-color: #FF0000; border: 1px solid #800000; border-radius: 6px;")
             self.status_label.setText("设备未连接")
             self.status_label.setStyleSheet("color: #800000; font-weight: bold;")
 
@@ -66,15 +65,12 @@ class USBGUI(QMainWindow):
         self.status_timer.timeout.connect(self.update_device_status)
         self.status_timer.start(1000)  # 每秒更新一次状态
         
-        # 初始化完成后更新状态
-        QTimer.singleShot(3000, self.update_status_label)
-        
         # 启动完成后显示就绪状态
         QTimer.singleShot(3500, self.show_ready_status)
     
     def setup_ui(self):
         """设置用户界面"""
-        self.setWindowTitle("USB通信工具 - VID:0x1514 PID:0x1000")
+        self.setWindowTitle("USB通信工具")
         self.setGeometry(100, 100, 800, 600)
         
         # 创建中央部件
@@ -83,36 +79,14 @@ class USBGUI(QMainWindow):
         
         # 主布局
         main_layout = QVBoxLayout(central_widget)
-        
-        # 标题
-        title_label = QLabel("USB通信工具")
-        title_label.setFont(QFont("Arial", 16, QFont.Bold))
-        title_label.setAlignment(Qt.AlignCenter)
-        title_label.setStyleSheet("color: #2C3E50; margin: 10px;")
-        main_layout.addWidget(title_label)
+        main_layout.setContentsMargins(5, 5, 5, 5)  # 减少边距
+        main_layout.setSpacing(5)  # 减少间距
         
         # 权限提示
         self.permission_label = QLabel("")
         self.permission_label.setAlignment(Qt.AlignCenter)
-        self.permission_label.setStyleSheet("color: #E74C3C; font-weight: bold; margin: 5px;")
+        self.permission_label.setStyleSheet("color: #E74C3C; font-weight: bold; margin: 2px;")
         main_layout.addWidget(self.permission_label)
-        
-        # 状态提示
-        self.status_label = QLabel("正在初始化USB设备...")
-        self.status_label.setAlignment(Qt.AlignCenter)
-        self.status_label.setStyleSheet("color: #3498DB; font-weight: bold; margin: 5px; background-color: #EBF3FD; padding: 5px; border-radius: 3px;")
-        main_layout.addWidget(self.status_label)
-        
-        # 设备状态组
-        status_group = QGroupBox("设备状态")
-        status_group.setFont(QFont("Arial", 10, QFont.Bold))
-        status_layout = QVBoxLayout(status_group)
-        
-        # 创建状态指示器
-        self.device_status = StatusIndicator()
-        status_layout.addWidget(self.device_status)
-        
-        main_layout.addWidget(status_group)
         
         # 通信控制组
         comm_group = QGroupBox("通信控制")
@@ -164,113 +138,6 @@ class USBGUI(QMainWindow):
         """)
         comm_layout.addWidget(self.clear_button, 0, 3)
         
-        # 查询控制
-        comm_layout.addWidget(QLabel("查询控制:"), 1, 0)
-        
-        # 自动查询开关
-        self.auto_query_checkbox = QPushButton("自动查询: 关闭")
-        self.auto_query_checkbox.setCheckable(True)
-        self.auto_query_checkbox.setChecked(False)
-        self.auto_query_checkbox.setStyleSheet("""
-            QPushButton {
-                background-color: #27AE60;
-                color: white;
-                border: none;
-                padding: 6px 12px;
-                border-radius: 4px;
-                font-weight: bold;
-            }
-            QPushButton:checked {
-                background-color: #27AE60;
-            }
-            QPushButton:!checked {
-                background-color: #95A5A6;
-            }
-        """)
-        comm_layout.addWidget(self.auto_query_checkbox, 1, 1)
-        
-        # 手动查询按钮
-        self.query_button = QPushButton("手动查询")
-        self.query_button.setStyleSheet("""
-            QPushButton {
-                background-color: #F39C12;
-                color: white;
-                border: none;
-                padding: 6px 12px;
-                border-radius: 4px;
-                font-weight: bold;
-            }
-            QPushButton:hover {
-                background-color: #E67E22;
-            }
-            QPushButton:pressed {
-                background-color: #D35400;
-            }
-        """)
-        comm_layout.addWidget(self.query_button, 1, 2)
-        
-        # 测试按钮
-        self.test_button = QPushButton("测试通信")
-        self.test_button.setStyleSheet("""
-            QPushButton {
-                background-color: #E67E22;
-                color: white;
-                border: none;
-                padding: 6px 12px;
-                border-radius: 4px;
-                font-weight: bold;
-            }
-            QPushButton:hover {
-                background-color: #D35400;
-            }
-            QPushButton:pressed {
-                background-color: #BA4A00;
-            }
-        """)
-        comm_layout.addWidget(self.test_button, 1, 3)
-        
-        # 调试按钮
-        self.debug_button = QPushButton("调试信息")
-        self.debug_button.setStyleSheet("""
-            QPushButton {
-                background-color: #9B59B6;
-                color: white;
-                border: none;
-                padding: 6px 12px;
-                border-radius: 4px;
-                font-weight: bold;
-            }
-            QPushButton:hover {
-                background-color: #8E44AD;
-            }
-            QPushButton:pressed {
-                background-color: #7D3C98;
-            }
-        """)
-        comm_layout.addWidget(self.debug_button, 1, 4)
-        
-        # 调试模式开关
-        self.debug_mode_button = QPushButton("调试模式: 关闭")
-        self.debug_mode_button.setCheckable(True)
-        self.debug_mode_button.setChecked(False)
-        self.debug_mode_button.setStyleSheet("""
-            QPushButton {
-                background-color: #95A5A6;
-                color: white;
-                border: none;
-                padding: 6px 12px;
-                border-radius: 4px;
-                font-weight: bold;
-            }
-            QPushButton:checked {
-                background-color: #E67E22;
-            }
-            QPushButton:!checked {
-                background-color: #95A5A6;
-            }
-        """)
-        comm_layout.addWidget(self.debug_mode_button, 1, 5)
-        
         main_layout.addWidget(comm_group)
         
         # 消息显示组
@@ -294,6 +161,16 @@ class USBGUI(QMainWindow):
         
         main_layout.addWidget(message_group)
         
+        # 右下角状态栏
+        status_layout = QHBoxLayout()
+        status_layout.addStretch()  # 左侧空白
+        
+        # 右下角设备状态指示器
+        self.device_status = StatusIndicator()
+        status_layout.addWidget(self.device_status)
+        
+        main_layout.addLayout(status_layout)
+        
         # 设置样式
         self.setStyleSheet("""
             QMainWindow {
@@ -303,8 +180,8 @@ class USBGUI(QMainWindow):
                 background-color: white;
                 border: 2px solid #BDC3C7;
                 border-radius: 6px;
-                margin-top: 10px;
-                padding-top: 10px;
+                margin-top: 8px;
+                padding-top: 8px;
             }
             QGroupBox::title {
                 subcontrol-origin: margin;
@@ -346,25 +223,27 @@ class USBGUI(QMainWindow):
         self.send_button.clicked.connect(self.send_message)
         self.clear_button.clicked.connect(self.clear_messages)
         self.send_input.returnPressed.connect(self.send_message)
-        self.auto_query_checkbox.toggled.connect(self.toggle_auto_query)
-        self.query_button.clicked.connect(self.manual_query)
-        self.test_button.clicked.connect(self.test_communication)
-        self.debug_button.clicked.connect(self.show_debug_info)
-        self.debug_mode_button.toggled.connect(self.toggle_debug_mode)
     
     @pyqtSlot(str)
     def on_device_connected(self, device_name):
         """设备连接事件"""
         self.log_message(f"系统: {device_name} 已连接", "system")
         self.update_device_status()
-        self.update_status_label()
+        
+        # 更新窗口标题显示设备信息
+        self.setWindowTitle("USB通信工具 - VID:0x1514 PID:0x1000")
     
     @pyqtSlot(str)
     def on_device_disconnected(self, device_name):
         """设备断开事件"""
         self.log_message(f"系统: {device_name} 已断开", "system")
         self.update_device_status()
-        self.update_status_label()
+        
+        # 检查是否还有其他设备连接
+        connected_count = len(self.usb_comm.get_device_info())
+        if connected_count == 0:
+            # 没有设备连接时恢复原始标题
+            self.setWindowTitle("USB通信工具")
     
     @pyqtSlot(str, bytes)
     def on_message_received(self, device_name, data):
@@ -416,7 +295,6 @@ class USBGUI(QMainWindow):
         # 发送消息
         if self.usb_comm.send_message(device_index, message):
             self.log_message(f"发送: {message}", "send")
-            self.send_input.clear()
         else:
             QMessageBox.critical(self, "错误", "发送消息失败！")
     
@@ -424,212 +302,11 @@ class USBGUI(QMainWindow):
         """清空消息显示"""
         self.message_display.clear()
     
-    def toggle_auto_query(self, checked):
-        """切换自动查询状态"""
-        self.usb_comm.set_auto_query(checked)
-        if checked:
-            self.auto_query_checkbox.setText("自动查询: 开启")
-            self.auto_query_checkbox.setStyleSheet("""
-                QPushButton {
-                    background-color: #27AE60;
-                    color: white;
-                    border: none;
-                    padding: 6px 12px;
-                    border-radius: 4px;
-                    font-weight: bold;
-                }
-            """)
-            self.log_message("自动查询已开启", "system")
-        else:
-            self.auto_query_checkbox.setText("自动查询: 关闭")
-            self.auto_query_checkbox.setStyleSheet("""
-                QPushButton {
-                    background-color: #95A5A6;
-                    color: white;
-                    border: none;
-                    padding: 6px 12px;
-                    border-radius: 4px;
-                    font-weight: bold;
-                }
-            """)
-            self.log_message("自动查询已关闭", "system")
-    
-    def manual_query(self):
-        """手动查询数据"""
-        device_index = 0
-        
-        # 检查设备是否连接
-        if not self.usb_comm.is_device_connected(device_index):
-            QMessageBox.warning(self, "警告", "设备未连接！")
-            return
-        
-        # 检查是否为只读接口
-        if self.usb_comm.is_device_readonly(device_index):
-            QMessageBox.information(self, "只读接口", 
-                "当前设备为只读接口，无法发送查询命令。\n\n"
-                "此接口会自动接收设备发送的数据，无需手动查询。\n\n"
-                "建议开启自动查询模式来监听数据。")
-            return
-        
-        if self.usb_comm.manual_query(device_index):
-            self.log_message("手动查询成功", "system")
-        else:
-            self.log_message("手动查询失败", "error")
-    
-    def toggle_debug_mode(self, checked):
-        """切换调试模式"""
-        self.usb_comm.debug_mode = checked
-        if checked:
-            self.debug_mode_button.setText("调试模式: 开启")
-            self.debug_mode_button.setStyleSheet("""
-                QPushButton {
-                    background-color: #E67E22;
-                    color: white;
-                    border: none;
-                    padding: 6px 12px;
-                    border-radius: 4px;
-                    font-weight: bold;
-                }
-            """)
-            self.log_message("调试模式已开启", "system")
-        else:
-            self.debug_mode_button.setText("调试模式: 关闭")
-            self.debug_mode_button.setStyleSheet("""
-                QPushButton {
-                    background-color: #95A5A6;
-                    color: white;
-                    border: none;
-                    padding: 6px 12px;
-                    border-radius: 4px;
-                    font-weight: bold;
-                }
-            """)
-            self.log_message("调试模式已关闭", "system")
-    
-    def test_communication(self):
-        """测试通信功能"""
-        device_index = 0
-        device_name = "USB设备"
-        
-        # 检查设备是否连接
-        if not self.usb_comm.is_device_connected(device_index):
-            QMessageBox.warning(self, "警告", "设备未连接！")
-            return
-        
-        # 检查是否为只读接口
-        if self.usb_comm.is_device_readonly(device_index):
-            self.log_message("=== 只读接口测试 ===", "system")
-            self.log_message("当前设备为只读模式，无法发送测试命令", "info")
-            self.log_message("设备将自动接收设备发送的数据", "info")
-            self.log_message("建议开启自动查询模式来监听数据", "info")
-            self.log_message("=== 只读接口测试完成 ===", "system")
-            return
-        
-        self.log_message(f"开始测试通信...", "system")
-        
-        # 临时关闭自动查询，避免干扰测试
-        original_auto_query = self.usb_comm.auto_query
-        self.usb_comm.auto_query = False
-        
-        # 测试1: 发送简单命令
-        test_commands = [
-            b'\x01',  # 简单查询
-            b'\x02',  # 另一个命令
-            b'TEST',  # 文本命令
-            b'\x00',  # 空命令
-        ]
-        
-        success_count = 0
-        response_count = 0
-        
-        for i, cmd in enumerate(test_commands):
-            try:
-                self.log_message(f"测试命令 {i+1}: {cmd.hex() if isinstance(cmd, bytes) else cmd}", "system")
-                
-                # 发送命令
-                if self.usb_comm.send_message(device_index, cmd):
-                    self.log_message(f"命令 {i+1} 发送成功", "send")
-                    success_count += 1
-                    
-                    # 等待响应
-                    import time
-                    time.sleep(0.2)
-                    
-                    # 尝试读取响应
-                    if self.usb_comm.manual_query(device_index):
-                        self.log_message(f"命令 {i+1} 响应成功", "receive")
-                        response_count += 1
-                    else:
-                        self.log_message(f"命令 {i+1} 无响应", "error")
-                else:
-                    self.log_message(f"命令 {i+1} 发送失败", "error")
-                    
-            except Exception as e:
-                self.log_message(f"命令 {i+1} 测试异常: {e}", "error")
-        
-        # 恢复原来的自动查询状态
-        self.usb_comm.auto_query = original_auto_query
-        
-        # 显示测试总结
-        total_commands = len(test_commands)
-        self.log_message(f"=== 通信测试总结 ===", "system")
-        self.log_message(f"发送成功率: {success_count}/{total_commands} ({success_count/total_commands*100:.1f}%)", "system")
-        self.log_message(f"响应成功率: {response_count}/{total_commands} ({response_count/total_commands*100:.1f}%)", "system")
-        self.log_message("通信测试完成", "system")
-    
     def show_ready_status(self):
         """显示就绪状态"""
         connected_count = len(self.usb_comm.get_device_info())
         if connected_count > 0:
             self.log_message(f"系统就绪，检测到 {connected_count} 个设备", "system")
-    
-    def show_debug_info(self):
-        """显示调试信息"""
-        device_info = self.usb_comm.get_device_info()
-        
-        debug_msg = "=== 设备调试信息 ===\n"
-        debug_msg += f"已连接设备数量: {len(device_info)}\n"
-        
-        for index, info in device_info.items():
-            debug_msg += f"设备: {info['name']} (ID: {info['id']})\n"
-            
-            # 获取设备能力信息
-            capabilities = self.usb_comm.get_device_capabilities(index)
-            if capabilities:
-                debug_msg += f"  接口: {capabilities['interface']}\n"
-                debug_msg += f"  能力: {capabilities['description']}\n"
-                debug_msg += f"  只读: {'是' if capabilities['readonly'] else '否'}\n"
-                debug_msg += f"  可发送: {'是' if capabilities['can_send'] else '否'}\n"
-                debug_msg += f"  可接收: {'是' if capabilities['can_receive'] else '否'}\n"
-        
-        debug_msg += f"\n设备连接状态: {self.usb_comm.is_device_connected(0)}\n"
-        debug_msg += f"设备只读状态: {self.usb_comm.is_device_readonly(0)}\n"
-        
-        # 扫描所有USB设备
-        all_devices = self.usb_comm.scan_all_devices()
-        debug_msg += f"\n=== 所有USB设备 ===\n"
-        debug_msg += f"系统USB设备总数: {len(all_devices)}\n"
-        
-        target_count = 0
-        for device in all_devices:
-            status = "✓" if device['is_target'] else "✗"
-            debug_msg += f"{status} VID={device['vid']}, PID={device['pid']}, Bus={device['bus']}, Address={device['address']}\n"
-            if device['is_target']:
-                target_count += 1
-        
-        debug_msg += f"\n目标设备(VID=0x1514, PID=0x1000)数量: {target_count}\n"
-        
-        # 检查驱动状态
-        try:
-            driver_status = self.usb_comm.check_device_driver()
-            debug_msg += f"\n=== 驱动状态 ===\n"
-            debug_msg += f"设备驱动状态: {driver_status}\n"
-        except:
-            debug_msg += f"\n=== 驱动状态 ===\n"
-            debug_msg += f"无法检查驱动状态\n"
-        
-        # 显示在消息区域
-        self.log_message(debug_msg, "info")
     
     def log_message(self, message, message_type="info"):
         """记录消息到显示区域"""
@@ -658,20 +335,6 @@ class USBGUI(QMainWindow):
         # 更新设备状态（只检查索引0的设备）
         device_connected = self.usb_comm.is_device_connected(0)
         self.device_status.update_status(device_connected)
-    
-    def update_status_label(self):
-        """更新状态标签"""
-        connected_count = len(self.usb_comm.get_device_info())
-        
-        if connected_count == 0:
-            self.status_label.setText("未检测到设备")
-            self.status_label.setStyleSheet("color: #E74C3C; font-weight: bold; margin: 5px; background-color: #FADBD8; padding: 5px; border-radius: 3px;")
-        elif connected_count >= 1:
-            self.status_label.setText("设备已连接 - 就绪")
-            self.status_label.setStyleSheet("color: #27AE60; font-weight: bold; margin: 5px; background-color: #E8F8F5; padding: 5px; border-radius: 3px;")
-        else:
-            self.status_label.setText(f"检测到{connected_count}个设备")
-            self.status_label.setStyleSheet("color: #3498DB; font-weight: bold; margin: 5px; background-color: #EBF3FD; padding: 5px; border-radius: 3px;")
     
     def closeEvent(self, event):
         """窗口关闭事件"""

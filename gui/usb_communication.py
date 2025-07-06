@@ -32,12 +32,7 @@ class USBCommunication(QObject):
             0: "USB设备"
         }
         
-        # 数据查询配置
-        self.query_commands = {
-            0: b'\x01'  # 设备的查询命令
-        }
-        self.auto_query = False  # 默认关闭自动查询，避免启动时的频繁查询
-        self.debug_mode = False  # 调试模式，控制错误信息显示
+
         self.filter_empty_data = True  # 过滤空数据
         
         # 检查权限
@@ -133,6 +128,7 @@ class USBCommunication(QObject):
                 # 添加调试信息
                 if len(devices) > 0:
                     for i, device in enumerate(devices):
+                        print(f"找到目标设备 {i+1}: VID=0x{device.idVendor:04X}, PID=0x{device.idProduct:04X}, Bus={device.bus}, Address={device.address}")
                         
                         # 检查每个设备的接口（只在第一次连接时）
                         if not any(f"{device.bus}-{device.address}" in dev_id for dev_id in self.devices.keys()):
@@ -153,7 +149,7 @@ class USBCommunication(QObject):
                                 elif "insufficient permissions" in str(e):
                                     print("  ⚠️  权限不足，但已建立的连接可能仍然有效")
                 else:
-                    print("未检测到任何设备")
+                    print("未检测到目标设备 (VID=0x1514, PID=0x1000)")
                 
                 # 检查新连接的设备
                 # 获取当前已连接的设备索引
@@ -196,19 +192,25 @@ class USBCommunication(QObject):
                 # 检查断开的设备
                 disconnected_devices = []
                 for device_id in list(self.devices.keys()):
-                    # 检查对应的物理设备是否还存在
-                    physical_device_id = device_id.split('-')[0] + '-' + device_id.split('-')[1]
-                    if not any(f"{d.bus}-{d.address}" == physical_device_id for d in devices):
+                    # 检查设备是否仍然存在
+                    device_still_exists = False
+                    for device in devices:
+                        if f"{device.bus}-{device.address}" in device_id:
+                            device_still_exists = True
+                            break
+                    
+                    if not device_still_exists:
                         disconnected_devices.append(device_id)
                 
+                # 断开不再存在的设备
                 for device_id in disconnected_devices:
                     self._disconnect_device(device_id)
                 
-                time.sleep(1)  # 每秒检查一次
+                time.sleep(1)  # 1秒检查间隔
                 
             except Exception as e:
-                self.error_occurred.emit(f"设备监控错误: {str(e)}")
-                time.sleep(2)
+                print(f"设备监控异常: {e}")
+                time.sleep(1)  # 异常时也等待1秒
     
     def _connect_device_interface(self, device, index, interface_num, alt_setting):
         """连接设备的特定接口"""
@@ -336,7 +338,7 @@ class USBCommunication(QObject):
         return self._get_winusb_handle_for_interface(device, 0, 0)
     
     def _receive_messages(self, device_id):
-        """接收消息线程"""
+        """接收消息线程 - 1ms轮询方式"""
         print(f"启动接收线程: {device_id}")
         
         while device_id in self.devices and self.monitoring:
@@ -345,56 +347,41 @@ class USBCommunication(QObject):
                     handle_info = self.device_handles[device_id]
                     device_info = self.devices[device_id]
                     
-                    # 只在自动查询模式下才主动请求数据
-                    if self.auto_query:
-                        try:
-                            # 获取设备对应的查询命令
-                            device_index = device_info['index']
-                            query_command = self.query_commands.get(device_index, b'\x01')
-                            
-                            # 发送查询命令
-                            handle_info['ep_out'].write(query_command)
-                            
-                            # 等待并读取响应数据
-                            data = handle_info['ep_in'].read(64, timeout=100)  # 64字节缓冲区，100ms超时
-                            if data and len(data) > 0:
-                                # 将array.array转换为bytes
-                                if hasattr(data, 'tobytes'):
-                                    data_bytes = data.tobytes()
-                                else:
-                                    data_bytes = bytes(data)
-                                
-                                # 过滤掉空数据或无效数据
-                                if self.filter_empty_data:
-                                    if data_bytes and len(data_bytes.strip(b'\x00')) > 0:
-                                        self.message_received.emit(device_info['name'], data_bytes)
-                                else:
-                                    self.message_received.emit(device_info['name'], data_bytes)
-                            
-                        except usb.core.USBError as e:
-                            # USB超时是正常的，不报错
-                            if e.args == ('Operation timed out',):
-                                pass
-                            elif "Operation not supported" in str(e):
-                                # 某些操作不支持，静默处理
-                                pass
+                    # 持续监听设备数据，使用1ms轮询
+                    try:
+                        # 尝试读取设备发送的数据
+                        data = handle_info['ep_in'].read(64, timeout=1)  # 1ms超时
+                        if data and len(data) > 0:
+                            # 将array.array转换为bytes
+                            if hasattr(data, 'tobytes'):
+                                data_bytes = data.tobytes()
                             else:
-                                # 只在调试模式下显示其他错误
-                                if hasattr(self, 'debug_mode') and self.debug_mode:
-                                    print(f"USB错误 ({device_info['name']}): {e}")
-                    else:
-                        # 自动查询关闭时，线程休眠更长时间
-                        time.sleep(1.0)  # 1秒休眠，减少CPU占用
-                        continue
+                                data_bytes = bytes(data)
+                            
+                            # 过滤掉空数据或无效数据
+                            if self.filter_empty_data:
+                                if data_bytes and len(data_bytes.strip(b'\x00')) > 0:
+                                    self.message_received.emit(device_info['name'], data_bytes)
+                            else:
+                                self.message_received.emit(device_info['name'], data_bytes)
+                        
+                    except usb.core.USBError as e:
+                        # USB超时是正常的，不报错
+                        if e.args == ('Operation timed out',):
+                            pass
+                        elif "Operation not supported" in str(e):
+                            # 某些操作不支持，静默处理
+                            pass
+                        else:
+                            # 静默处理其他错误
+                            pass
                 
-                time.sleep(0.5)  # 增加到500ms轮询间隔，减少CPU占用
+                time.sleep(0.001)  # 1ms轮询间隔
                 
             except Exception as e:
                 if device_id in self.devices:
-                    # 只在调试模式下显示接收错误
-                    if hasattr(self, 'debug_mode') and self.debug_mode:
-                        print(f"接收线程异常 ({device_info['name']}): {str(e)}")
-                        self.error_occurred.emit(f"接收消息错误 ({device_info['name']}): {str(e)}")
+                    # 静默处理接收错误
+                    pass
                 break
         
         print(f"接收线程结束: {device_id}")
@@ -537,91 +524,6 @@ class USBCommunication(QObject):
                 return "无法检查驱动状态"
         except Exception as e:
             return f"驱动检查失败: {e}"
-    
-    def set_query_command(self, device_index, command):
-        """设置设备的查询命令"""
-        if isinstance(command, str):
-            command = command.encode('utf-8')
-        self.query_commands[device_index] = command
-    
-    def set_auto_query(self, enabled):
-        """设置是否自动查询数据"""
-        self.auto_query = enabled
-    
-    def manual_query(self, device_index):
-        """手动查询指定设备的数据"""
-        try:
-            # 查找指定索引的设备
-            target_device_id = None
-            for device_id, device_info in self.devices.items():
-                if device_info['index'] == device_index:
-                    target_device_id = device_id
-                    break
-            
-            if target_device_id and target_device_id in self.device_handles:
-                handle_info = self.device_handles[target_device_id]
-                device_info = self.devices[target_device_id]
-                
-                print(f"手动查询 {device_info['name']} (接口 {device_info.get('interface', 'unknown')})")
-                
-                # 发送查询命令
-                query_command = self.query_commands.get(device_index, b'\x01')
-                print(f"发送查询命令: {query_command}")
-                
-                try:
-                    handle_info['ep_out'].write(query_command)
-                    print("查询命令发送成功")
-                except Exception as e:
-                    print(f"查询命令发送失败: {e}")
-                    self.error_occurred.emit(f"查询命令发送失败: {e}")
-                    return False
-                
-                # 读取响应
-                try:
-                    data = handle_info['ep_in'].read(64, timeout=100)
-                    if data and len(data) > 0:
-                        # 将array.array转换为bytes
-                        if hasattr(data, 'tobytes'):
-                            data_bytes = data.tobytes()
-                        else:
-                            data_bytes = bytes(data)
-                        
-                        # 处理响应数据
-                        if self.filter_empty_data:
-                            # 过滤空数据
-                            if data_bytes and len(data_bytes.strip(b'\x00')) > 0:
-                                print(f"收到响应数据: {data_bytes}")
-                                self.message_received.emit(device_info['name'], data_bytes)
-                                return True
-                            else:
-                                print("收到空数据，忽略")
-                                return False
-                        else:
-                            # 不过滤，显示所有数据
-                            if data_bytes:
-                                print(f"收到响应数据: {data_bytes}")
-                                self.message_received.emit(device_info['name'], data_bytes)
-                                return True
-                            else:
-                                print("收到空数据")
-                                return False
-                    else:
-                        print("无数据响应")
-                        self.error_occurred.emit(f"设备 {device_index} 无数据响应")
-                        return False
-                except Exception as e:
-                    print(f"读取响应失败: {e}")
-                    self.error_occurred.emit(f"读取响应失败: {e}")
-                    return False
-            else:
-                print(f"设备 {device_index} 未连接，可用设备: {list(self.devices.keys())}")
-                self.error_occurred.emit(f"设备 {device_index} 未连接")
-                return False
-                
-        except Exception as e:
-            print(f"手动查询异常: {e}")
-            self.error_occurred.emit(f"手动查询失败: {str(e)}")
-            return False
     
     def cleanup(self):
         """清理资源"""
