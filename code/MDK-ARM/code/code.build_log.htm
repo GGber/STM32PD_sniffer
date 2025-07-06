@@ -28,10 +28,13 @@ Project File Date:  07/05/2025
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'code'
 compiling winusb1.0_template.c...
+..\CherryUSB\demo\winusb1.0_template.c(436): warning:  #177-D: variable "ep2_queue"  was declared but never referenced
+  static data_queue_t ep2_queue = {0};
+..\CherryUSB\demo\winusb1.0_template.c: 1 warning, 0 errors
 linking...
-Program Size: Code=33356 RO-data=1540 RW-data=5196 ZI-data=42684  
+Program Size: Code=33368 RO-data=1348 RW-data=5176 ZI-data=59112  
 FromELF: creating hex file...
-"code\code.axf" - 0 Error(s), 0 Warning(s).
+"code\code.axf" - 0 Error(s), 1 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -54,7 +57,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE:5.6.0
       Include file:  CMSIS/Core/Include/tz_context.h
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:00
 </pre>
 </body>
 </html>

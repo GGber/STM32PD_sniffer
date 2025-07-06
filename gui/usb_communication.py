@@ -29,14 +29,12 @@ class USBCommunication(QObject):
         
         # 设备名称映射
         self.device_names = {
-            0: "WinUSB设备1",
-            1: "WinUSB设备2"
+            0: "USB设备"
         }
         
         # 数据查询配置
         self.query_commands = {
-            0: b'\x01',  # 设备1的查询命令
-            1: b'\x02'   # 设备2的查询命令
+            0: b'\x01'  # 设备的查询命令
         }
         self.auto_query = False  # 默认关闭自动查询，避免启动时的频繁查询
         self.debug_mode = False  # 调试模式，控制错误信息显示
@@ -171,8 +169,8 @@ class USBCommunication(QObject):
                         # 只在第一次连接时检查配置，避免重复权限检查
                         if not any(device_id in dev_id for dev_id in self.devices.keys()):
                             cfg = device.get_active_configuration()
-                            # 假设有两个接口 (0,0) 和 (1,0)
-                            interfaces_to_connect = [(0, 0), (1, 0)]
+                            # 只连接接口0
+                            interfaces_to_connect = [(0, 0)]
                             
                             for intf_num, alt_setting in interfaces_to_connect:
                                 interface_id = f"{device_id}-{intf_num}"
@@ -442,6 +440,41 @@ class USBCommunication(QObject):
     def is_device_connected(self, device_index):
         """检查指定设备是否已连接"""
         return any(device_info['index'] == device_index for device_info in self.devices.values())
+    
+    def is_device_readonly(self, device_index):
+        """检查指定设备是否为只读接口"""
+        for device_id, device_info in self.devices.items():
+            if device_info['index'] == device_index:
+                if device_id in self.device_handles:
+                    handle_info = self.device_handles[device_id]
+                    return handle_info.get('readonly', False) or handle_info['ep_out'] is None
+        return False
+    
+    def get_device_capabilities(self, device_index):
+        """获取设备的详细能力信息"""
+        for device_id, device_info in self.devices.items():
+            if device_info['index'] == device_index:
+                if device_id in self.device_handles:
+                    handle_info = self.device_handles[device_id]
+                    capabilities = {
+                        'name': device_info['name'],
+                        'interface': device_info.get('interface', 'unknown'),
+                        'connected': True,
+                        'readonly': handle_info.get('readonly', False),
+                        'can_send': handle_info['ep_out'] is not None and not handle_info.get('readonly', False),
+                        'can_receive': handle_info['ep_in'] is not None,
+                        'description': ''
+                    }
+                    
+                    if capabilities['can_send'] and capabilities['can_receive']:
+                        capabilities['description'] = "支持发送和接收"
+                    elif capabilities['can_receive']:
+                        capabilities['description'] = "只读模式 - 仅支持接收"
+                    else:
+                        capabilities['description'] = "无功能"
+                    
+                    return capabilities
+        return None
     
     def get_device_info(self):
         """获取所有设备的详细信息"""

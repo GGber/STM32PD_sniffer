@@ -8,7 +8,7 @@
 
 #define WCID_VENDOR_CODE 0x17
 
-#define DOUBLE_WINUSB 1
+#define DOUBLE_WINUSB 0
 
 __ALIGN_BEGIN const uint8_t WCID_StringDescriptor_MSOS[18] __ALIGN_END = {
     ///////////////////////////////////////
@@ -409,8 +409,12 @@ const uint8_t winusb_descriptor[] = {
 USB_NOCACHE_RAM_SECTION USB_MEM_ALIGNX uint8_t read_buffer[2048];
 USB_NOCACHE_RAM_SECTION USB_MEM_ALIGNX uint8_t write_buffer[2048];
 
-// 数据队列结构体
-#define MAX_QUEUE_SIZE 4
+// 为第二个接口添加独立的缓冲区
+USB_NOCACHE_RAM_SECTION USB_MEM_ALIGNX uint8_t read_buffer2[2048];
+USB_NOCACHE_RAM_SECTION USB_MEM_ALIGNX uint8_t write_buffer2[2048];
+
+// FIFO队列结构体定义
+#define MAX_QUEUE_SIZE 8
 #define MAX_DATA_SIZE 2048
 
 typedef struct {
@@ -431,7 +435,7 @@ typedef struct {
 static data_queue_t ep1_queue = {0};
 static data_queue_t ep2_queue = {0};
 
-// 队列操作函数
+// FIFO队列操作函数
 static bool queue_is_empty(data_queue_t *queue) {
     return queue->count == 0;
 }
@@ -507,7 +511,7 @@ static void usbd_event_handler(uint8_t busid, uint8_t event)
             /* setup first out ep read transfer */
             usbd_ep_start_read(busid, WINUSB_OUT_EP, read_buffer, 2048);
 #if DOUBLE_WINUSB == 1
-            usbd_ep_start_read(busid, WINUSB_OUT_EP2, read_buffer, 2048);
+            usbd_ep_start_read(busid, WINUSB_OUT_EP2, read_buffer2, 2048);
 #endif
             break;
         case USBD_EVENT_SET_REMOTE_WAKEUP:
@@ -539,7 +543,7 @@ void usbd_winusb_out(uint8_t busid, uint8_t ep, uint32_t nbytes)
 
 void usbd_winusb_in(uint8_t busid, uint8_t ep, uint32_t nbytes)
 {
-    //    USB_LOG_RAW("actual1 in len:%d\r\n", (unsigned int)nbytes);
+//    USB_LOG_RAW("actual1 in len:%d\r\n", (unsigned int)nbytes);
 
     if ((nbytes % WINUSB_EP_MPS) == 0 && nbytes) {
         /* send zlp */
@@ -589,25 +593,13 @@ void usbd_winusb_out2(uint8_t busid, uint8_t ep, uint32_t nbytes)
 
 void usbd_winusb_in2(uint8_t busid, uint8_t ep, uint32_t nbytes)
 {
-    //    USB_LOG_RAW("actual2 in len:%d\r\n", (unsigned int)nbytes);
+//    USB_LOG_RAW("actual2 in len:%d\r\n", (unsigned int)nbytes);
 
     if ((nbytes % usbd_get_ep_mps(busid, ep)) == 0 && nbytes) {
         /* send zlp */
         usbd_ep_start_write(busid, WINUSB_IN_EP2, NULL, 0);
     } else {
-        // 传输完成，处理队列中的下一个数据
-        ep2_queue.sending = false;
-        
-        // 检查队列中是否还有数据需要发送
-        uint8_t send_data[MAX_DATA_SIZE];
-        uint32_t send_length;
-        
-        if (queue_dequeue(&ep2_queue, send_data, &send_length)) {
-            // 还有数据，继续发送
-            ep2_queue.sending = true;
-            memcpy(write_buffer, send_data, send_length);
-            usbd_ep_start_write(busid, WINUSB_IN_EP2, write_buffer, send_length);
-        }
+        ep_tx_busy_flag = false;
     }
 }
 
@@ -646,25 +638,22 @@ void winusb_init(uint8_t busid, uintptr_t reg_base)
     usbd_initialize(busid, reg_base, usbd_event_handler);
 }
 
-// 发送数据到第一个 WinUSB 接口 IN 端点
+// 为第一个接口添加独立的缓冲区
 int winusb_send_data_ep1(const uint8_t *data, uint32_t len)
 {
     if (len > MAX_DATA_SIZE) {
         // 数据太大，无法处理
         return -2;
     }
-    
     // 尝试将数据加入队列
     if (!queue_enqueue(&ep1_queue, data, len)) {
         // 队列满了，无法添加新数据
         return -1;
     }
-    
     // 如果当前没有在发送数据，尝试开始发送
     if (!ep1_queue.sending) {
         uint8_t send_data[MAX_DATA_SIZE];
         uint32_t send_length;
-        
         if (queue_dequeue(&ep1_queue, send_data, &send_length)) {
             ep1_queue.sending = true;
             memcpy(write_buffer, send_data, send_length);
@@ -678,49 +667,33 @@ int winusb_send_data_ep1(const uint8_t *data, uint32_t len)
             }
         }
     }
-    
     return 0; // 成功加入队列
 }
 
-// 发送数据到第二个 WinUSB 接口 IN 端点（需要定义 DOUBLE_WINUSB）
+// 为第二个接口添加独立的缓冲区
 int winusb_send_data_ep2(const uint8_t *data, uint32_t len)
 {
 #if DOUBLE_WINUSB == 1
-    if (len > MAX_DATA_SIZE) {
+    if (ep_tx_busy_flag) {
+        // 之前还没有完成，不能发送新数据
+        return -1;
+    }
+
+    if (len > 2048) {
         // 数据太大，无法处理
         return -2;
     }
-    
-    // 尝试将数据加入队列
-    if (!queue_enqueue(&ep2_queue, data, len)) {
-        // 队列满了，无法添加新数据
-        return -1;
-    }
-    
-    // 如果当前没有在发送数据，尝试开始发送
-    if (!ep2_queue.sending) {
-        uint8_t send_data[MAX_DATA_SIZE];
-        uint32_t send_length;
-        
-        if (queue_dequeue(&ep2_queue, send_data, &send_length)) {
-            ep2_queue.sending = true;
-            memcpy(write_buffer, send_data, send_length);
-            int ret = usbd_ep_start_write(0, WINUSB_IN_EP2, write_buffer, send_length);
-            if (ret != 0) {
-                // 发送失败，恢复队列状态
-                ep2_queue.sending = false;
-                // 将数据重新放回队列头部（这里简化处理，实际应该放回原位置）
-                queue_enqueue(&ep2_queue, send_data, send_length);
-                return -3;
-            }
-        }
-    }
-    
-    return 0; // 成功加入队列
+
+    // 将数据加入发送缓冲区
+    memcpy(write_buffer, data, len);
+
+    ep_tx_busy_flag = true;
+    int ret = usbd_ep_start_write(0, WINUSB_IN_EP2, write_buffer, len);
+    return ret;
 #else
     (void)data;
     (void)len;
-    // 未定义双接口时返回错误
+    // 没有双接口时返回错误
     return -3;
 #endif
 }
