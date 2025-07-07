@@ -87,7 +87,7 @@ osThreadId_t PDTaskHandle;
 const osThreadAttr_t PDTask_attributes = {
   .name = "PDTask",
   .priority = (osPriority_t) osPriorityAboveNormal,
-  .stack_size = 1024 * 4
+  .stack_size = 4096 * 4
 };
 /* Definitions for CCTask */
 osThreadId_t CCTaskHandle;
@@ -206,10 +206,17 @@ void StartTaskPD(void *argument)
     osMessageQueueGet(TimeIndexQueueHandle, &buffer_index, NULL, portMAX_DELAY);
 
     uint8_t data_time[MAX_BUFFER_LEN];
-    /* first and last data is invalid */
+    /* last data is invalid */
     uint16_t data_time_len = time2_data_len[buffer_index] - 2;
     memcpy(data_time, &time2_data_buffer[buffer_index][1], data_time_len);
 
+    // printf("\r\n");
+    // for(uint16_t i = 0; i < data_time_len; i++)
+    // {
+    //   printf("%d ", data_time[i]);
+    // }
+    // printf("\r\n");
+    
     decode_bmc(data_time, data_time_len);
   }
   /* USER CODE END StartTaskPD */
@@ -254,7 +261,7 @@ void StartTaskCC(void *argument)
             cc_detect[index].state = CC_IDLE; // Back to idle if ADC is above threshold
           } else if ((osKernelGetTickCount() - cc_detect[index].cc_debounce_time) >= CC_DEBOUNCE_ATTACH_TIME) {
             cc_detect[index].flag_cc_attach = 1; // Set attach flag
-            //handle_cc_attach();
+            handle_cc_attach();
             cc_detect[index].state = CC_ATTACH; // Transition to attach state after debounce
           }
           break;
@@ -275,7 +282,7 @@ void StartTaskCC(void *argument)
             cc_detect[index].state = CC_ATTACH; // Back to attach state if ADC is above threshold
           } else if ((osKernelGetTickCount() - cc_detect[index].cc_debounce_time) >= CC_DEBOUNCE_DETACH_TIME) {
             cc_detect[index].flag_cc_attach = 0; // Set attach flag
-            //handle_cc_detach();
+            handle_cc_detach();
             cc_detect[index].state = CC_DETACH; // Transition to detach state after debounce
           }
           break;

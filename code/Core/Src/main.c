@@ -102,7 +102,7 @@ int main(void)
   MX_COMP2_Init();
   MX_TIM2_Init();
   MX_USART1_UART_Init();
-//  MX_USB_PCD_Init();
+  //MX_USB_PCD_Init();
   MX_ADC2_Init();
   MX_DAC1_Init();
   MX_OPAMP1_Init();

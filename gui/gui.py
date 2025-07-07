@@ -8,6 +8,7 @@ from PyQt5.QtCore import Qt, QTimer, pyqtSlot
 from PyQt5.QtGui import QFont, QPalette, QColor, QPixmap
 
 from usb_communication import USBCommunication
+from pd_parser import parse_pd_data  # 新增：导入PD数据解析函数
 
 class StatusIndicator(QFrame):
     """状态指示器组件"""
@@ -231,7 +232,7 @@ class USBGUI(QMainWindow):
         self.update_device_status()
         
         # 更新窗口标题显示设备信息
-        self.setWindowTitle("USB通信工具 - VID:0x1514 PID:0x1000")
+        self.setWindowTitle("USB通信工具 - PD Sniffer")
     
     @pyqtSlot(str)
     def on_device_disconnected(self, device_name):
@@ -248,14 +249,9 @@ class USBGUI(QMainWindow):
     @pyqtSlot(str, bytes)
     def on_message_received(self, device_name, data):
         """消息接收事件"""
-        try:
-            # 尝试解码为UTF-8
-            message = data.decode('utf-8')
-        except UnicodeDecodeError:
-            # 如果解码失败，显示十六进制
-            message = data.hex()
-        
-        self.log_message(f"接收 [{device_name}]: {message}", "receive")
+        # 解析PD数据
+        parsed = parse_pd_data(data)
+        self.log_message(f"{parsed}", "receive")
     
     @pyqtSlot(str)
     def on_error_occurred(self, error_message):

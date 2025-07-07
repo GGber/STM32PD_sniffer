@@ -1,7 +1,7 @@
 --cpu=Cortex-M4.fp.sp
 "code\startup_stm32g473xx.o"
-"code\main.o"
 "code\bmc_analyze.o"
+"code\main.o"
 "code\gpio.o"
 "code\app_freertos.o"
 "code\adc.o"
