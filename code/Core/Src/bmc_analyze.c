@@ -1,4 +1,19 @@
 #include "bmc_analyze.h"
+#include "tim.h"
+
+typedef struct {
+    uint8_t func_code;
+    uint32_t timestamp;
+    uint8_t data[500]; 
+} __attribute__((packed)) packet_t;
+
+void send_pd_message(uint32_t time_data_systick, uint8_t *data, uint8_t data_len) {
+    packet_t pkt;
+    pkt.func_code = 0xAA;
+    pkt.timestamp = time_data_systick;
+    memcpy(pkt.data, data, data_len);
+    winusb_send_data_ep1((uint8_t*)&pkt, data_len + 5);
+}
 
 static int is_training_code(const uint8_t *bits, int len) {
     // 这里检测是否为交替序列，至少前60bit
@@ -23,7 +38,7 @@ static void pack_5bit_to_byte(const uint8_t *bit_stream, int bit_len, uint8_t *o
     *out_len = byte_count;
 }
 
-void decode_bmc(uint8_t *intervals, size_t len) {
+void decode_bmc(uint8_t index, uint8_t *intervals, size_t len) {
     uint8_t bits[1024] = {0};
     int bit_index = 0;
     size_t i = 0;
@@ -46,19 +61,22 @@ void decode_bmc(uint8_t *intervals, size_t len) {
                 bits[bit_index++] = 1;
                 i += 2;
             } else {
+                
                 // 异常：只有一个half-bit
-                printf("Error: unexpected single half-bit at index %d \r\n", i);
+                //printf("Error: unexpected single half-bit at index %d \r\n", i);
                 i++;
+                return;
             }
         } else {
-            printf("Error: unknown interval value %d at index %d \r\n", t, i);
+            //printf("Error: unknown interval value %d at index %d \r\n", t, i);
             i++;
+            return;
         }
 
         // 防止越界
         if (bit_index >= sizeof(bits)) {
-            printf("Error: bits buffer overflow!\r\n");
-            break;
+            //printf("Error: bits buffer overflow!\r\n");
+            return;
         }
     }
 
@@ -68,7 +86,7 @@ void decode_bmc(uint8_t *intervals, size_t len) {
     if(rv == 1)
     {
         if (bit_index < 64) {
-            printf("Error: bit stream too short, bit_index=%d\r\n", bit_index);
+            //printf("Error: bit stream too short, bit_index=%d\r\n", bit_index);
             return;
         }
         
@@ -80,7 +98,7 @@ void decode_bmc(uint8_t *intervals, size_t len) {
         int packed_len = 0;
         pack_5bit_to_byte(bits, ana_len, packed_bytes, &packed_len);
     
-        winusb_send_data_ep1(packed_bytes, packed_len);
+        send_pd_message(time_data_systick[index], packed_bytes, packed_len);
 
 //        for(uint16_t i = 0; i < packed_len; i++)
 //        {
@@ -90,6 +108,6 @@ void decode_bmc(uint8_t *intervals, size_t len) {
     }
     else
     {
-        printf("No training code detected.\r\n");
+        //printf("No training code detected.\r\n");
     }
 }

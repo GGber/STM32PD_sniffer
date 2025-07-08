@@ -26,6 +26,7 @@
 uint8_t buffer_index = 0;
 uint8_t time2_data_buffer[MAX_BUFFER_INDEX][MAX_BUFFER_LEN];
 uint16_t time2_data_len[MAX_BUFFER_INDEX];
+uint32_t time_data_systick[MAX_BUFFER_INDEX];
 /* USER CODE END 0 */
 
 TIM_HandleTypeDef htim2;
@@ -49,7 +50,7 @@ void MX_TIM2_Init(void)
   htim2.Instance = TIM2;
   htim2.Init.Prescaler = 8 - 1;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 1000;
+  htim2.Init.Period = 800;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
   if (HAL_TIM_Base_Init(&htim2) != HAL_OK)

@@ -35,9 +35,6 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-
-
-
 #define CC_DEBOUNCE_ATTACH_TIME 100 // Debounce time in milliseconds
 #define CC_DEBOUNCE_DETACH_TIME 10  // Debounce time in milliseconds
 #define CC_MAX_ADC_VALUE 2500 // Maximum ADC value for CC detection 
@@ -114,6 +111,49 @@ void StartTaskCC(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
+/* Hook prototypes */
+void vApplicationStackOverflowHook(xTaskHandle xTask, signed char *pcTaskName);
+void vApplicationMallocFailedHook(void);
+
+/* USER CODE BEGIN 4 */
+void vApplicationStackOverflowHook(xTaskHandle xTask, signed char *pcTaskName)
+{
+   /* Run time stack overflow checking is performed if
+   configCHECK_FOR_STACK_OVERFLOW is defined to 1 or 2. This hook function is
+   called if a stack overflow is detected. */
+    
+    printf(" Stack overflow detected in task: %s\r\n", pcTaskName);
+
+    TaskStatus_t taskList[10];
+    UBaseType_t taskCount = uxTaskGetSystemState(taskList, 10, NULL);
+
+    for (int i = 0; i < taskCount; i++) {
+        printf("Task: %s | Stack Free: %u\r\n",
+               taskList[i].pcTaskName,
+               taskList[i].usStackHighWaterMark);
+    }
+
+    taskDISABLE_INTERRUPTS();
+    for(;;);
+}
+/* USER CODE END 4 */
+
+/* USER CODE BEGIN 5 */
+void vApplicationMallocFailedHook(void)
+{
+   /* vApplicationMallocFailedHook() will only be called if
+   configUSE_MALLOC_FAILED_HOOK is set to 1 in FreeRTOSConfig.h. It is a hook
+   function that will get called if a call to pvPortMalloc() fails.
+   pvPortMalloc() is called internally by the kernel whenever a task, queue,
+   timer or semaphore is created. It is also called by various parts of the
+   demo application. If heap_1.c or heap_2.c are used, then the size of the
+   heap available to pvPortMalloc() is defined by configTOTAL_HEAP_SIZE in
+   FreeRTOSConfig.h, and the xPortGetFreeHeapSize() API function can be used
+   to query the size of free heap space that remains (although it does not
+   provide information on how the remaining heap might be fragmented). */
+}
+/* USER CODE END 5 */
+
 /**
   * @brief  FreeRTOS initialization
   * @param  None
@@ -183,7 +223,15 @@ void StartLedTask(void *argument)
     HAL_GPIO_WritePin(GPIOB, LED1_Pin, GPIO_PIN_SET);
     osDelay(500); // Delay for 500 ms
       
-    //usbd_cdc_write("123456789", 9);
+    TaskStatus_t taskList[10];
+    UBaseType_t taskCount = uxTaskGetSystemState(taskList, 10, NULL);
+
+//    for (int i = 0; i < taskCount; i++) {
+//        printf("Task: %s | Stack Free: %u\r\n",
+//               taskList[i].pcTaskName,
+//               taskList[i].usStackHighWaterMark);
+//    }
+//    printf("\r\n");
   }
   /* USER CODE END StartLedTask */
 }
@@ -208,7 +256,13 @@ void StartTaskPD(void *argument)
     uint8_t data_time[MAX_BUFFER_LEN];
     /* last data is invalid */
     uint16_t data_time_len = time2_data_len[buffer_index] - 2;
-    memcpy(data_time, &time2_data_buffer[buffer_index][1], data_time_len);
+    if(data_time_len <= MAX_BUFFER_LEN)
+    {
+      memcpy(data_time, &time2_data_buffer[buffer_index][1], data_time_len);
+      decode_bmc(buffer_index, data_time, data_time_len);
+    }
+    
+
 
     // printf("\r\n");
     // for(uint16_t i = 0; i < data_time_len; i++)
@@ -217,7 +271,7 @@ void StartTaskPD(void *argument)
     // }
     // printf("\r\n");
     
-    decode_bmc(data_time, data_time_len);
+
   }
   /* USER CODE END StartTaskPD */
 }
@@ -302,7 +356,7 @@ void StartTaskCC(void *argument)
       }
     }
 
-    osDelay(1000);
+    osDelay(5);
   }
   /* USER CODE END StartTaskCC */
 }
@@ -327,10 +381,11 @@ void timer2_timeout_handle(void)
   /* open cc interrupt */
   LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_21 | LL_EXTI_LINE_22);
   LL_EXTI_EnableFallingTrig_0_31(LL_EXTI_LINE_21 | LL_EXTI_LINE_22);
-
+  
   /* data len */
   uint16_t transferred = MAX_BUFFER_LEN - __HAL_DMA_GET_COUNTER(htim2.hdma[TIM_DMA_ID_CC1]);
   time2_data_len[buffer_index] = transferred;
+  time_data_systick[buffer_index] = osKernelGetTickCount();
 
   /* handle data */
   /* Send buffer index to message queue */
@@ -364,7 +419,7 @@ void handle_cc_attach(void)
     /* start DMA channel */
     HAL_TIM_IC_Start_DMA(&htim2, TIM_CHANNEL_1, (uint32_t*)time2_data_buffer[buffer_index], MAX_BUFFER_LEN);
       
-    DEBUG_PRINT("CC1 attach\r\n");
+//    DEBUG_PRINT("CC1 attach\r\n");
   }
   else if(cc_detect[1].flag_cc_attach == 1 && cc_detect[0].flag_cc_attach == 0)
   {
@@ -380,7 +435,7 @@ void handle_cc_attach(void)
     /* start DMA channel */
     HAL_TIM_IC_Start_DMA(&htim2, TIM_CHANNEL_1, (uint32_t*)time2_data_buffer[buffer_index], MAX_BUFFER_LEN);
       
-    DEBUG_PRINT("CC2 attach\r\n");
+//    DEBUG_PRINT("CC2 attach\r\n");
   }
 }
 
@@ -388,7 +443,7 @@ void handle_cc_detach(void)
 {
   if(cc_detect[0].flag_cc_attach == 0 && cc_detect[1].flag_cc_attach == 0)
   {
-    DEBUG_PRINT("CC1/2 detach\r\n");
+//    DEBUG_PRINT("CC1/2 detach\r\n");
 
     HAL_COMP_Stop(&hcomp1);
     HAL_COMP_Stop(&hcomp2);

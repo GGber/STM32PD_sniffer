@@ -2,8 +2,8 @@ import sys
 import time
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, 
                              QHBoxLayout, QGridLayout, QLabel, QPushButton, 
-                             QTextEdit, QLineEdit, QComboBox, QGroupBox, 
-                             QFrame, QMessageBox, QScrollArea)
+                             QLineEdit, QComboBox, QGroupBox, 
+                             QFrame, QMessageBox, QScrollArea, QTableWidget, QTableWidgetItem)
 from PyQt5.QtCore import Qt, QTimer, pyqtSlot
 from PyQt5.QtGui import QFont, QPalette, QColor, QPixmap
 
@@ -72,7 +72,7 @@ class USBGUI(QMainWindow):
     def setup_ui(self):
         """设置用户界面"""
         self.setWindowTitle("USB通信工具")
-        self.setGeometry(100, 100, 800, 600)
+        self.setGeometry(100, 100, 900, 650)
         
         # 创建中央部件
         central_widget = QWidget()
@@ -80,8 +80,8 @@ class USBGUI(QMainWindow):
         
         # 主布局
         main_layout = QVBoxLayout(central_widget)
-        main_layout.setContentsMargins(5, 5, 5, 5)  # 减少边距
-        main_layout.setSpacing(5)  # 减少间距
+        main_layout.setContentsMargins(12, 12, 12, 12)
+        main_layout.setSpacing(10)
         
         # 权限提示
         self.permission_label = QLabel("")
@@ -91,27 +91,48 @@ class USBGUI(QMainWindow):
         
         # 通信控制组
         comm_group = QGroupBox("通信控制")
-        comm_group.setFont(QFont("Arial", 10, QFont.Bold))
+        comm_group.setFont(QFont("Arial", 11, QFont.Bold))
+        comm_group.setStyleSheet("""
+            QGroupBox {
+                background-color: #F8FAFF;
+                border: 2px solid #A9CCE3;
+                border-radius: 10px;
+                margin-top: 8px;
+                padding-top: 8px;
+                box-shadow: 0 2px 8px #D6EAF8;
+            }
+            QGroupBox::title {
+                subcontrol-origin: margin;
+                left: 10px;
+                padding: 0 5px 0 5px;
+            }
+        """)
         comm_layout = QGridLayout(comm_group)
+        comm_layout.setHorizontalSpacing(10)
+        comm_layout.setVerticalSpacing(8)
         
         # 发送消息
         comm_layout.addWidget(QLabel("发送消息:"), 0, 0)
         self.send_input = QLineEdit()
         self.send_input.setPlaceholderText("输入要发送的消息...")
+        self.send_input.setStyleSheet("padding: 8px; border: 1.5px solid #A9CCE3; border-radius: 6px; background-color: #FDFEFE;")
         comm_layout.addWidget(self.send_input, 0, 1)
         
         self.send_button = QPushButton("发送")
         self.send_button.setStyleSheet("""
             QPushButton {
-                background-color: #3498DB;
+                background-color: #5DADE2;
                 color: white;
                 border: none;
-                padding: 8px 16px;
-                border-radius: 4px;
+                padding: 10px 22px;
+                border-radius: 6px;
                 font-weight: bold;
+                font-size: 15px;
+                letter-spacing: 1px;
+                box-shadow: 0 2px 6px #D6EAF8;
             }
             QPushButton:hover {
-                background-color: #2980B9;
+                background-color: #3498DB;
             }
             QPushButton:pressed {
                 background-color: #21618C;
@@ -126,40 +147,83 @@ class USBGUI(QMainWindow):
                 background-color: #E74C3C;
                 color: white;
                 border: none;
-                padding: 8px 16px;
-                border-radius: 4px;
+                padding: 10px 22px;
+                border-radius: 6px;
                 font-weight: bold;
+                font-size: 15px;
+                letter-spacing: 1px;
+                box-shadow: 0 2px 6px #FADBD8;
             }
             QPushButton:hover {
                 background-color: #C0392B;
             }
             QPushButton:pressed {
-                background-color: #A93226;
+                background-color: #922B21;
             }
         """)
         comm_layout.addWidget(self.clear_button, 0, 3)
         
         main_layout.addWidget(comm_group)
         
-        # 消息显示组
-        message_group = QGroupBox("消息显示")
-        message_group.setFont(QFont("Arial", 10, QFont.Bold))
-        message_layout = QVBoxLayout(message_group)
-        
-        # 消息显示区域
-        self.message_display = QTextEdit()
-        self.message_display.setReadOnly(True)
-        self.message_display.setFont(QFont("Consolas", 9))
-        self.message_display.setStyleSheet("""
-            QTextEdit {
-                background-color: #F8F9FA;
-                border: 1px solid #DEE2E6;
-                border-radius: 4px;
-                padding: 8px;
+        # 消息显示组（表格控件）
+        message_group = QGroupBox("PD数据包列表")
+        message_group.setFont(QFont("Arial", 11, QFont.Bold))
+        message_group.setStyleSheet("""
+            QGroupBox {
+                background-color: #F8FAFF;
+                border: 2px solid #A9CCE3;
+                border-radius: 10px;
+                margin-top: 8px;
+                padding-top: 8px;
+                box-shadow: 0 2px 8px #D6EAF8;
+            }
+            QGroupBox::title {
+                subcontrol-origin: margin;
+                left: 10px;
+                padding: 0 5px 0 5px;
             }
         """)
-        message_layout.addWidget(self.message_display)
-        
+        message_layout = QVBoxLayout(message_group)
+        self.pd_table = QTableWidget()
+        self.pd_table.setColumnCount(8)
+        self.pd_table.setHorizontalHeaderLabels([
+            "时间戳", "SOP类型", "消息类型", "供电角色", "协议版本", "数据角色", "ID", "详细内容"
+        ])
+        self.pd_table.setColumnWidth(7, 420)
+        self.pd_table.setEditTriggers(QTableWidget.NoEditTriggers)
+        self.pd_table.setSelectionBehavior(QTableWidget.SelectRows)
+        self.pd_table.setSelectionMode(QTableWidget.SingleSelection)
+        self.pd_table.verticalHeader().setVisible(False)
+        self.pd_table.setAlternatingRowColors(True)
+        self.pd_table.setStyleSheet("""
+            QTableWidget {
+                background-color: #FDFEFE;
+                border: 1.5px solid #A9CCE3;
+                border-radius: 8px;
+                font-family: Consolas, Arial, sans-serif;
+                font-size: 13px;
+                selection-background-color: #D6EAF8;
+                selection-color: #222222;
+                gridline-color: #D6EAF8;
+            }
+            QHeaderView::section {
+                background-color: #5DADE2;
+                color: white;
+                font-weight: bold;
+                font-size: 14px;
+                border: none;
+                height: 32px;
+            }
+            QTableWidget::item {
+                padding: 6px;
+            }
+            QTableWidget::item:alternate {
+                background: #EBF5FB;
+            }
+        """)
+        self.pd_table.horizontalHeader().setStyleSheet("background-color: #5DADE2; color: white; font-weight: bold; font-size: 14px; border: none; height: 32px;")
+        self.pd_table.setAlternatingRowColors(True)
+        message_layout.addWidget(self.pd_table)
         main_layout.addWidget(message_group)
         
         # 右下角状态栏
@@ -172,43 +236,10 @@ class USBGUI(QMainWindow):
         
         main_layout.addLayout(status_layout)
         
-        # 设置样式
+        # 主窗口背景渐变
         self.setStyleSheet("""
             QMainWindow {
-                background-color: #ECF0F1;
-            }
-            QGroupBox {
-                background-color: white;
-                border: 2px solid #BDC3C7;
-                border-radius: 6px;
-                margin-top: 8px;
-                padding-top: 8px;
-            }
-            QGroupBox::title {
-                subcontrol-origin: margin;
-                left: 10px;
-                padding: 0 5px 0 5px;
-            }
-            QLabel {
-                color: #2C3E50;
-            }
-            QLineEdit {
-                padding: 6px;
-                border: 1px solid #BDC3C7;
-                border-radius: 4px;
-                background-color: white;
-            }
-            QLineEdit:focus {
-                border: 2px solid #3498DB;
-            }
-            QComboBox {
-                padding: 6px;
-                border: 1px solid #BDC3C7;
-                border-radius: 4px;
-                background-color: white;
-            }
-            QComboBox:focus {
-                border: 2px solid #3498DB;
+                background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #F8FAFF, stop:1 #D6EAF8);
             }
         """)
     
@@ -248,10 +279,85 @@ class USBGUI(QMainWindow):
     
     @pyqtSlot(str, bytes)
     def on_message_received(self, device_name, data):
-        """消息接收事件"""
-        # 解析PD数据
-        parsed = parse_pd_data(data)
-        self.log_message(f"{parsed}", "receive")
+        result = parse_pd_data(data)
+        # 非PD包直接忽略不显示
+        if result.get('error') and '非PD包' in result.get('error_msg', ''):
+            return
+        field_values = [''] * 8
+        error_flag = result.get('error', False)
+        # 时间戳
+        if result.get('timestamp') is not None:
+            ms = result['timestamp']
+            m = (ms // 1000) // 60
+            s = (ms // 1000) % 60
+            ms_rem = ms % 1000
+            field_values[0] = f"{m:02d}:{s:02d}.{ms_rem:03d}"
+        # SOP类型
+        field_values[1] = result.get('sop_type', '')
+        # 消息类型
+        field_values[2] = result.get('msg_type', '')
+        # 供电角色
+        field_values[3] = result.get('power_role', '')
+        # 协议版本
+        field_values[4] = result.get('spec_revision', '')
+        # 数据角色
+        field_values[5] = result.get('data_role', '')
+        # ID
+        field_values[6] = str(result.get('msg_id', ''))
+        # 详细内容加粗Header Data CRC
+        detail = ''
+        raw_hex = result.get('raw_hex', '')
+        if raw_hex:
+            hex_parts = raw_hex.split()
+            if len(hex_parts) > 10:
+                header_hex = ' '.join(hex_parts[4:6])
+                data_hex = ' '.join(hex_parts[6:-4])
+                crc_hex = ' '.join(hex_parts[-4:])
+                detail += f"Header: {header_hex}    Data: {data_hex} CRC: {crc_hex}"
+            elif len(hex_parts) > 6:
+                header_hex = ' '.join(hex_parts[4:6])
+                data_hex = ' '.join(hex_parts[6:])
+                detail += f"Header: {header_hex}    Data: {data_hex}"
+            else:
+                detail += f"Header: {raw_hex}"
+        # 协议字段解析，去掉消息类型主行
+        proto = result.get('detail', '')
+        if proto:
+            lines = str(proto).split('\n')
+            proto_lines = []
+            for l in lines:
+                # 跳过第一行（如GoodCRC、Request等）
+                if proto_lines or (not (l.strip().startswith('GoodCRC') or l.strip().startswith('Request') or l.strip().startswith('Accept') or l.strip().startswith('Reject') or l.strip().startswith('Ping') or l.strip().startswith('PS_RDY') or l.strip().startswith('GotoMin') or l.strip().startswith('DR_Swap') or l.strip().startswith('PR_Swap') or l.strip().startswith('VCONN_Swap') or l.strip().startswith('Wait') or l.strip().startswith('Soft_Reset') or l.strip().startswith('Not_Supported') or l.strip().startswith('Get_Source_Cap') or l.strip().startswith('Get_Sink_Cap') or l.strip().startswith('Get_Source_Cap_Ext') or l.strip().startswith('Source Capabilities') or l.strip().startswith('Sink Capabilities') or l.strip().startswith('Vendor Defined'))):
+                    proto_lines.append(l)
+            proto_str = '\n'.join(proto_lines)
+            if proto_str:
+                if detail:
+                    detail += ' '
+                detail += proto_str
+        if result.get('error') and result.get('error_msg'):
+            detail = result['error_msg']
+        field_values[7] = detail
+        row = self.pd_table.rowCount()
+        self.pd_table.insertRow(row)
+        for col, val in enumerate(field_values):
+            item = QTableWidgetItem(val)
+            if col == 7:
+                item.setTextAlignment(Qt.AlignLeft | Qt.AlignTop)
+            else:
+                item.setTextAlignment(Qt.AlignCenter)
+            self.pd_table.setItem(row, col, item)
+        # 根据供电角色设置行背景色
+        role_lower = (field_values[3] or '').lower()
+        if role_lower == 'source':
+            for col in range(self.pd_table.columnCount()):
+                self.pd_table.item(row, col).setBackground(QColor(Qt.cyan).lighter(180))  # 淡蓝色
+        elif role_lower == 'sink':
+            for col in range(self.pd_table.columnCount()):
+                self.pd_table.item(row, col).setBackground(QColor(Qt.green).lighter(180))  # 淡绿色
+        if error_flag:
+            for col in range(self.pd_table.columnCount()):
+                self.pd_table.item(row, col).setBackground(Qt.red)
+        self.pd_table.scrollToBottom()
     
     @pyqtSlot(str)
     def on_error_occurred(self, error_message):
@@ -296,7 +402,7 @@ class USBGUI(QMainWindow):
     
     def clear_messages(self):
         """清空消息显示"""
-        self.message_display.clear()
+        self.pd_table.setRowCount(0)
     
     def show_ready_status(self):
         """显示就绪状态"""
@@ -305,26 +411,7 @@ class USBGUI(QMainWindow):
             self.log_message(f"系统就绪，检测到 {connected_count} 个设备", "system")
     
     def log_message(self, message, message_type="info"):
-        """记录消息到显示区域"""
-        timestamp = time.strftime("%H:%M:%S")
-        
-        # 根据消息类型设置颜色
-        color_map = {
-            "send": "#2980B9",      # 蓝色 - 发送
-            "receive": "#27AE60",   # 绿色 - 接收
-            "system": "#F39C12",    # 橙色 - 系统
-            "error": "#E74C3C",     # 红色 - 错误
-            "info": "#2C3E50"       # 深灰 - 信息
-        }
-        
-        color = color_map.get(message_type, "#2C3E50")
-        formatted_message = f'<span style="color: {color};">[{timestamp}] {message}</span>'
-        
-        self.message_display.append(formatted_message)
-        
-        # 自动滚动到底部
-        scrollbar = self.message_display.verticalScrollBar()
-        scrollbar.setValue(scrollbar.maximum())
+        pass  # 表格模式下不再使用日志显示
     
     def update_device_status(self):
         """更新设备状态显示"""

@@ -29,7 +29,7 @@ extern "C" {
 #include "main.h"
 
 /* USER CODE BEGIN Includes */
-#define MAX_BUFFER_INDEX 8
+#define MAX_BUFFER_INDEX 16
 #define MAX_BUFFER_LEN  2048
 /* USER CODE END Includes */
 
@@ -39,6 +39,7 @@ extern TIM_HandleTypeDef htim2;
 extern uint8_t buffer_index;
 extern uint8_t time2_data_buffer[MAX_BUFFER_INDEX][MAX_BUFFER_LEN];
 extern uint16_t time2_data_len[MAX_BUFFER_INDEX];
+extern uint32_t time_data_systick[MAX_BUFFER_INDEX];
 /* USER CODE END Private defines */
 
 void MX_TIM2_Init(void);

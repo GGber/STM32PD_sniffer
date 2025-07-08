@@ -7,7 +7,7 @@
 #define HALF_BIT_MIN  28
 #define HALF_BIT_MAX  37
 
-void decode_bmc(uint8_t *intervals, size_t len);
+void decode_bmc(uint8_t index, uint8_t *intervals, size_t len);
 
 void bits_to_bytes(uint8_t *bits, int bit_count, uint8_t *bytes_out, int *byte_count_out);
 

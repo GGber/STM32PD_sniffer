@@ -5,10 +5,36 @@ _4b5b_table = {
     0x1A: 0xC, 0x1B: 0xD, 0x1C: 0xE, 0x1D: 0xF,
 }
 
-def parse_pd_data(data: bytes) -> str:
-
-    sop = data[:4]
-    data_field = data[4:]
+def parse_pd_data(packet: bytes) -> dict:
+    result = {
+        "timestamp": None,
+        "sop_type": None,
+        "msg_type": None,
+        "power_role": None,
+        "spec_revision": None,
+        "data_role": None,
+        "msg_id": None,
+        "raw_hex": None,
+        "header_data_hex": None,
+        "detail": None,
+        "error": False,
+        "error_msg": ""
+    }
+    if len(packet) < 6:
+        result["error"] = True
+        result["error_msg"] = f"数据包长度不足，原始: {packet.hex(' ').upper()}"
+        result["raw_hex"] = packet.hex(' ').upper()
+        return result
+    func_code = packet[0]
+    if func_code != 0xAA:
+        result["error"] = True
+        result["error_msg"] = f"非PD包，功能码: 0x{func_code:02X}"
+        result["raw_hex"] = packet.hex(' ').upper()
+        return result
+    timestamp = int.from_bytes(packet[1:5], 'little')  # ms
+    pd_raw = packet[5:]
+    sop = pd_raw[:4]
+    data_field = pd_raw[4:]
     nibbles = []
     for b in data_field:
         code = b & 0x1F
@@ -22,11 +48,14 @@ def parse_pd_data(data: bytes) -> str:
         pd_bytes.append(nibbles[-1])  # 最后一个nibble单独补齐
     # 拼回完整协议帧
     data = sop + pd_bytes
+    result["raw_hex"] = data.hex(' ').upper()
+    result["timestamp"] = timestamp
     if len(data) < 6:
-        return f"数据长度不足，原始: {data.hex(' ').upper()}"
+        result["error"] = True
+        result["error_msg"] = f"数据长度不足，原始: {result['raw_hex']}"
+        return result
     header = data[4:6]
     header_val = int.from_bytes(header, 'little')
-
     # SOP*类型识别
     sop_map = {
         b'\x18\x18\x18\x11': "SOP",
@@ -37,114 +66,164 @@ def parse_pd_data(data: bytes) -> str:
         b'\xFF\xFF\xFF\xFF': "EOP"
     }
     sop_type = sop_map.get(bytes(sop), "未知/自定义SOP*")
-
-    # 头部字段解析（PD2.0/3.2通用）
-    msg_type = header_val & 0x1F  # 0-4bit
-    port_data_role = (header_val >> 5) & 0x1  # 5bit
-    spec_revision = (header_val >> 6) & 0x3   # 6-7bit
-    port_power_role = (header_val >> 8) & 0x1 # 8bit
-    msg_id = (header_val >> 9) & 0x7          # 9-11bit
-    num_data_obj = (header_val >> 12) & 0x7   # 12-14bit
-    ext = (header_val >> 15) & 0x1            # 15bit (PD3.0/3.2扩展)
-
-    # 字段含义映射
+    result["sop_type"] = sop_type
+    # 头部字段解析
+    msg_type = header_val & 0x1F
+    port_data_role = (header_val >> 5) & 0x1
+    spec_revision = (header_val >> 6) & 0x3
+    port_power_role = (header_val >> 8) & 0x1
+    msg_id = (header_val >> 9) & 0x7
+    num_data_obj = (header_val >> 12) & 0x7
+    ext = (header_val >> 15) & 0x1
     port_data_role_map = ["UFP", "DFP"]
     port_power_role_map = ["Sink", "Source"]
     spec_revision_map = ["1.0", "2.0", "3.0/3.2"]
-
-    # 判断消息类别
-    if num_data_obj == 0:
-        msg_class = "Control Message"
-    else:
-        msg_class = "Data Message"
-
-    # 计算data区长度
+    result["power_role"] = port_power_role_map[port_power_role]
+    result["spec_revision"] = spec_revision_map[spec_revision] if spec_revision < len(spec_revision_map) else '未知'
+    result["data_role"] = port_data_role_map[port_data_role]
+    result["msg_id"] = msg_id
+    # header+data区原始数据
     data_len = num_data_obj * 4
-    data_bytes = data[6:6+data_len] if data_len > 0 else b''
-    crc = data[6+data_len:6+data_len+4]
-    eop = data[6+data_len+4:6+data_len+5]
-
-    result = []
-    result.append(f"{sop_type}")
-    result.append(f"-{msg_class}")
-    result.append(f"-{port_power_role_map[port_power_role]}")
-    result.append(f"-{spec_revision_map[spec_revision] if spec_revision < len(spec_revision_map) else '未知'}")
-    result.append(f"-{port_data_role_map[port_data_role]}")
-    result.append(f"-ID:{msg_id:d}")
-
+    header_data = data[4:6+data_len] if len(data) >= 6+data_len else data[4:]
+    result["header_data_hex"] = header_data.hex(' ').upper()
+    # 消息类型判断与解析
     if num_data_obj == 0:
-        # 解析Control Message
-        ctrl_detail = parse_pd_control_message(msg_type)
-        result.append(f"    {ctrl_detail}")
+        ctrl_type = parse_pd_control_message(msg_type)
+        result["msg_type"] = ctrl_type
+        result["detail"] = ctrl_type
+    elif ext == 1:
+        ext_type = parse_ext_message(msg_type, data[6:6+num_data_obj*4] if num_data_obj > 0 else b'')
+        result["msg_type"] = ext_type
+        result["detail"] = ext_type
     else:
-        # 进一步解析Data区
-        data_detail = parse_pd_data_object(msg_type, data_bytes)
-        result.append(f"    {data_detail}")
-
-    result.append(f"CRC: {crc.hex(' ').upper()}")
-    result.append(f"EOP: {eop.hex(' ').upper()}")
-    return '\n'.join(result)
+        data_type = parse_pd_data_object(msg_type, data[6:6+num_data_obj*4] if num_data_obj > 0 else b'')
+        result["msg_type"] = data_type
+        result["detail"] = data_type
+    return result
 
 def parse_pd_control_message(msg_type: int) -> str:
     """
     解析PD Control Message类型，返回详细含义。
+    完整支持0-23类型。
     """
     ctrl_map = {
         0: "Reserved",
-        1: "GoodCRC：确认收到数据包",
-        2: "GotoMin：请求降到最小电流/功率",
-        3: "Accept：接受前一条消息",
-        4: "Reject：拒绝前一条消息",
-        5: "Ping：Ping信号",
-        6: "PS_RDY：电源准备就绪",
-        7: "Get_Source_Cap：请求源能力",
-        8: "Get_Sink_Cap：请求受电能力",
-        9: "DR_Swap：数据角色切换",
-        10: "PR_Swap：电源角色切换",
-        11: "VCONN_Swap：VCONN切换",
-        12: "Wait：暂时无法处理",
-        13: "Soft_Reset：软复位",
-        14: "Not_Supported：不支持",
-        15: "Get_Source_Cap_Ext：请求扩展源能力"
+        1: "GoodCRC",
+        2: "GotoMin",
+        3: "Accept",
+        4: "Reject",
+        5: "Ping",
+        6: "PS_RDY",
+        7: "Get_Source_Cap",
+        8: "Get_Sink_Cap",
+        9: "DR_Swap",
+        10: "PR_Swap",
+        11: "VCONN_Swap",
+        12: "Wait",
+        13: "Soft_Reset",
+        14: "Data_Reset",
+        15: "Data_Reset_Complete",
+        16: "Not_Supported",
+        17: "Get_Source_Cap_Extended",
+        18: "Get_Status",
+        19: "FR_Swap",
+        20: "Get_PPS_Status",
+        21: "Get_Country_Codes",
+        22: "Get_Sink_Cap_Extended",
+        23: "Get_Source_Info",
+        24: "Get_Revision"
     }
-    return ctrl_map.get(msg_type, "未知Control Message")
+    return ctrl_map.get(msg_type, "Reserved")
 
 def parse_pd_data_object(msg_type: int, data_bytes: bytes) -> str:
     """
-    针对不同msg_type解析不同的Data Object内容。
-    支持Source Capabilities、Request、BIST、Sink Capabilities、Vendor Defined等常见类型。
+    只处理标准Data Message（不处理ext/obj判断）。
+    返回类型名由data_map决定。
     """
+    data_map = {
+        0: "Reserved",
+        1: "Source Capabilities",
+        2: "Request",
+        3: "BIST",
+        4: "Sink Capabilities",
+        5: "Battery Status",
+        6: "Alert",
+        7: "Country Info",
+        8: "Enter_USB",
+        9: "EPR_Request",
+        10: "EPR_Mode",
+        11: "Source_Info",
+        12: "Revision",
+        13: "Reserved",
+        14: "Reserved",
+        15: "Vendor Defined"
+    }
     if not data_bytes:
-        return "(无Data Object)"
-    # Source Capabilities
+        return data_map.get(msg_type, f"Data Message({msg_type})")
+    # 具体内容解析（如需详细内容可扩展）
     if msg_type == 1:
-        return parse_source_capabilities(data_bytes)
-    # Request
+        return data_map[1]
     elif msg_type == 2:
-        return parse_request_data_object(data_bytes)
-    # BIST
+        return data_map[2]
     elif msg_type == 3:
-        return parse_bist_data_object(data_bytes)
-    # Sink Capabilities
+        return data_map[3]
     elif msg_type == 4:
-        return parse_sink_capabilities(data_bytes)
-    # Battery Status
+        return data_map[4]
     elif msg_type == 5:
-        return parse_battery_status(data_bytes)
-    # Alert
+        return data_map[5]
     elif msg_type == 6:
-        return parse_alert_data_object(data_bytes)
-    # Get Country Info
+        return data_map[6]
     elif msg_type == 7:
-        return parse_country_info(data_bytes)
-    # Enter_USB
+        return data_map[7]
     elif msg_type == 8:
-        return parse_enter_usb(data_bytes)
-    # Vendor Defined
+        return data_map[8]
+    elif msg_type == 9:
+        return data_map[9]
+    elif msg_type == 10:
+        return data_map[10]
+    elif msg_type == 11:
+        return data_map[11]
+    elif msg_type == 12:
+        return data_map[12]
+    elif msg_type == 13:
+        return data_map[13]
+    elif msg_type == 14:
+        return data_map[14]
     elif msg_type == 15:
-        return parse_vendor_defined(data_bytes)
+        return data_map[15]
     else:
-        return "(暂未实现详细解析)"
+        return f"Data Message({msg_type})"
+
+def parse_ext_message(msg_type: int, data_bytes: bytes) -> str:
+    """
+    解析PD Extended Message (EXT message)。
+    参考PD3.0/3.1/3.2规范。
+    """
+    ext_map = {
+        0: "Reserved",
+        1: "Source_Capabilities_Extended",
+        2: "Status",
+        3: "Get_Battery_Cap",
+        4: "Get_Battery_Status",
+        5: "Battery_Capabilities",
+        6: "Get_Manufacturer_Info",
+        7: "Manufacturer_Info",
+        8: "Security_Request",
+        9: "Security_Response",
+        10: "Firmware_Update_Request",
+        11: "Firmware_Update_Response",
+        12: "PPS_Status",
+        13: "Country_Info",
+        14: "Country_Codes",
+        15: "Sink_Capabilities_Extended",
+        16: "Extended_Control",
+        17: "EPR_Source_Capabilities",
+        18: "EPR_Sink_Capabilities",
+        30: "Vendor_Defined_Extended",
+        31: "Reserved"
+    }
+    ext_type = ext_map.get(msg_type, "Reserved")
+    return ext_type
 
 def parse_source_capabilities(data_bytes: bytes) -> str:
     """解析Source Capabilities Data Objects"""

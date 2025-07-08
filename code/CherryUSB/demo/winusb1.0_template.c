@@ -6,6 +6,12 @@
 #include "usbd_core.h"
 #include "usbd_cdc_acm.h"
 
+
+// FIFO队列结构体定义
+#define MAX_QUEUE_SIZE 16
+#define MAX_DATA_SIZE 512
+
+
 #define WCID_VENDOR_CODE 0x17
 
 #define DOUBLE_WINUSB 0
@@ -413,9 +419,7 @@ USB_NOCACHE_RAM_SECTION USB_MEM_ALIGNX uint8_t write_buffer[2048];
 USB_NOCACHE_RAM_SECTION USB_MEM_ALIGNX uint8_t read_buffer2[2048];
 USB_NOCACHE_RAM_SECTION USB_MEM_ALIGNX uint8_t write_buffer2[2048];
 
-// FIFO队列结构体定义
-#define MAX_QUEUE_SIZE 16
-#define MAX_DATA_SIZE 512
+
 
 typedef struct {
     uint8_t data[MAX_DATA_SIZE];
