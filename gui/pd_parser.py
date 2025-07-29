@@ -20,6 +20,7 @@ def parse_pd_data(packet: bytes) -> dict:
         "error": False,
         "error_msg": ""
     }
+    print(f"[PD解析] 接收到原始数据: {packet.hex(' ').upper()}")
     if len(packet) < 6:
         result["error"] = True
         result["error_msg"] = f"数据包长度不足，原始: {packet.hex(' ').upper()}"
@@ -45,7 +46,7 @@ def parse_pd_data(packet: bytes) -> dict:
     for i in range(0, len(nibbles)-1, 2):
         pd_bytes.append((nibbles[i+1] << 4) | nibbles[i])
     if len(nibbles) % 2 == 1:
-        pd_bytes.append(nibbles[-1])  # 最后一个nibble单独补齐
+        pd_bytes.append((nibbles[-1] << 4))  # 最后一个nibble单独补齐
     # 拼回完整协议帧
     data = sop + pd_bytes
     result["raw_hex"] = data.hex(' ').upper()

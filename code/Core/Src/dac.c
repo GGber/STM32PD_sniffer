@@ -71,7 +71,7 @@ void MX_DAC1_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN DAC1_Init 2 */
-  uint32_t dac_value = 300 * 4095 / 3300;
+  uint32_t dac_value = 280 * 4095 / 3300;
   
   HAL_DAC_Start(&hdac1, DAC_CHANNEL_1);
   HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, dac_value);

@@ -262,7 +262,10 @@ void StartTaskPD(void *argument)
       decode_bmc(buffer_index, data_time, data_time_len);
     }
     
-
+//    if(buffer_index == MAX_BUFFER_INDEX - 1)
+//    {
+//        while(1);
+//    }
 
     // printf("\r\n");
     // for(uint16_t i = 0; i < data_time_len; i++)
@@ -419,7 +422,6 @@ void handle_cc_attach(void)
     /* start DMA channel */
     HAL_TIM_IC_Start_DMA(&htim2, TIM_CHANNEL_1, (uint32_t*)time2_data_buffer[buffer_index], MAX_BUFFER_LEN);
       
-//    DEBUG_PRINT("CC1 attach\r\n");
   }
   else if(cc_detect[1].flag_cc_attach == 1 && cc_detect[0].flag_cc_attach == 0)
   {
@@ -435,7 +437,6 @@ void handle_cc_attach(void)
     /* start DMA channel */
     HAL_TIM_IC_Start_DMA(&htim2, TIM_CHANNEL_1, (uint32_t*)time2_data_buffer[buffer_index], MAX_BUFFER_LEN);
       
-//    DEBUG_PRINT("CC2 attach\r\n");
   }
 }
 
@@ -443,7 +444,6 @@ void handle_cc_detach(void)
 {
   if(cc_detect[0].flag_cc_attach == 0 && cc_detect[1].flag_cc_attach == 0)
   {
-//    DEBUG_PRINT("CC1/2 detach\r\n");
 
     HAL_COMP_Stop(&hcomp1);
     HAL_COMP_Stop(&hcomp2);

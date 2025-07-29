@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout,
                              QFrame, QMessageBox, QScrollArea, QTableWidget, QTableWidgetItem)
 from PyQt5.QtCore import Qt, QTimer, pyqtSlot
 from PyQt5.QtGui import QFont, QPalette, QColor, QPixmap
+from PyQt5.QtWidgets import QHeaderView  # 在顶部import部分补充
 
 from usb_communication import USBCommunication
 from pd_parser import parse_pd_data  # 新增：导入PD数据解析函数
@@ -89,82 +90,6 @@ class USBGUI(QMainWindow):
         self.permission_label.setStyleSheet("color: #E74C3C; font-weight: bold; margin: 2px;")
         main_layout.addWidget(self.permission_label)
         
-        # 通信控制组
-        comm_group = QGroupBox("通信控制")
-        comm_group.setFont(QFont("Arial", 11, QFont.Bold))
-        comm_group.setStyleSheet("""
-            QGroupBox {
-                background-color: #F8FAFF;
-                border: 2px solid #A9CCE3;
-                border-radius: 10px;
-                margin-top: 8px;
-                padding-top: 8px;
-                box-shadow: 0 2px 8px #D6EAF8;
-            }
-            QGroupBox::title {
-                subcontrol-origin: margin;
-                left: 10px;
-                padding: 0 5px 0 5px;
-            }
-        """)
-        comm_layout = QGridLayout(comm_group)
-        comm_layout.setHorizontalSpacing(10)
-        comm_layout.setVerticalSpacing(8)
-        
-        # 发送消息
-        comm_layout.addWidget(QLabel("发送消息:"), 0, 0)
-        self.send_input = QLineEdit()
-        self.send_input.setPlaceholderText("输入要发送的消息...")
-        self.send_input.setStyleSheet("padding: 8px; border: 1.5px solid #A9CCE3; border-radius: 6px; background-color: #FDFEFE;")
-        comm_layout.addWidget(self.send_input, 0, 1)
-        
-        self.send_button = QPushButton("发送")
-        self.send_button.setStyleSheet("""
-            QPushButton {
-                background-color: #5DADE2;
-                color: white;
-                border: none;
-                padding: 10px 22px;
-                border-radius: 6px;
-                font-weight: bold;
-                font-size: 15px;
-                letter-spacing: 1px;
-                box-shadow: 0 2px 6px #D6EAF8;
-            }
-            QPushButton:hover {
-                background-color: #3498DB;
-            }
-            QPushButton:pressed {
-                background-color: #21618C;
-            }
-        """)
-        comm_layout.addWidget(self.send_button, 0, 2)
-        
-        # 清空按钮
-        self.clear_button = QPushButton("清空")
-        self.clear_button.setStyleSheet("""
-            QPushButton {
-                background-color: #E74C3C;
-                color: white;
-                border: none;
-                padding: 10px 22px;
-                border-radius: 6px;
-                font-weight: bold;
-                font-size: 15px;
-                letter-spacing: 1px;
-                box-shadow: 0 2px 6px #FADBD8;
-            }
-            QPushButton:hover {
-                background-color: #C0392B;
-            }
-            QPushButton:pressed {
-                background-color: #922B21;
-            }
-        """)
-        comm_layout.addWidget(self.clear_button, 0, 3)
-        
-        main_layout.addWidget(comm_group)
-        
         # 消息显示组（表格控件）
         message_group = QGroupBox("PD数据包列表")
         message_group.setFont(QFont("Arial", 11, QFont.Bold))
@@ -189,6 +114,12 @@ class USBGUI(QMainWindow):
         self.pd_table.setHorizontalHeaderLabels([
             "时间戳", "SOP类型", "消息类型", "供电角色", "协议版本", "数据角色", "ID", "详细内容"
         ])
+        # 详细内容列自适应最大宽度
+        self.pd_table.horizontalHeader().setSectionResizeMode(7, QHeaderView.Stretch)
+        # 其它列可固定宽度（如有需要可调整）
+        for i in range(7):
+            self.pd_table.setColumnWidth(i, 110)
+            
         self.pd_table.setColumnWidth(7, 420)
         self.pd_table.setEditTriggers(QTableWidget.NoEditTriggers)
         self.pd_table.setSelectionBehavior(QTableWidget.SelectRows)
@@ -201,7 +132,7 @@ class USBGUI(QMainWindow):
                 border: 1.5px solid #A9CCE3;
                 border-radius: 8px;
                 font-family: Consolas, Arial, sans-serif;
-                font-size: 13px;
+                font-size: 16px;
                 selection-background-color: #D6EAF8;
                 selection-color: #222222;
                 gridline-color: #D6EAF8;
@@ -230,6 +161,29 @@ class USBGUI(QMainWindow):
         status_layout = QHBoxLayout()
         status_layout.addStretch()  # 左侧空白
         
+        # 清空按钮放在右下角
+        self.clear_button = QPushButton("清空")
+        self.clear_button.setStyleSheet("""
+            QPushButton {
+                background-color: #E74C3C;
+                color: white;
+                border: none;
+                padding: 10px 22px;
+                border-radius: 6px;
+                font-weight: bold;
+                font-size: 15px;
+                letter-spacing: 1px;
+                box-shadow: 0 2px 6px #FADBD8;
+            }
+            QPushButton:hover {
+                background-color: #C0392B;
+            }
+            QPushButton:pressed {
+                background-color: #922B21;
+            }
+        """)
+        status_layout.addWidget(self.clear_button)
+
         # 右下角设备状态指示器
         self.device_status = StatusIndicator()
         status_layout.addWidget(self.device_status)
@@ -252,9 +206,7 @@ class USBGUI(QMainWindow):
         self.usb_comm.error_occurred.connect(self.on_error_occurred)
         
         # GUI控件信号
-        self.send_button.clicked.connect(self.send_message)
         self.clear_button.clicked.connect(self.clear_messages)
-        self.send_input.returnPressed.connect(self.send_message)
     
     @pyqtSlot(str)
     def on_device_connected(self, device_name):
@@ -312,8 +264,7 @@ class USBGUI(QMainWindow):
             if len(hex_parts) > 10:
                 header_hex = ' '.join(hex_parts[4:6])
                 data_hex = ' '.join(hex_parts[6:-4])
-                crc_hex = ' '.join(hex_parts[-4:])
-                detail += f"Header: {header_hex}    Data: {data_hex} CRC: {crc_hex}"
+                detail += f"Header: {header_hex}    Data: {data_hex}"
             elif len(hex_parts) > 6:
                 header_hex = ' '.join(hex_parts[4:6])
                 data_hex = ' '.join(hex_parts[6:])
@@ -371,34 +322,6 @@ class USBGUI(QMainWindow):
         else:
             self.permission_label.setText("")
             self.permission_label.setStyleSheet("color: #E74C3C; font-weight: bold; margin: 5px;")
-    
-    def send_message(self):
-        """发送消息"""
-        message = self.send_input.text().strip()
-        if not message:
-            return
-        
-        # 使用设备索引0（唯一设备）
-        device_index = 0
-        
-        # 检查设备是否连接
-        if not self.usb_comm.is_device_connected(device_index):
-            QMessageBox.warning(self, "警告", "设备未连接！")
-            return
-        
-        # 检查是否为只读接口
-        if self.usb_comm.is_device_readonly(device_index):
-            QMessageBox.information(self, "只读接口", 
-                "当前设备为只读接口，无法发送数据。\n\n"
-                "此接口只能接收设备发送的数据，不能向设备发送命令。\n\n"
-                "建议开启自动查询模式来监听设备数据。")
-            return
-        
-        # 发送消息
-        if self.usb_comm.send_message(device_index, message):
-            self.log_message(f"发送: {message}", "send")
-        else:
-            QMessageBox.critical(self, "错误", "发送消息失败！")
     
     def clear_messages(self):
         """清空消息显示"""
