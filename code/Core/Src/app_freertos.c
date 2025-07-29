@@ -77,7 +77,7 @@ osThreadId_t LedTaskHandle;
 const osThreadAttr_t LedTask_attributes = {
   .name = "LedTask",
   .priority = (osPriority_t) osPriorityNormal,
-  .stack_size = 128 * 4
+  .stack_size = 256 * 4
 };
 /* Definitions for PDTask */
 osThreadId_t PDTaskHandle;
@@ -294,8 +294,8 @@ void StartTaskCC(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    cc_detect[0].adc_cc = adc1_value * 2 * 3300 / 4096; // Convert ADC value to mV
-    cc_detect[1].adc_cc = adc2_value * 2 * 3300 / 4096; // Convert ADC value to mV
+    cc_detect[0].adc_cc = adc2_value * 2 * 3300 / 4096; // Convert ADC value to mV
+    cc_detect[1].adc_cc = adc1_value * 2 * 3300 / 4096; // Convert ADC value to mV
 
     //printf(" %d  %d \r\n", cc_detect[0].adc_cc, cc_detect[1].adc_cc);
     for(uint8_t index = 0; index < 2; index++){
@@ -374,6 +374,8 @@ void HAL_COMP_TriggerCallback(COMP_HandleTypeDef *hcomp)
   /* open timeout event */
   __HAL_TIM_CLEAR_FLAG(&htim2, TIM_FLAG_UPDATE);
   __HAL_TIM_ENABLE_IT(&htim2,  TIM_IT_UPDATE);
+  __HAL_TIM_ENABLE_IT(&htim2,  TIM_IT_UPDATE);
+  __HAL_TIM_ENABLE_IT(&htim2,  TIM_IT_UPDATE);
 }
 
 void timer2_timeout_handle(void)
@@ -408,8 +410,10 @@ void timer2_timeout_handle(void)
 
 void handle_cc_attach(void)
 {
+  
   if(cc_detect[0].flag_cc_attach == 1 && cc_detect[1].flag_cc_attach == 0)
   {
+//    DEBUG_PRINT("handle_cc_attach 1\r\n");
     /* change to comp1 */
     HAL_TIMEx_TISelection(&htim2, TIM_TIM2_TI1_COMP1, TIM_CHANNEL_1);
 
@@ -425,6 +429,7 @@ void handle_cc_attach(void)
   }
   else if(cc_detect[1].flag_cc_attach == 1 && cc_detect[0].flag_cc_attach == 0)
   {
+//    DEBUG_PRINT("handle_cc_attach 2\r\n");  
     /* change to comp2 */
     HAL_TIMEx_TISelection(&htim2, TIM_TIM2_TI1_COMP2, TIM_CHANNEL_1);
 
@@ -442,6 +447,7 @@ void handle_cc_attach(void)
 
 void handle_cc_detach(void)
 {
+//  DEBUG_PRINT("handle_cc_detach\r\n");
   if(cc_detect[0].flag_cc_attach == 0 && cc_detect[1].flag_cc_attach == 0)
   {
 
